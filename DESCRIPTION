@@ -10,3 +10,5 @@ Description: sensolution aims to provide set of tools for performing sensory ana
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
+URL: https://github.com/aswansyahputra/sensehubr
+BugReports: https://github.com/aswansyahputra/sensehubr/issues
