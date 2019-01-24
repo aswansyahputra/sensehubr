@@ -6,6 +6,6 @@ The goal of sensehubr is to perform sensory analyses using tidyverse approach.
 
 ``` r
 if (!require("devtools")) install.packages("devtools")
-devtools::install_github("husson/SensoMineR")
+devtools::install_github("aswansyahputra/sensehubr")
 ```
 
