@@ -1,2 +1,5 @@
+^LICENSE\.md$
+^docs$
+^_pkgdown\.yml$
 ^sensehubr\.Rproj$
 ^\.Rproj\.user$
