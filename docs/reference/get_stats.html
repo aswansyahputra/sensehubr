@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Perform PCA on dataframe — do_pca • sensehubr</title>
+<title>Get statistics — get_stats • sensehubr</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Perform PCA on dataframe — do_pca" />
+<meta property="og:title" content="Get statistics — get_stats" />
 
-<meta property="og:description" content="Pipe friendly PCA" />
+<meta property="og:description" content="Perform univariate statistical analysis for all sensory attributes simultaniously" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -99,43 +99,35 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Perform PCA on dataframe</h1>
-    <small class="dont-index">Source: <a href='https://github.com/aswansyahputra/sensehubr/blob/master/R/do_pca.R'><code>R/do_pca.R</code></a></small>
-    <div class="hidden name"><code>do_pca.Rd</code></div>
+    <h1>Get statistics</h1>
+    <small class="dont-index">Source: <a href='https://github.com/aswansyahputra/sensehubr/blob/master/R/get_stats.R'><code>R/get_stats.R</code></a></small>
+    <div class="hidden name"><code>get_stats.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Pipe friendly PCA</p>
+    <p>Perform univariate statistical analysis for all sensory attributes simultaniously</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>do_pca</span>(<span class='no'>.data</span>, <span class='no'>product</span>, <span class='kw'>liking</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>get_stats</span>(<span class='no'>.data</span>, <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"anova"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>.data</th>
-      <td><p>a dataframe or tibble.</p></td>
+      <td><p>a dataframe</p></td>
     </tr>
     <tr>
-      <th>product</th>
-      <td><p>name of column containing product information.</p></td>
-    </tr>
-    <tr>
-      <th>liking</th>
-      <td><p>name of column containing hedonic liking (default to NULL).</p></td>
-    </tr>
-    <tr>
-      <th>scale</th>
-      <td><p>whether to scale data to unit of variance (default to TRUE)</p></td>
+      <th>stat</th>
+      <td><p>statistical procedure to be performed. Choice: "anova", "cochran", and "friedman"</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Returns a list containing information of PCA results.</p>
+    <p>a tibble</p>
     
 
   </div>

@@ -29,5 +29,6 @@ Imports:
     sensR,
     BradleyTerry2,
     FactoMineR,
-    SensoMineR
+    SensoMineR,
+    plyr
 RoxygenNote: 6.1.1
