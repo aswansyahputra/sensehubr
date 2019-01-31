@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • sensehubr</title>
+<title>Get Performance of Sensory Panel and Panelist — get_performance • sensehubr</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,7 +30,10 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Get Performance of Sensory Panel and Panelist — get_performance" />
+
+<meta property="og:description" content="Perform calculation to get performance metrics" />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -47,7 +50,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -94,114 +97,77 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Get Performance of Sensory Panel and Panelist</h1>
+    <small class="dont-index">Source: <a href='https://github.com/aswansyahputra/sensehubr/blob/master/R/get_performance.R'><code>R/get_performance.R</code></a></small>
+    <div class="hidden name"><code>get_performance.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    
+    <p>Perform calculation to get performance metrics</p>
+    
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
-
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="create_template.html">create_template()</a></code> </p>
-        </td>
-        <td><p>Create Data Tabulation Template</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="do_pca.html">do_pca()</a></code> </p>
-        </td>
-        <td><p>Perform PCA on dataframe</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="generate_design.html">generate_design()</a></code> </p>
-        </td>
-        <td><p>Generate Design</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_eig.html">get_eig()</a></code> </p>
-        </td>
-        <td><p>Get eigenvalues</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_performance.html">get_performance()</a></code> </p>
-        </td>
-        <td><p>Get Performance of Sensory Panel and Panelist</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_stats.html">get_stats()</a></code> </p>
-        </td>
-        <td><p>Get statistics</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="nest_data.html">nest_data()</a></code> </p>
-        </td>
-        <td><p>Nest sensory dataset</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot_attribute.html">plot_attribute()</a></code> </p>
-        </td>
-        <td><p>Plot attribute</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot_product.html">plot_product()</a></code> </p>
-        </td>
-        <td><p>Plot product</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot_radar.html">plot_radar()</a></code> </p>
-        </td>
-        <td><p>Radar Plot</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="prepare.html">prepare()</a></code> </p>
-        </td>
-        <td><p>Prepare data</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="see_panel.html">see_panel()</a></code> </p>
-        </td>
-        <td><p>See Panel</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="see_panelist.html">see_panelist()</a></code> </p>
-        </td>
-        <td><p>See Panelist</p></td>
-      </tr>
-    </tbody>
+    <pre class="usage"><span class='fu'>get_performance</span>(<span class='no'>.data</span>, <span class='kw'>panelist</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>product</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>session</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>pres_order</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>attribute</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>.data</th>
+      <td><p>a dataframe</p></td>
+    </tr>
+    <tr>
+      <th>panelist</th>
+      <td><p>column contaning panelist information</p></td>
+    </tr>
+    <tr>
+      <th>product</th>
+      <td><p>column contaning product information</p></td>
+    </tr>
+    <tr>
+      <th>session</th>
+      <td><p>column containing session information</p></td>
+    </tr>
+    <tr>
+      <th>pres_order</th>
+      <td><p>column contaning presentation order information</p></td>
+    </tr>
+    <tr>
+      <th>attribute</th>
+      <td><p>vector of columns of sensory attributes</p></td>
+    </tr>
     </table>
-  </div>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>a named list of four dataframe</p>
+    
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>SensoMineR</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>chocolates</span>)
+<span class='no'>attrs</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/colnames'>colnames</a></span>(<span class='no'>sensochoc</span>)[-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>:<span class='fl'>4</span>)]
+<span class='no'>out</span> <span class='kw'>&lt;-</span>
+  <span class='fu'>get_performance</span>(<span class='no'>sensochoc</span>, <span class='kw'>panelist</span> <span class='kw'>=</span> <span class='no'>Panelist</span>, <span class='kw'>product</span> <span class='kw'>=</span> <span class='no'>Product</span>, <span class='kw'>session</span> <span class='kw'>=</span> <span class='no'>Session</span>, <span class='kw'>pres_order</span> <span class='kw'>=</span> <span class='no'>Rank</span>, <span class='kw'>attribute</span> <span class='kw'>=</span> <span class='no'>attrs</span>)
+<span class='no'>out</span>
+<span class='co'># }</span><div class='input'>
+</div></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#value">Value</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
     </ul>
+
   </div>
 </div>
 

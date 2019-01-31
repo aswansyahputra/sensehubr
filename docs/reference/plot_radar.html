@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • sensehubr</title>
+<title>Radar Plot — plot_radar • sensehubr</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,7 +30,10 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Radar Plot — plot_radar" />
+
+<meta property="og:description" content="Create radar plot of sensory attributes for each product" />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -47,7 +50,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -94,114 +97,73 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Radar Plot</h1>
+    <small class="dont-index">Source: <a href='https://github.com/aswansyahputra/sensehubr/blob/master/R/plot_radar.R'><code>R/plot_radar.R</code></a></small>
+    <div class="hidden name"><code>plot_radar.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    
+    <p>Create radar plot of sensory attributes for each product</p>
+    
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
-
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="create_template.html">create_template()</a></code> </p>
-        </td>
-        <td><p>Create Data Tabulation Template</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="do_pca.html">do_pca()</a></code> </p>
-        </td>
-        <td><p>Perform PCA on dataframe</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="generate_design.html">generate_design()</a></code> </p>
-        </td>
-        <td><p>Generate Design</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_eig.html">get_eig()</a></code> </p>
-        </td>
-        <td><p>Get eigenvalues</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_performance.html">get_performance()</a></code> </p>
-        </td>
-        <td><p>Get Performance of Sensory Panel and Panelist</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_stats.html">get_stats()</a></code> </p>
-        </td>
-        <td><p>Get statistics</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="nest_data.html">nest_data()</a></code> </p>
-        </td>
-        <td><p>Nest sensory dataset</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot_attribute.html">plot_attribute()</a></code> </p>
-        </td>
-        <td><p>Plot attribute</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot_product.html">plot_product()</a></code> </p>
-        </td>
-        <td><p>Plot product</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="plot_radar.html">plot_radar()</a></code> </p>
-        </td>
-        <td><p>Radar Plot</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="prepare.html">prepare()</a></code> </p>
-        </td>
-        <td><p>Prepare data</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="see_panel.html">see_panel()</a></code> </p>
-        </td>
-        <td><p>See Panel</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="see_panelist.html">see_panelist()</a></code> </p>
-        </td>
-        <td><p>See Panelist</p></td>
-      </tr>
-    </tbody>
+    <pre class="usage"><span class='fu'>plot_radar</span>(<span class='no'>.data</span>, <span class='kw'>scale_min</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>scale_max</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>point_size</span> <span class='kw'>=</span> <span class='fl'>4</span>,
+  <span class='kw'>line_width</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>subtitle</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>caption</span> <span class='kw'>=</span> <span class='st'>""</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>.data</th>
+      <td><p>an aggregated dataset containing columns of product and sensory attributes</p></td>
+    </tr>
+    <tr>
+      <th>scale_min</th>
+      <td><p>minimum value of the scales</p></td>
+    </tr>
+    <tr>
+      <th>scale_max</th>
+      <td><p>maximum value of the scales</p></td>
+    </tr>
+    <tr>
+      <th>point_size</th>
+      <td><p>point size</p></td>
+    </tr>
+    <tr>
+      <th>line_width</th>
+      <td><p>line width</p></td>
+    </tr>
+    <tr>
+      <th>title</th>
+      <td><p>title of the plot</p></td>
+    </tr>
+    <tr>
+      <th>subtitle</th>
+      <td><p>subtitle of the plot</p></td>
+    </tr>
+    <tr>
+      <th>caption</th>
+      <td><p>caption of the plot</p></td>
+    </tr>
     </table>
-  </div>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>a radar plot</p>
+    
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
-    </ul>
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#value">Value</a></li>
+          </ul>
+
   </div>
 </div>
 
