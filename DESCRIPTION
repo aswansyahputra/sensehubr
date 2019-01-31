@@ -6,29 +6,34 @@ Authors@R:
            family = "Syahputra",
            role = c("aut", "cre"),
            email = "aswansyahputra@sensolution.id")
-Description: sensehubr aims to provide set of tools for performing sensory analyses using tidy phylosophy. This package wraps around some core function from sensR, BradleyTerry2, FactoMineR, and SensoMineR. 
-Depends: R (>= 3.4.0)
+Description: sensehubr aims to provide set of tools for
+    performing sensory analyses using tidy phylosophy. This package wraps
+    around some core function from sensR, BradleyTerry2, FactoMineR, and
+    SensoMineR. 
 License: MIT + file LICENSE
-Encoding: UTF-8
-LazyData: true
 URL: https://github.com/aswansyahputra/sensehubr
 BugReports: https://github.com/aswansyahputra/sensehubr/issues
+Depends: 
+    R (>= 3.4.0)
 Imports: 
     agricolae,
+    BradleyTerry2,
     broom,
-    purrr,
-    readr,
-    tidyr,
+    crossdes,
     dplyr,
-    stringr,
+    FactoMineR,
     ggplot2,
     ggrepel,
-    magrittr,
+    glue,
     janitor,
-    crossdes,
-    sensR,
-    BradleyTerry2,
-    FactoMineR,
+    magrittr,
+    plyr,
+    purrr,
+    readr,
     SensoMineR,
-    plyr
+    sensR,
+    stringr,
+    tidyr
+Encoding: UTF-8
+LazyData: true
 RoxygenNote: 6.1.1
