@@ -1,4 +1,4 @@
-#' Get Performance of Sensory Panel and Panelist
+#' Get performance of sensory panel and panelist
 #'
 #' Perform calculation to get performance metrics
 #'

@@ -2,7 +2,7 @@
 % Please edit documentation in R/see_panel.R
 \name{see_panel}
 \alias{see_panel}
-\title{See Panel}
+\title{See performance of whole panel}
 \usage{
 see_panel(res)
 }

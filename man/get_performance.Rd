@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_performance.R
 \name{get_performance}
 \alias{get_performance}
-\title{Get Performance of Sensory Panel and Panelist}
+\title{Get performance of sensory panel and panelist}
 \usage{
 get_performance(.data, panelist = NULL, product = NULL,
   session = NULL, pres_order = NULL, attribute = NULL)

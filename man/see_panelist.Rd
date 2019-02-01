@@ -2,7 +2,7 @@
 % Please edit documentation in R/see_panelist.R
 \name{see_panelist}
 \alias{see_panelist}
-\title{See Panelist}
+\title{See performance of panelist}
 \usage{
 see_panelist(res, ability = c("discrimination", "consensus",
   "consistency"))

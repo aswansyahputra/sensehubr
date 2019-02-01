@@ -1,4 +1,4 @@
-#' See Panelist
+#' See performance of panelist
 #'
 #' See the performance of each panelist in a panel
 #'

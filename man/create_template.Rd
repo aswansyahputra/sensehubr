@@ -2,7 +2,7 @@
 % Please edit documentation in R/create_template.R
 \name{create_template}
 \alias{create_template}
-\title{Create Data Tabulation Template}
+\title{Create template for data input}
 \usage{
 create_template(.data, panelist, attribute)
 }

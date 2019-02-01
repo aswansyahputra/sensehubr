@@ -1,4 +1,4 @@
-#' Create Data Tabulation Template
+#' Create template for data input
 #'
 #' Create template for inputting data collected from sensory research
 #'

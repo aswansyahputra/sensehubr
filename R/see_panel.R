@@ -1,4 +1,4 @@
-#' See Panel
+#' See performance of whole panel
 #'
 #' See the performance of panel as a whole
 #'
