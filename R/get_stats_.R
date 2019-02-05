@@ -9,7 +9,7 @@
 #' @return a tibble
 #' @export
 
-get_stats <- function(.data, stat = "anova") {
+get_stats_ <- function(.data, stat = "anova") {
   if (missing(.data)) {
     stop("Data is not supplied", call. = FALSE)
   } else if (!stat %in% c("anova", "cochran", "friedman")) {
@@ -41,7 +41,11 @@ get_stats <- function(.data, stat = "anova") {
       ) %>%
       select(attribute, stats, means) %>%
       unnest(stats, means) %>%
-      arrange(desc(statistic))
+      arrange(desc(statistic)) %>%
+      rename(
+        atribute = attribute,
+        statistik = statistic
+      )
     # if (any("session" %in% colnames(.data[["data"]][[1]]))) {
     #   res <-
     #     .data %>%
