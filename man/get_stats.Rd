@@ -4,12 +4,14 @@
 \alias{get_stats}
 \title{Get statistics}
 \usage{
-get_stats(.data, stat = "anova")
+get_stats(.data, stat = "anova", round = TRUE)
 }
 \arguments{
 \item{.data}{a dataframe}
 
 \item{stat}{statistical procedure to be performed. Choice: "anova", "cochran", and "friedman"}
+
+\item{round}{whether to round the statistic and p-value, default to TRUE}
 }
 \value{
 a tibble

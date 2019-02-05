@@ -4,12 +4,13 @@
 #'
 #' @param .data a dataframe
 #' @param stat statistical procedure to be performed. Choice: "anova", "cochran", and "friedman"
+#' @param round whether to round the statistic and p-value, default to TRUE
 #'
 #' @import dplyr tidyr purrr magrittr broom agricolae
 #' @return a tibble
 #' @export
 
-get_stats <- function(.data, stat = "anova") {
+get_stats <- function(.data, stat = "anova", round = TRUE) {
   if (missing(.data)) {
     stop("Data is not supplied", call. = FALSE)
   } else if (!stat %in% c("anova", "cochran", "friedman")) {
@@ -42,6 +43,7 @@ get_stats <- function(.data, stat = "anova") {
       select(attribute, stats, means) %>%
       unnest(stats, means) %>%
       arrange(desc(statistic))
+
     # if (any("session" %in% colnames(.data[["data"]][[1]]))) {
     #   res <-
     #     .data %>%
@@ -98,5 +100,15 @@ get_stats <- function(.data, stat = "anova") {
     #     arrange(desc(statistic))
     # }
   }
-  return(res)
+  if (!isTRUE(round)) {
+    return(res)
+  } else {
+    res <-
+      res %>%
+      mutate(
+        statistic = round(statistic, 2),
+        p.value = signif(p.value, 3)
+      )
+    return(res)
+  }
 }
