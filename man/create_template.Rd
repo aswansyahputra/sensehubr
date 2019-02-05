@@ -9,7 +9,7 @@ create_template(.data, panelist, attribute)
 \arguments{
 \item{.data}{output from \code{generate_design} function}
 
-\item{panelist}{number of panelist}
+\item{panelist}{column containing panelist information}
 
 \item{attribute}{a numeric value of number or sensory attributes or vector of sensory terms (lexicon)}
 }

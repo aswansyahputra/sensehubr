@@ -50,3 +50,32 @@ generate_design <- function(n_panelist, product, use_coding = TRUE) {
     slice(seq_len(n_panelist))
   return(res)
 }
+
+generate_design_ <- function(n_panelist, product, use_coding = TRUE) {
+  if (is.numeric(product) & length(product) == 1) {
+    n_product <- product
+    nms <- str_c("Produk", seq_len(n_product))
+  } else if (is.character(product)) {
+    n_product <- length(product)
+    nms <- product
+  }
+
+  if (!isTRUE(use_coding)) {
+    nms <- nms
+  } else {
+    set.seed(n_product + n_panelist)
+    cds <- sample(100:999, n_product, replace = FALSE)
+    nms <- str_c(nms, " (", cds, ")")
+  }
+
+  res <-
+    williams(n_product) %>%
+    as_tibble() %>%
+    map_df(rep, n_panelist) %>%
+    set_colnames(str_c("Urutan", seq_len(n_product))) %>%
+    mutate_all(~plyr::mapvalues(.x, seq_len(n_product), nms)) %>%
+    mutate(Panelis = str_c("Panelis", seq_len(nrow(.)))) %>%
+    select(Panelis, everything()) %>%
+    slice(seq_len(n_panelist))
+  return(res)
+}
