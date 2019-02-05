@@ -4,7 +4,7 @@
 \alias{nest_data}
 \title{Nest sensory dataset}
 \usage{
-nest_data(.data, panelist, product, pres_order, replicate = NULL)
+nest_data(.data, panelist, product, pres_order, session = NULL)
 }
 \arguments{
 \item{.data}{a dataframe}
@@ -15,7 +15,7 @@ nest_data(.data, panelist, product, pres_order, replicate = NULL)
 
 \item{pres_order}{column contaning presentation order information}
 
-\item{replicate}{column contaning replicate/session information}
+\item{session}{column contaning replicate/session information}
 }
 \value{
 a tibble

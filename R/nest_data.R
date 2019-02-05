@@ -1,13 +1,13 @@
 #' Nest sensory dataset
-#' 
+#'
 #' Function to nest dataset to its sensory attribute
-#' 
+#'
 #' @param .data a dataframe
 #' @param panelist column contaning panelist information
 #' @param product column contaning product information
 #' @param pres_order column contaning presentation order information
-#' @param replicate column contaning replicate/session information
-#' 
+#' @param session column contaning replicate/session information
+#'
 #' @import dplyr
 #' @return a tibble
 #' @export
@@ -17,12 +17,12 @@ nest_data <-
            panelist,
            product,
            pres_order,
-           replicate = NULL) {
+           session = NULL) {
     panelist_quo <- enquo(panelist)
     product_quo <- enquo(product)
     pres_order_quo <- enquo(pres_order)
-    if (is.null(replicate)) {
-      res <- 
+    if (missing(session)) {
+      res <-
         .data %>%
         as_tibble() %>%
         select(!!panelist_quo,
@@ -36,22 +36,22 @@ nest_data <-
           pres_order = !!pres_order_quo
         ) %>%
         nest(-!!"attribute")
-    } else if (!is.null(replicate)){
-      replicate_quo <- enquo(replicate)
-      res <- 
+    } else if (!missing(session)) {
+      session_quo <- enquo(session)
+      res <-
       .data %>%
         as_tibble() %>%
         select(!!panelist_quo,
                !!product_quo,
                !!pres_order_quo,
-               !!replicate_quo,
+               !!session_quo,
                everything()) %>%
-        gather("attribute", "value", -c(!!panelist_quo:!!replicate_quo)) %>%
+        gather("attribute", "value", -c(!!panelist_quo:!!session_quo)) %>%
         rename(
           panelist = !!panelist_quo,
           product = !!product_quo,
           pres_order = !!pres_order_quo,
-          session = !!replicate_quo
+          session = !!session_quo
         ) %>%
         nest(-!!"attribute")
     }

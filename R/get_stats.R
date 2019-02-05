@@ -16,32 +16,61 @@ get_stats <- function(.data, stat = "anova") {
     stop("'stat' is not one of anova, cochran, or friedman", call. = FALSE)
   }
   if (stat == "anova") {
-    res <-
-      .data %>%
-      mutate(
-        model = map(data, ~ aov(
-          value ~ product + panelist + pres_order, data = .
-        )),
-        stats = map(
-          model,
-          ~ anova(.x) %>%
-            tidy() %>%
-            filter(term == "product") %>%
-            select(statistic, p.value)
-        ),
-        means = map(
-          model,
-          ~ HSD.test(y = ., trt = "product", console = FALSE) %>%
-            use_series("groups") %>%
-            as_tibble(rownames = "product") %>%
-            mutate(value = signif(value, 3)) %>%
-            unite("value", c(value, groups), sep = " ") %>%
-            spread(product, value)
-        )
-      ) %>%
-      select(attribute, stats, means) %>%
-      unnest(stats, means) %>%
-      arrange(desc(statistic))
+    if (any("session" %in% colnames(.data[["data"]][[1]]))) {
+      res <-
+        .data %>%
+        mutate(
+          model = map(data, ~ aov(
+            value ~ product + panelist + session + panelist:product + panelist:session + product:session + pres_order, data = .
+          )),
+          stats = map(
+            model,
+            ~ anova(.x) %>%
+              tidy() %>%
+              filter(term == "product") %>%
+              select(statistic, p.value)
+          ),
+          means = map(
+            model,
+            ~ HSD.test(y = ., trt = "product", console = FALSE) %>%
+              use_series("groups") %>%
+              as_tibble(rownames = "product") %>%
+              mutate(value = signif(value, 3)) %>%
+              unite("value", c(value, groups), sep = " ") %>%
+              spread(product, value)
+          )
+        ) %>%
+        select(attribute, stats, means) %>%
+        unnest(stats, means) %>%
+        arrange(desc(statistic))
+    } else {
+      res <-
+        .data %>%
+        mutate(
+          model = map(data, ~ aov(
+            value ~ product + panelist + pres_order, data = .
+          )),
+          stats = map(
+            model,
+            ~ anova(.x) %>%
+              tidy() %>%
+              filter(term == "product") %>%
+              select(statistic, p.value)
+          ),
+          means = map(
+            model,
+            ~ HSD.test(y = ., trt = "product", console = FALSE) %>%
+              use_series("groups") %>%
+              as_tibble(rownames = "product") %>%
+              mutate(value = signif(value, 3)) %>%
+              unite("value", c(value, groups), sep = " ") %>%
+              spread(product, value)
+          )
+        ) %>%
+        select(attribute, stats, means) %>%
+        unnest(stats, means) %>%
+        arrange(desc(statistic))
+    }
   }
   return(res)
 }
