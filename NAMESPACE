@@ -2,8 +2,10 @@
 
 export("%>%")
 export(create_template)
+export(create_template_)
 export(do_pca)
 export(generate_design)
+export(generate_design_)
 export(get_eig)
 export(get_performance)
 export(get_stats)
