@@ -4,7 +4,7 @@
 \alias{get_stats}
 \title{Get statistics}
 \usage{
-get_stats(.data, stat = "anova", round = TRUE)
+get_stats(.data, stat = c("anova", "cochran"), round = TRUE)
 }
 \arguments{
 \item{.data}{a dataframe}

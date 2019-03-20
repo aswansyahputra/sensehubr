@@ -16,3 +16,11 @@ prepare <- function(.data) {
     gather("product", "value", -attribute) %>%
     spread("attribute", "value")
 }
+
+prepare2 <- function(.data) {
+  .data %>%
+    select(-statistic, -p.value) %>%
+    gather("product", "value", -attribute) %>%
+    spread("attribute", "value")
+}
+

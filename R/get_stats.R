@@ -7,10 +7,11 @@
 #' @param round whether to round the statistic and p-value, default to TRUE
 #'
 #' @import dplyr tidyr purrr magrittr broom agricolae
+#' @importFrom RVAideMemoire cochran.qtest
 #' @return a tibble
 #' @export
 
-get_stats <- function(.data, stat = "anova", round = TRUE) {
+get_stats <- function(.data, stat = c("anova", "cochran"), round = TRUE) {
   if (missing(.data)) {
     stop("Data is not supplied", call. = FALSE)
   } else if (!stat %in% c("anova", "cochran", "friedman")) {
@@ -99,7 +100,25 @@ get_stats <- function(.data, stat = "anova", round = TRUE) {
     #     unnest(stats, means) %>%
     #     arrange(desc(statistic))
     # }
+  } else if (stat == "cochran") {
+    res <-
+      .data %>%
+      mutate(
+        model = map(
+          data, ~ cochran.qtest(value ~ product | panelist, data = .x)
+        ),
+        statistic = map_dbl(model, "statistic"),
+        p.value = map_dbl(model, "p.value"),
+        probs = map(model, ~use_series(.x, "estimate") %>%
+                      enframe(name = "product") %>%
+                      mutate(product = str_remove_all(product, "proba in group ")))
+      ) %>%
+      unnest(probs) %>%
+      spread(key = product, value = value) %>%
+      arrange(desc(statistic))
   }
+
+
   if (!isTRUE(round)) {
     return(res)
   } else {

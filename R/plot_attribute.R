@@ -37,7 +37,7 @@ plot_attribute <- function(.res, axes = c(1, 2), main = "", lab_size = 4) {
       res_plot <-
         df_main %>%
         ggplot(aes_string(x = names(df_main)[axes[1]], y = names(df_main)[axes[2]])) +
-        geom_text_repel(aes(label = "attribute"), size = lab_size) +
+        geom_text_repel(aes(label = attribute), size = lab_size) +
         geom_segment(aes_string(x = 0, y = 0, xend = names(df_main)[axes[1]], yend = names(df_main)[axes[2]]),
           arrow = arrow(length = unit(0.3, "cm"))
         ) +
