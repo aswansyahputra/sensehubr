@@ -36,7 +36,9 @@ Imports:
     tidyr,
     ggradar (>= 0.1),
     scales,
-    RVAideMemoire
+    RVAideMemoire,
+    factoextra,
+    tibble
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
