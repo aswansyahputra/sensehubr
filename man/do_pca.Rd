@@ -9,9 +9,9 @@ do_pca(.data, product, liking = NULL, scale = TRUE)
 \arguments{
 \item{.data}{a dataframe or tibble.}
 
-\item{product}{name of column containing product information.}
+\item{product}{name of column containing product information}
 
-\item{liking}{name of column containing hedonic liking (default to NULL).}
+\item{liking}{name of column containing hedonic liking (default to NULL)}
 
 \item{scale}{whether to scale data to unit of variance (default to TRUE)}
 }

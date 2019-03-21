@@ -4,10 +4,12 @@
 \alias{prepare}
 \title{Prepare data}
 \usage{
-prepare(.data)
+prepare(.data, type)
 }
 \arguments{
 \item{.data}{result from get_stats}
+
+\item{type}{type of original data, valid values: "string" and "number"}
 }
 \value{
 a tibble

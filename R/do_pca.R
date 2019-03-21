@@ -3,8 +3,8 @@
 #' Pipe friendly PCA
 #'
 #' @param .data a dataframe or tibble.
-#' @param product name of column containing product information.
-#' @param liking name of column containing hedonic liking (default to NULL).
+#' @param product name of column containing product information
+#' @param liking name of column containing hedonic liking (default to NULL)
 #' @param scale whether to scale data to unit of variance (default to TRUE)
 #'
 #' @import dplyr stringr FactoMineR
