@@ -4,7 +4,7 @@
 \alias{prepare}
 \title{Prepare data}
 \usage{
-prepare(.data, type)
+prepare(.data, type = "string")
 }
 \arguments{
 \item{.data}{result from get_stats}

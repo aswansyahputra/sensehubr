@@ -10,7 +10,7 @@
 #' @return a tibble
 #' @export
 
-prepare <- function(.data, type) {
+prepare <- function(.data, type = "string") {
   if (type == "string") {
     .data %>%
       select(-statistic, -p.value) %>%
