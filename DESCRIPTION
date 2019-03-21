@@ -14,7 +14,7 @@ License: MIT + file LICENSE
 URL: https://github.com/aswansyahputra/sensehubr
 BugReports: https://github.com/aswansyahputra/sensehubr/issues
 Depends: 
-    R (>= 3.5.0)
+    R (>= 3.4.0)
 Imports: 
     agricolae,
     BradleyTerry2,
@@ -32,13 +32,13 @@ Imports:
     plyr,
     purrr,
     readr,
-    RVAideMemoire,
     scales,
     SensoMineR,
     sensR,
     stringr,
     tibble,
-    tidyr
+    tidyr,
+    RVAideMemoire
 Remotes: 
     ricardo-bion/ggradar
 Encoding: UTF-8
