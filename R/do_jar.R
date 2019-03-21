@@ -37,7 +37,10 @@ do_jar <- function(.data, attribute, jar_value, liking) {
       prop = map(prop, ~filter(.x, class != "JAR"))
     ) %>%
     unnest(anova, prop) %>%
-    mutate(penalty = abs(estimate)) %>%
+    mutate(
+      attribute = if_else(p.value <= 0.05, paste0(attribute, "*"), attribute),
+      penalty = abs(estimate)
+    ) %>%
     select(
       attribute, class, penalty, everything(), -estimate, -term
     )
