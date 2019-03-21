@@ -25,7 +25,7 @@ get_global_summary <- function(.res, choice, axes = c(1, 2)) {
     as_tibble() %>%
     rename(
       Komponen = name,
-      `Kosinus Kuadarat` = cos2,
+      `Kosinus Kuadrat` = cos2,
       Kontribusi = contrib
     ) %>%
     select(-coord)

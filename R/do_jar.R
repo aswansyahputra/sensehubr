@@ -1,7 +1,6 @@
 #' Perform JAR analysis
 #'
 #' @param .data a dataframe
-#' @param panelist a column containing information of panelist
 #' @param attribute set of columns containing information of  sensory attributes
 #' @param jar_value JAR value (numeric)
 #' @param liking a column containing information of liking
@@ -12,12 +11,12 @@
 #' @return a tibble
 #' @export
 
-do_jar <- function(.data, panelist, attribute, jar_value, liking) {
-  panelist_quo <- enquo(panelist)
+do_jar <- function(.data, attribute, jar_value, liking) {
   attribute_quos <- enquos(attribute)
   liking_quo <- enquo(liking)
 
   .data %>%
+    rename(liking = !!liking_quo) %>%
     mutate_at(vars(!!!attribute_quos),
               ~case_when(
                 .x < jar_value ~ "Low",
@@ -25,7 +24,7 @@ do_jar <- function(.data, panelist, attribute, jar_value, liking) {
                 TRUE ~ "JAR"
               )
     ) %>%
-    gather(key = "attribute", value = "class", -!!panelist_quo, -!!liking_quo) %>%
+    gather(key = "attribute", value = "class", !!!attribute_quos) %>%
     mutate(class = factor(class, levels = c("JAR", "High", "Low"))) %>%
     group_by(attribute) %>%
     nest(.key = "data") %>%
