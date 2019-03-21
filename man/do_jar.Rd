@@ -4,12 +4,10 @@
 \alias{do_jar}
 \title{Perform JAR analysis}
 \usage{
-do_jar(.data, panelist, attribute, jar_value, liking)
+do_jar(.data, attribute, jar_value, liking)
 }
 \arguments{
 \item{.data}{a dataframe}
-
-\item{panelist}{a column containing information of panelist}
 
 \item{attribute}{set of columns containing information of  sensory attributes}
 
