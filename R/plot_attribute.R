@@ -118,7 +118,7 @@ plot_attribute <- function(.res, axes = c(1, 2), main = "", lab_size = 4) {
       df_main %>%
       ggplot(aes_string(x = names(df_main)[axes[1]], y = names(df_main)[axes[2]])) +
       geom_point() +
-      geom_text_repel(aes(label = "attribute"), size = lab_size) +
+      geom_text_repel(aes(label = attribute), size = lab_size) +
       geom_vline(xintercept = 0, lty = 2, col = "grey40") +
       geom_hline(yintercept = 0, lty = 2, col = "grey40") +
       labs(

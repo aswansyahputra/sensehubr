@@ -7,8 +7,13 @@ library(broom)
 library(FactoMineR)
 source("/home/aswansyahputra/Projects/GitHub/sensehub/_helpers/check_status.R")
 
+library(sensehubr)
+
 demoCATA <- read_xls("/home/aswansyahputra/Downloads/demoCATA.xls")
 skimr::skim(demoCATA)
+demoCATA %>%
+  do_cata_penalty(panelist = "Consumer", product = "Product", ideal_product = "Ideal", attribute = colnames(demoCATA)[-c(1:3)], liking = "Liking") %>%
+  plot_jar(drop_threshold = 0)
 glimpse(demoCATA)
 
 input <-
