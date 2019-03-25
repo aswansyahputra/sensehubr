@@ -29,6 +29,10 @@ nest_data <-
         panelist = !!panelist_quo,
         product = !!product_quo
       ) %>%
+      mutate(
+        panelist = as.factor(panelist),
+        product = as.factor(product)
+      ) %>%
       nest(-!!"attribute")
     return(res)
   }
