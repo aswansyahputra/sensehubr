@@ -2,7 +2,7 @@ angle_brackets <- function(x) {
   paste0("<", x, ">")
 }
 
-#' Title
+#' Capture metadata
 #'
 #' @param x a dataframe of class `tbl_sensory`
 #' @param meta metadata, one of "panelist", "product", "attribute", or "hedonic"

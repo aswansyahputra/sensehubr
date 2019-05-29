@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{meta_info}
 \alias{meta_info}
-\title{Title}
+\title{Capture metadata}
 \usage{
 meta_info(x, meta = c("panelist", "product", "attribute", "hedonic"))
 }
@@ -15,5 +15,5 @@ meta_info(x, meta = c("panelist", "product", "attribute", "hedonic"))
 a metadata
 }
 \description{
-Title
+Capture metadata
 }
