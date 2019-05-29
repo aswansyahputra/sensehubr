@@ -2,18 +2,31 @@
 % Please edit documentation in R/prepare.R
 \name{prepare}
 \alias{prepare}
-\title{Prepare data}
+\title{Prepare sensory table}
 \usage{
-prepare(.data, type = "string")
+prepare(.data, panelist = NULL, product = NULL, pres_order = NULL,
+  attribute = NULL, hedonic = NULL)
 }
 \arguments{
-\item{.data}{result from get_stats}
+\item{.data}{a dataframe with minimal sensory informations: panelist, product, and attribute}
 
-\item{type}{type of original data, valid values: "string" and "number"}
+\item{panelist}{panelist column}
+
+\item{product}{product column}
+
+\item{pres_order}{presentation order column}
+
+\item{attribute}{sensory attribute columns}
+
+\item{hedonic}{hedonic column}
 }
 \value{
-a tibble
+a tibble with class of `tbl_sensory`
 }
 \description{
-Prepare result from local test for global test
+Prepare sensory table
+}
+\examples{
+data(perfume_qda_consumer)
+prepare(.data = perfume_qda_consumers, panelist = consumer, product = product, attribute = intensity:green, hedonic = NULL)
 }
