@@ -4,7 +4,8 @@
 \alias{meta_info}
 \title{Capture metadata}
 \usage{
-meta_info(x, meta = c("panelist", "product", "attribute", "hedonic"))
+meta_info(x, meta = c("dimension", "panelist", "product", "attribute",
+  "hedonic"))
 }
 \arguments{
 \item{x}{a dataframe of class `tbl_sensory`}

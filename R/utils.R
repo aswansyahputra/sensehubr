@@ -11,9 +11,13 @@ angle_brackets <- function(x) {
 #'
 #' @return a metadata
 
-meta_info <- function(x, meta = c("panelist", "product", "attribute", "hedonic")) {
-  if (!meta[[1]] %in% c("panelist", "product", "attribute", "hedonic")) {
+meta_info <- function(x, meta = c("dimension", "panelist", "product", "attribute", "hedonic")) {
+  if (!meta[[1]] %in% c("dimension", "panelist", "product", "attribute", "hedonic")) {
     stop("Unknown metadata", call. = FALSE)
+  }
+  
+  if (meta[[1]] == "dimension") {
+    res <- paste(NROW(x), "x", NCOL(x))
   }
   
   if (meta[[1]] == "panelist") {

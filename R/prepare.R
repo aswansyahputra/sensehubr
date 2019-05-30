@@ -1,6 +1,8 @@
 #' Prepare sensory table
 #'
-#' @param .data a dataframe with minimal sensory informations: panelist, product, and attribute
+#' Prepare a raw dataframe with minimal sensory informations (panelist, product, and attribute) into a sensory table fur further processing.
+#'
+#' @param .data a dataframe
 #' @param panelist panelist column
 #' @param product product column
 #' @param pres_order presentation order column
@@ -12,12 +14,16 @@
 #' @importFrom tidyselect vars_select
 #' @importFrom tibble new_tibble
 #'
-#' @return a tibble with class of `tbl_sensory`
+#' @return a sensory table (dataframe with class of \code{tbl_sensory})
 #' @export
 #'
 #' @examples
 #' data(perfume_qda_consumer)
-#' prepare(.data = perfume_qda_consumers, panelist = consumer, product = product, attribute = intensity:green, hedonic = NULL)
+#' (df <- prepare(.data = perfume_qda_consumers, 
+#'   panelist = consumer, 
+#'   product = product, 
+#'   attribute = intensity:green, 
+#'   hedonic = NULL))
 
 prepare <- function(.data, panelist = NULL, product = NULL, pres_order = NULL, attribute = NULL, hedonic = NULL) {
   tbl <- .data %>% 
@@ -27,26 +33,17 @@ prepare <- function(.data, panelist = NULL, product = NULL, pres_order = NULL, a
            !!enquo(attribute),
            !!enquo(hedonic)) %>% 
     mutate_at(vars(!!enquo(panelist), !!enquo(product)), ~as.factor(.x))
-  meta_panelist <- rlang::as_label(enquo(panelist))
-  meta_n_panelist <- length(unique(pull(tbl, !!enquo(panelist))))
-  meta_product <- rlang::as_label(enquo(product))
-  meta_n_product <- length(unique(pull(tbl, !!enquo(product))))
-  meta_pres_order <- rlang::as_label(enquo(pres_order))
-  meta_attribute <- unname(tidyselect::vars_select(names(tbl), !!enquo(attribute)))
-  meta_n_attribute <- length(meta_attribute)
-  meta_hedonic <- rlang::as_label(enquo(hedonic))
-  
-  res <- tibble::new_tibble(tbl,
-                            "panelist" = meta_panelist,
-                            "n_panelist" = meta_n_panelist,
-                            "product" = meta_product,
-                            "n_product" = meta_n_product,
-                            "pres_order" = meta_pres_order,
-                            "attribute" = meta_attribute,
-                            "n_attribute" = meta_n_attribute,
-                            "hedonic" = meta_hedonic,
-                            nrow = NROW(tbl),
-                            class = "tbl_sensory")
-  res
+  res <- new_tibble(tbl,
+                    "panelist" = as_label(enquo(panelist)),
+                    "n_panelist" = length(unique(pull(tbl, !!enquo(panelist)))),
+                    "product" = as_label(enquo(product)),
+                    "n_product" = length(unique(pull(tbl, !!enquo(product)))),
+                    "pres_order" = as_label(enquo(pres_order)),
+                    "attribute" = unname(vars_select(names(tbl), !!enquo(attribute))),
+                    "n_attribute" = length(vars_select(names(tbl), !!enquo(attribute))),
+                    "hedonic" = meta_hedonic <- as_label(enquo(hedonic)),
+                    nrow = NROW(tbl),
+                    class = "tbl_sensory")
+  return(res)
 }
 

@@ -8,7 +8,7 @@ prepare(.data, panelist = NULL, product = NULL, pres_order = NULL,
   attribute = NULL, hedonic = NULL)
 }
 \arguments{
-\item{.data}{a dataframe with minimal sensory informations: panelist, product, and attribute}
+\item{.data}{a dataframe}
 
 \item{panelist}{panelist column}
 
@@ -21,12 +21,16 @@ prepare(.data, panelist = NULL, product = NULL, pres_order = NULL,
 \item{hedonic}{hedonic column}
 }
 \value{
-a tibble with class of `tbl_sensory`
+a sensory table (dataframe with class of \code{tbl_sensory})
 }
 \description{
-Prepare sensory table
+Prepare a raw dataframe with minimal sensory informations (panelist, product, and attribute) into a sensory table fur further processing.
 }
 \examples{
 data(perfume_qda_consumer)
-prepare(.data = perfume_qda_consumers, panelist = consumer, product = product, attribute = intensity:green, hedonic = NULL)
+(df <- prepare(.data = perfume_qda_consumers, 
+  panelist = consumer, 
+  product = product, 
+  attribute = intensity:green, 
+  hedonic = NULL))
 }
