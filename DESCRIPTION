@@ -24,4 +24,7 @@ Imports:
     tidyselect,
     tibble,
     stringr,
-    magrittr
+    magrittr,
+    broom,
+    purrr,
+    tidyr
