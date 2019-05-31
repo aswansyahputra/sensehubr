@@ -2,22 +2,29 @@ angle_brackets <- function(x) {
   paste0("<", x, ">")
 }
 
-#' Capture metadata
-#'
-#' @param x a dataframe of class `tbl_sensory`
-#' @param meta metadata, one of "panelist", "product", "attribute", or "hedonic"
-#' 
-#' @importFrom stringr str_trunc
-#'
-#' @return a metadata
+#' @importFrom pillar style_subtle
 
-meta_info <- function(x, meta = c("dimension", "panelist", "product", "attribute", "hedonic")) {
-  if (!meta[[1]] %in% c("dimension", "panelist", "product", "attribute", "hedonic")) {
+cat_subtle <- function(...) {
+  cat(pillar::style_subtle(paste0(...))) 
+}
+
+#' @importFrom stringr str_trunc
+
+meta_info <- function(x, meta = c("sensory_table", "dimension", "method", "panelist", "product", "attribute", "hedonic")) {
+  if (!meta[[1]] %in% c("sensory_table", "dimension", "method", "panelist", "product", "attribute", "hedonic")) {
     stop("Unknown metadata", call. = FALSE)
+  }
+  
+  if (meta[[1]] == "sensory_table") {
+    res <- paste(attr(x, "method"), angle_brackets(paste(NROW(x), "x", NCOL(x))))
   }
   
   if (meta[[1]] == "dimension") {
     res <- paste(NROW(x), "x", NCOL(x))
+  }
+  
+  if (meta[[1]] == "method") {
+    res <- attr(x, "method")
   }
   
   if (meta[[1]] == "panelist") {

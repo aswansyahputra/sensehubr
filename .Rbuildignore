@@ -6,3 +6,5 @@
 ^_pkgdown\.yml$
 ^sensehubr\.Rproj$
 ^\.Rproj\.user$
+^\.R$
+^\.R2$

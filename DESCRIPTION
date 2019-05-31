@@ -27,4 +27,8 @@ Imports:
     magrittr,
     broom,
     purrr,
-    tidyr
+    tidyr,
+    pillar,
+    FactoMineR,
+    SensoMineR,
+    factoextra
