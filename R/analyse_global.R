@@ -6,9 +6,9 @@
 #' 
 #' @import dplyr
 #' @import FactoMineR
-#' @importFrom tidyr nest
-#' @importFrom tibble column_to_rownames as_tibble
-#' @importFrom factoextra get_eig get_pca_ind get_pca_var
+#' @importFrom tibble as_tibble column_to_rownames trunc_mat
+#' @importFrom factoextra get_eig
+#' @importFrom stringr str_remove_all
 #'
 #' @return a sensory table of global analysis
 #' @export
@@ -61,37 +61,58 @@ analyse_global.tbl_sensory_qda <- function(.data) {
     column_to_rownames("product") %>% 
     PCA(quanti.sup = liking, graph = FALSE)
   
-  tbl_eig <-  
+  tbl_eig <- 
     get_eig(res_global) %>% 
     as_tibble(rownames = "dimension") %>% 
-    rename(pct_variance = variance.percent,
-           pct_cum_variance = cumulative.variance.percent)
+    transmute(dimension = str_remove_all(dimension, "Dim\\."),
+              dimension = as.numeric(dimension),
+              eigenvalue,
+              pct_variance = variance.percent,
+              pct_cum_variance = cumulative.variance.percent)
   
-  tbl_product <- 
-    list(
-      coord = get_pca_ind(res_global)$coord %>% 
-        as_tibble(rownames = "attribute"),
-      cos2 = get_pca_ind(res_global)$cos2 %>% 
-        as_tibble(rownames = "attribute"),
-      contrib = get_pca_ind(res_global)$contrib %>% 
-        as_tibble(rownames = "attribute")
-    ) %>% 
-    bind_rows(.id = "parameter") %>% 
-    nest(-parameter)
   
-  tbl_attribute <- 
-    list(
-      coord = get_pca_var(res_global)$coord %>% 
-        as_tibble(rownames = "attribute"),
-      cor = get_pca_var(res_global)$cor %>% 
-        as_tibble(rownames = "attribute"),
-      cos2 = get_pca_var(res_global)$cos2 %>% 
-        as_tibble(rownames = "attribute"),
-      contrib = get_pca_var(res_global)$contrib %>% 
-        as_tibble(rownames = "attribute")
-    ) %>% 
-    bind_rows(.id = "parameter") %>% 
-    nest(-parameter)
+  tbl_eig <- trunc_mat(as_tibble(tbl_eig))
+  tbl_eig$summary <- c(
+    "A sensory table" = meta_info(.data, "method"),
+    "Type" = "Global analysis",
+    "Method" = "PCA"
+  )
+  
+  tbl_product <- glance_product(res_global)
+  
+  tbl_attribute <- glance_attribute(res_global)
+  
+  # tbl_eig <-  
+  #   get_eig(res_global) %>% 
+  #   as_tibble(rownames = "dimension") %>% 
+  #   rename(pct_variance = variance.percent,
+  #          pct_cum_variance = cumulative.variance.percent)
+  # 
+  # tbl_product <- 
+  #   list(
+  #     coord = get_pca_ind(res_global)$coord %>% 
+  #       as_tibble(rownames = "attribute"),
+  #     cos2 = get_pca_ind(res_global)$cos2 %>% 
+  #       as_tibble(rownames = "attribute"),
+  #     contrib = get_pca_ind(res_global)$contrib %>% 
+  #       as_tibble(rownames = "attribute")
+  #   ) %>% 
+  #   bind_rows(.id = "parameter") %>% 
+  #   nest(-parameter)
+  # 
+  # tbl_attribute <- 
+  #   list(
+  #     coord = get_pca_var(res_global)$coord %>% 
+  #       as_tibble(rownames = "attribute"),
+  #     cor = get_pca_var(res_global)$cor %>% 
+  #       as_tibble(rownames = "attribute"),
+  #     cos2 = get_pca_var(res_global)$cos2 %>% 
+  #       as_tibble(rownames = "attribute"),
+  #     contrib = get_pca_var(res_global)$contrib %>% 
+  #       as_tibble(rownames = "attribute")
+  #   ) %>% 
+  #   bind_rows(.id = "parameter") %>% 
+  #   nest(-parameter)
   
   res <- list(
     method = "pca",
@@ -100,7 +121,6 @@ analyse_global.tbl_sensory_qda <- function(.data) {
     attribute = tbl_attribute,
     res_global = res_global
   )
-  # class(res) <- c("tbl_sensory_global", "list")
   class(res) <- append(class(res), "tbl_sensory_global")
   return(res)
 }
