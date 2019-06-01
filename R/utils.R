@@ -2,6 +2,9 @@ angle_brackets <- function(x) {
   paste0("<", x, ">")
 }
 
+#' @importFrom utils getFromNamespace
+print.tbl <- getFromNamespace("print.tbl", "tibble")
+
 #' @importFrom pillar style_subtle
 
 cat_subtle <- function(...) {
