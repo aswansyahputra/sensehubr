@@ -33,5 +33,7 @@ Imports:
     SensoMineR,
     factoextra,
     ggplot2,
-    ggradar,
+    ggradar (>= 0.1),
     scales
+Remotes:  
+    ricardo-bion/ggradar
