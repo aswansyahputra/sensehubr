@@ -2,11 +2,11 @@
 % Please edit documentation in R/specify.R
 \name{specify}
 \alias{specify}
-\title{Speficy sensory table}
+\title{Specify sensory table}
 \usage{
-specify(.data, panelist = NULL, product = NULL, pres_order = NULL,
-  attribute = NULL, hedonic = NULL, method = c("QDA", "CATA", "RATA",
-  "FCP", "FP", "JAR", "IPM"))
+specify(.data, panelist = NULL, product = NULL, session = NULL,
+  pres_order = NULL, attribute = NULL, hedonic = NULL,
+  method = c("QDA", "CATA", "RATA", "FCP", "FP", "JAR", "IPM"))
 }
 \arguments{
 \item{.data}{a dataframe}
@@ -14,6 +14,8 @@ specify(.data, panelist = NULL, product = NULL, pres_order = NULL,
 \item{panelist}{panelist column}
 
 \item{product}{product column}
+
+\item{session}{session column}
 
 \item{pres_order}{presentation order column}
 
@@ -27,7 +29,7 @@ specify(.data, panelist = NULL, product = NULL, pres_order = NULL,
 a sensory table (dataframe with class of \code{tbl_sensory})
 }
 \description{
-Specify sensory informations into a raw dataframe. The minimal sensory informations are the panelist, the product, the sensory attributes, and the method in which the evaluation was conducted. Additonally the presentation order and hedonic evaluation can also be specified.
+Specify sensory informations into a raw dataframe. The minimal sensory informations are the panelist, the product, the sensory attributes, and the method in which the evaluation was conducted. Additonally the session, the presentation order and hedonic evaluation can also be specified.
 }
 \examples{
 data(perfume_qda_consumer)
@@ -37,4 +39,15 @@ data(perfume_qda_consumer)
   attribute = intensity:green, 
   hedonic = NULL,
   method = "QDA"))
+
+data(perfume_qda_experts)
+perfume_qda_experts \%>\% 
+specify(
+  panelist = panelist,
+  product = product,
+  session = session,
+  pres_order = rank,
+  attribute = spicy:wrapping,
+  method = "QDA"
+)
 }

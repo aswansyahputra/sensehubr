@@ -29,11 +29,15 @@ data(perfume_qda_consumers)
 analyse_global(df)
 
 # Using pipe \%>\%
-perfume_qda_consumers \%>\% 
-specify(panelist = consumer, 
-  product = product, 
-  attribute = intensity:green, 
-  hedonic = NULL,
-  method = "QDA") \%>\% 
+data(perfume_qda_experts)
+perfume_qda_experts \%>\% 
+specify(
+  panelist = panelist,
+  product = product,
+  session = session,
+  pres_order = rank,
+  attribute = spicy:wrapping,
+  method = "QDA"
+) \%>\% 
 analyse_global()
 }

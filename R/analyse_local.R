@@ -24,12 +24,16 @@
 #' analyse_local(df)
 #' 
 #' # Using pipe %>%
-#' perfume_qda_consumers %>% 
-#' specify(panelist = consumer, 
-#'   product = product, 
-#'   attribute = intensity:green, 
-#'   hedonic = NULL,
-#'   method = "QDA") %>% 
+#' data(perfume_qda_experts)
+#' perfume_qda_experts %>% 
+#' specify(
+#'   panelist = panelist,
+#'   product = product,
+#'   session = session,
+#'   pres_order = rank,
+#'   attribute = spicy:wrapping,
+#'   method = "QDA"
+#' ) %>% 
 #' analyse_local()
 
 analyse_local <- function(.data) {
@@ -46,17 +50,43 @@ analyse_local.default <- function(.data) {
 #' @export
 
 analyse_local.tbl_sensory_qda <- function(.data) {
+  meta_panelist <- attr(.data, "panelist")
+  meta_product <- attr(.data, "product")
+  meta_attribute <- attr(.data, "attribute")
+  
+  if (attr(.data, "session") != "NULL") {
+    meta_session <- attr(.data, "session")
+    if (attr(.data, "pres_order") != "NULL") {
+      meta_pres_order <- attr(.data, "pres_order")
+      fmla <- "value ~ product + panelist + session + panelist:product + panelist:session + product:session + pres_order"
+    } else if (attr(.data, "pres_order") == "NULL") {
+      meta_pres_order <- NULL
+      fmla <- "value ~ product + panelist + session + panelist:product + panelist:session + product:session"
+    }
+  } else if (attr(.data, "session") == "NULL") {
+    meta_session <- NULL
+    if (attr(.data, "pres_order") != "NULL") {
+      meta_pres_order <- attr(.data, "pres_order")
+      fmla <- "value ~ product + panelist + pres_order"
+    } else if (attr(.data, "pres_order") == "NULL") {
+      meta_pres_order <- NULL
+      fmla <- "value ~ product + panelist"
+    }
+  }
+  
   tbl <- .data %>% 
-    select(panelist = attr(.data, "panelist"),
-           product = attr(.data, "product"),
-           attr(.data, "attribute")) %>% 
-    gather("attribute", "value", attr(.data, "attribute")) %>%
+    select(panelist = meta_panelist,
+           product = meta_product,
+           session = meta_session,
+           pres_order = meta_pres_order,
+           meta_attribute) %>% 
+    gather("attribute", "value", meta_attribute) %>%
     group_by(attribute) %>% 
     nest() %>% 
     mutate(
       model = map(
         data, 
-        ~ aov(value ~ product + panelist,
+        ~ aov(as.formula(fmla),
               data = .x)),
       stats = map(
         model,
@@ -75,16 +105,13 @@ analyse_local.tbl_sensory_qda <- function(.data) {
     select(attribute, stats, values) %>% 
     unnest(stats, values) %>% 
     arrange(desc(statistic))
+  
   res <- new_tibble(tbl, 
                     "method" = attr(.data, "method"),
-                    "panelist" = attr(.data, "panelist"),
-                    "n_panelist" = attr(.data, "n_panelist"),
-                    "product" = attr(.data, "product"),
-                    "n_product" = attr(.data, "n_product"),
-                    "attribute" = attr(.data, "attribute"),
-                    "n_attribute" = attr(.data, "n_attribute"),
                     "method_local" = "Analysis of Variance",
+                    "model" = fmla,
                     nrow = NROW(tbl), 
                     class = "tbl_sensory_local")
+  
   return(res)
 }
