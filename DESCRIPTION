@@ -31,4 +31,7 @@ Imports:
     pillar,
     FactoMineR,
     SensoMineR,
-    factoextra
+    factoextra,
+    ggplot2,
+    ggradar,
+    scales
