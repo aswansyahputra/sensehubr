@@ -1,9 +1,26 @@
 #' Local analysis of sensory data
 #' 
 #' Perform local analysis on sensory table.
+#' @param .data a sensory table
+#' @param ... other arguments to pass on specific method
+#' 
+#' @export
+analyse_local <- function(.data, ...) {
+  UseMethod("analyse_local")
+}
+
+#' @export
+analyse_local.default <- function(.data, ...) {
+  stop("`.data` should be a sensory table.", call. = FALSE)
+}
+
+#' Local analysis of sensory data
+#' 
+#' Perform local analysis on sensory table.
 #'
 #' @param .data a sensory table
-#'
+#' @param ... not yet implemented
+#' 
 #' @import dplyr
 #' @importFrom tidyr gather spread nest unnest
 #' @importFrom purrr map
@@ -12,6 +29,8 @@
 #' 
 #' @return a sensory table of local analysis
 #' @export
+#' 
+#' @name analyse-local_qda
 #'
 #' @examples
 #' data(perfume_qda_consumers)
@@ -35,21 +54,7 @@
 #'   method = "QDA"
 #' ) %>% 
 #' analyse_local()
-
-analyse_local <- function(.data) {
-  UseMethod("analyse_local")
-}
-
-#' @export
-
-analyse_local.default <- function(.data) {
-  stop("`.data` should be a sensory table.", call. = FALSE)
-}
-
-#' @rdname analyse_local
-#' @export
-
-analyse_local.tbl_sensory_qda <- function(.data) {
+analyse_local.tbl_sensory_qda <- function(.data, ...) {
   meta_panelist <- attr(.data, "panelist")
   meta_product <- attr(.data, "product")
   meta_attribute <- attr(.data, "attribute")

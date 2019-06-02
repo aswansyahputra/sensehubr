@@ -1,8 +1,25 @@
+#' Global analysis of sensory data
+#' 
+#' Perform global analysis on sensory table.
+#' @param .data a sensory table
+#' @param ... other arguments to pass on specific method
+#' 
+#' @export
+analyse_global <- function(.data, ...) {
+  UseMethod("analyse_global")
+}
+
+#' @export
+analyse_global.default <- function(.data, ...) {
+  stop("`.data` should be a sensory table.", call. = FALSE)
+}
+
 #' Global analysis for sensory data
 #' 
 #' Perform global analysis on sensory table.
 #' 
 #' @param .data a sensory table
+#' @param ... not yet implemented
 #' 
 #' @import dplyr
 #' @import FactoMineR
@@ -13,6 +30,8 @@
 #' @return a sensory table of global analysis
 #' @export
 #'
+#' @name analyse-global_qda
+#' 
 #' @examples
 #' data(perfume_qda_consumers)
 #' (df <- specify(.data = perfume_qda_consumers, 
@@ -36,20 +55,7 @@
 #' ) %>% 
 #' analyse_global()
 
-analyse_global <- function(.data) {
-  UseMethod("analyse_global")
-}
-
-#' @export
-
-analyse_global.default <- function(.data) {
-  stop("`.data` should be a sensory table.", call. = FALSE)
-}
-
-#' @rdname analyse_global
-#' @export
-
-analyse_global.tbl_sensory_qda <- function(.data) {
+analyse_global.tbl_sensory_qda <- function(.data, ...) {
   meta_product <- attr(.data, "product")
   meta_attribute <- attr(.data, "attribute")
   
