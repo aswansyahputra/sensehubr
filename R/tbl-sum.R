@@ -1,5 +1,23 @@
 #' @export
+tbl_sum.tbl_sensory_design <- function(x){
+  c(
+    "A sensory table" = "Design of Experiment",
+    "Panelist" = paste(attr(x, "n_panelist"), "subjects"),
+    "Product" = paste(attr(x, "n_product"), "items")
+  )
+}
 
+#' @export
+tbl_sum.tbl_sensory_template <- function(x){
+  c(
+    "A sensory table" = "Design of Experiment",
+    "Panelist" = paste(attr(x, "n_panelist"), "subjects"),
+    "Product" = paste(attr(x, "n_product"), "items"),
+    "Attribute" = paste(attr(x, "n_attribute"), "lexicons") 
+  )
+}
+
+#' @export
 tbl_sum.tbl_sensory_qda <- function(x){
   c(
     "A sensory table" = meta_info(x, "sensory_table"),
@@ -11,7 +29,6 @@ tbl_sum.tbl_sensory_qda <- function(x){
 }
 
 #' @export
-
 tbl_sum.tbl_sensory_local <- function(x) {
   c(
     "A sensory table" = meta_info(x, "method"),
