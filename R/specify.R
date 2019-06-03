@@ -17,6 +17,7 @@
 #' @importFrom tibble new_tibble
 #'
 #' @return a sensory table (dataframe with class of \code{tbl_sensory})
+#' 
 #' @export
 #'
 #' @examples
@@ -63,7 +64,7 @@ specify <- function(.data, panelist = NULL, product = NULL, session = NULL, pres
                       "IPM" = "tbl_sensory_ipm")
   
   res <- new_tibble(tbl,
-                    "method" = method,
+                    "method" = method[[1]],
                     "panelist" = as_label(enquo(panelist)),
                     "n_panelist" = length(unique(pull(tbl, !!enquo(panelist)))),
                     "product" = as_label(enquo(product)),
