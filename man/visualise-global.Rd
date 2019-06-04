@@ -6,7 +6,7 @@
 \title{Visualise sensory space}
 \usage{
 \method{visualise}{tbl_sensory_global}(res, choice = c("product",
-  "attribute"), dimension = c(1, 2), repel = FALSE,
+  "attribute", "eigenvalue"), dimension = c(1, 2), repel = FALSE,
   colour_by = c("none", "quality", "contribution"), title = "default",
   ...)
 }

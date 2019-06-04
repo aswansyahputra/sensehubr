@@ -84,8 +84,9 @@ visualise.tbl_sensory_local <- function(res, min_scales = 0, max_scales = 10, po
 #' @param title a title to use in plot
 #' @param ... not yet implemented
 #'
+#' @import ggplot2
 #' @importFrom factoextra fviz
-#' @importFrom ggplot2 labs scale_colour_viridis_c
+#' @importFrom scales percent_format
 #' 
 #' @return a ggplot object
 #' @export
@@ -105,43 +106,67 @@ visualise.tbl_sensory_local <- function(res, min_scales = 0, max_scales = 10, po
 #' ) %>% 
 #' analyse_global() %>% 
 #' visualise(choice = "attribute", colour_by = "contribution")
-visualise.tbl_sensory_global <- function(res, choice = c("product", "attribute"), dimension = c(1, 2), repel = FALSE, colour_by =  c("none", "quality", "contribution"), title = "default", ...) {
+visualise.tbl_sensory_global <- function(res, choice = c("product", "attribute", "eigenvalue"), dimension = c(1, 2), repel = FALSE, colour_by =  c("none", "quality", "contribution"), title = "default", ...) {
   res_global <- res$res_global
   
-  if (choice[[1]] == "product") {
-    element <- switch(class(res_global)[[1]],
-                      "PCA" = "ind",
-                      "MCA" = "ind",
-                      "CA"  = "row") 
-  } else if (choice[[1]] == "attribute") {
-    element <- switch(class(res_global)[[1]],
-                      "PCA" = "var",
-                      "MCA" = "var",
-                      "CA"  = "col")
-  } 
-  
-  res <- fviz(res_global, 
-              element = element,
-              axes = dimension, 
-              repel = repel, 
-              color = switch(colour_by[[1]],
-                             "none" = "black",
-                             "quality" = "cos2",
-                             "contribution" = "contrib")) +
-    labs(
-      title = ifelse(title == "default",
-                     ifelse(choice == "product",
-                            "Representation of products",
-                            "Correlation circle of sensory attributes"
-                            ),
-                     title),
-      colour = switch(colour_by[[1]],
-                      "none" = "",
-                      "quality" = "Quality",
-                      "contribution" = "Contribution")
-    ) +
-    if (colour_by[[1]] %in% c("quality", "contribution")) {
-      scale_colour_viridis_c(direction = -1)
+  if (choice[[1]] == "eigenvalue") {
+    tbl <- res_global %>% 
+      glance_eigenvalue()
+    
+    max_dim <- NROW(tbl)
+    
+    res <- ggplot(tbl, aes(dimension, eigenvalue)) +
+      geom_col(fill = "lightblue") +
+      geom_hline(yintercept = 1, lty = "longdash", colour = "darkred") +
+      scale_x_continuous(breaks = seq_len(max_dim)) +
+      scale_y_continuous(breaks = seq_len(max_dim),
+                         sec.axis = sec_axis(~./max_dim, 
+                                             name = "Explained variance", 
+                                             breaks = seq(0, 1, 0.1), 
+                                             labels = percent_format())) +
+      labs(
+        x = "Dimension",
+        y = "Eigenvalue",
+        title = ifelse(title == "default", "Screeplot", title),
+        subtitle = "Red dashed line depicts threshold for eigenvalue"
+      ) +
+      theme_minimal()
+  } else {
+    if (choice[[1]] == "product") {
+      element <- switch(class(res_global)[[1]],
+                        "PCA" = "ind",
+                        "MCA" = "ind",
+                        "CA"  = "row") 
+    } else if (choice[[1]] == "attribute") {
+      element <- switch(class(res_global)[[1]],
+                        "PCA" = "var",
+                        "MCA" = "var",
+                        "CA"  = "col")
     }
+    res <- fviz(res_global, 
+                element = element,
+                axes = dimension, 
+                repel = repel, 
+                color = switch(colour_by[[1]],
+                               "none" = "black",
+                               "quality" = "cos2",
+                               "contribution" = "contrib")) +
+      labs(
+        title = ifelse(title == "default",
+                       ifelse(choice == "product",
+                              "Representation of products",
+                              "Correlation circle of sensory attributes"
+                       ),
+                       title),
+        colour = switch(colour_by[[1]],
+                        "none" = "",
+                        "quality" = "Quality",
+                        "contribution" = "Contribution")
+      ) +
+      if (colour_by[[1]] %in% c("quality", "contribution")) {
+        scale_colour_viridis_c(direction = -1)
+      }
+  }
+ 
   return(res)
 }
