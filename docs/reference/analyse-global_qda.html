@@ -158,13 +158,15 @@
 #&gt; </span><span style='color: #555555;'># … with 1,226 more rows, and 15 more variables: vanilla </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, citrus </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
 #&gt; #   anis </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, sweet_fruit </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, honey </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, caramel </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, spicy </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
 #&gt; #   woody </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, leather </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, nutty </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, musk </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, animal </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   earthy </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, incense </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, green </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'><span class='fu'>analyse_global</span>(<span class='no'>df</span>)</div><div class='output co'>#&gt; $eigenvalue
-#&gt; </span><span style='color: #555555;'># A sensory table:       QDA</span><span>
-#&gt; </span><span style='color: #555555;'># Type:                  Global analysis</span><span>
-#&gt; </span><span style='color: #555555;'># Method:                PCA</span><span>
-#&gt; </span><span style='color: #555555;'># Active individual:     12 products as active individuals</span><span>
-#&gt; </span><span style='color: #555555;'># Active variable:       21 sensory attributes as active variables</span><span>
-#&gt; </span><span style='color: #555555;'># Suplementary variable: None as supplementary quantitative variable</span><span>
+#&gt; #   earthy </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, incense </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, green </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'><span class='fu'>analyse_global</span>(<span class='no'>df</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A sensory table:        QDA 
+#&gt; # Type:                   Global analysis 
+#&gt; # Method:                 PCA 
+#&gt; # Active individual:      12 products 
+#&gt; # Active variable:        21 sensory attributes 
+#&gt; # Supplementary variable: None 
+#&gt; #
+#&gt; # Description of:      Eigenvalue</span><span>
+#&gt; </span><span style='color: #555555;'># Number of dimension: 11</span><span>
 #&gt;    dimension eigenvalue pct_variance pct_cum_variance
 #&gt;        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span>         1    14.3          68.3               68.3
@@ -178,9 +180,9 @@
 #&gt; </span><span style='color: #555555;'> 9</span><span>         9     0.097</span><span style='text-decoration: underline;'>5</span><span>        0.464             99.6
 #&gt; </span><span style='color: #555555;'>10</span><span>        10     0.048</span><span style='text-decoration: underline;'>7</span><span>        0.232             99.9
 #&gt; </span><span style='color: #555555;'>11</span><span>        11     0.027</span><span style='text-decoration: underline;'>4</span><span>        0.130            100  
-#&gt; 
-#&gt; $product
-#&gt; </span><span style='color: #555555;'># Results of: product &lt;dim 1 and 2&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>#
+#&gt; # Description of: Product &lt;12 items&gt;</span><span>
+#&gt; </span><span style='color: #555555;'># Dimension:      Dim 1 x Dim 2</span><span>
 #&gt;    attribute            dim1   dim2 quality contribution
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>               </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> Angel              7.33    1.99    0.930        26.5 
@@ -195,9 +197,9 @@
 #&gt; </span><span style='color: #555555;'>10</span><span> Cinema            -</span><span style='color: #BB0000;'>0.414</span><span>   1.98    0.497         1.88
 #&gt; </span><span style='color: #555555;'>11</span><span> L'instant          0.033</span><span style='text-decoration: underline;'>3</span><span>  2.00    0.651         1.84
 #&gt; </span><span style='color: #555555;'>12</span><span> Chanel N5          0.765  -</span><span style='color: #BB0000;'>1.62</span><span>    0.461         1.47
-#&gt; 
-#&gt; $attribute
-#&gt; </span><span style='color: #555555;'># Results of: sensory attributes &lt;dim 1 and 2&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>#
+#&gt; # Description of: Sensory attribute &lt;21 lexicons&gt;</span><span>
+#&gt; </span><span style='color: #555555;'># Dimension:      Dim 1 x Dim 2</span><span>
 #&gt;    attribute   dim1    dim2 cor_to_dim1 cor_to_dim2 quality contribution
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> spicy      0.857 -</span><span style='color: #BB0000;'>0.496</span><span>        0.857     -</span><span style='color: #BB0000;'>0.496</span><span>    0.982         5.42
@@ -210,38 +212,7 @@
 #&gt; </span><span style='color: #555555;'> 8</span><span> freshness -</span><span style='color: #BB0000;'>0.957</span><span>  0.043</span><span style='text-decoration: underline;'>0</span><span>      -</span><span style='color: #BB0000;'>0.957</span><span>      0.043</span><span style='text-decoration: underline;'>0</span><span>   0.917         5.06
 #&gt; </span><span style='color: #555555;'> 9</span><span> anis       0.725  0.612        0.725      0.612    0.899         4.97
 #&gt; </span><span style='color: #555555;'>10</span><span> earthy     0.913 -</span><span style='color: #BB0000;'>0.253</span><span>        0.913     -</span><span style='color: #BB0000;'>0.253</span><span>    0.897         4.95
-#&gt; </span><span style='color: #555555;'># … with 11 more rows</span><span>
-#&gt; 
-#&gt; $res_global
-#&gt; **Results for the Principal Component Analysis (PCA)**
-#&gt; The analysis was performed on 12 individuals, described by 21 variables
-#&gt; *The results are available in the following objects:
-#&gt; 
-#&gt;    name               description                          
-#&gt; 1  "$eig"             "eigenvalues"                        
-#&gt; 2  "$var"             "results for the variables"          
-#&gt; 3  "$var$coord"       "coord. for the variables"           
-#&gt; 4  "$var$cor"         "correlations variables - dimensions"
-#&gt; 5  "$var$cos2"        "cos2 for the variables"             
-#&gt; 6  "$var$contrib"     "contributions of the variables"     
-#&gt; 7  "$ind"             "results for the individuals"        
-#&gt; 8  "$ind$coord"       "coord. for the individuals"         
-#&gt; 9  "$ind$cos2"        "cos2 for the individuals"           
-#&gt; 10 "$ind$contrib"     "contributions of the individuals"   
-#&gt; 11 "$call"            "summary statistics"                 
-#&gt; 12 "$call$centre"     "mean of the variables"              
-#&gt; 13 "$call$ecart.type" "standard error of the variables"    
-#&gt; 14 "$call$row.w"      "weights for the individuals"        
-#&gt; 15 "$call$col.w"      "weights for the variables"          
-#&gt; 
-#&gt; attr(,"class")
-#&gt; [1] "list"               "tbl_sensory_global"
-#&gt; attr(,"method")
-#&gt; [1] "QDA"
-#&gt; attr(,"method_local")
-#&gt; [1] "PCA"
-#&gt; attr(,"hedonic")
-#&gt; [1] "NULL"</div><div class='input'>
+#&gt; </span><span style='color: #555555;'># … with 11 more rows</span><span></div><div class='input'>
 <span class='co'># Using pipe %&gt;%</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>perfume_qda_experts</span>)
 <span class='no'>perfume_qda_experts</span> <span class='kw'>%&gt;%</span>
@@ -253,13 +224,15 @@
   <span class='kw'>attribute</span> <span class='kw'>=</span> <span class='no'>spicy</span>:<span class='no'>wrapping</span>,
   <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"QDA"</span>
 ) <span class='kw'>%&gt;%</span>
-<span class='fu'>analyse_global</span>()</div><div class='output co'>#&gt; $eigenvalue
-#&gt; </span><span style='color: #555555;'># A sensory table:       QDA</span><span>
-#&gt; </span><span style='color: #555555;'># Type:                  Global analysis</span><span>
-#&gt; </span><span style='color: #555555;'># Method:                PCA</span><span>
-#&gt; </span><span style='color: #555555;'># Active individual:     12 products as active individuals</span><span>
-#&gt; </span><span style='color: #555555;'># Active variable:       12 sensory attributes as active variables</span><span>
-#&gt; </span><span style='color: #555555;'># Suplementary variable: None as supplementary quantitative variable</span><span>
+<span class='fu'>analyse_global</span>()</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A sensory table:        QDA 
+#&gt; # Type:                   Global analysis 
+#&gt; # Method:                 PCA 
+#&gt; # Active individual:      12 products 
+#&gt; # Active variable:        12 sensory attributes 
+#&gt; # Supplementary variable: None 
+#&gt; #
+#&gt; # Description of:      Eigenvalue</span><span>
+#&gt; </span><span style='color: #555555;'># Number of dimension: 11</span><span>
 #&gt;    dimension eigenvalue pct_variance pct_cum_variance
 #&gt;        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span>         1    7.71        64.2                 64.2
@@ -273,9 +246,9 @@
 #&gt; </span><span style='color: #555555;'> 9</span><span>         9    0.023</span><span style='text-decoration: underline;'>5</span><span>       0.196               99.9
 #&gt; </span><span style='color: #555555;'>10</span><span>        10    0.010</span><span style='text-decoration: underline;'>8</span><span>       0.090</span><span style='text-decoration: underline;'>4</span><span>             100.0
 #&gt; </span><span style='color: #555555;'>11</span><span>        11    0.001</span><span style='text-decoration: underline;'>16</span><span>      0.009</span><span style='text-decoration: underline;'>68</span><span>            100  
-#&gt; 
-#&gt; $product
-#&gt; </span><span style='color: #555555;'># Results of: product &lt;dim 1 and 2&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>#
+#&gt; # Description of: Product &lt;12 items&gt;</span><span>
+#&gt; </span><span style='color: #555555;'># Dimension:      Dim 1 x Dim 2</span><span>
 #&gt;    attribute           dim1   dim2 quality contribution
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> Aromatics Elixir   3.74   2.39    0.990       15.9  
@@ -290,9 +263,9 @@
 #&gt; </span><span style='color: #555555;'>10</span><span> Cinema            -</span><span style='color: #BB0000;'>0.503</span><span> -</span><span style='color: #BB0000;'>1.44</span><span>    0.731        1.87 
 #&gt; </span><span style='color: #555555;'>11</span><span> L'instant         -</span><span style='color: #BB0000;'>0.523</span><span> -</span><span style='color: #BB0000;'>1.04</span><span>    0.409        1.09 
 #&gt; </span><span style='color: #555555;'>12</span><span> Pure Poison       -</span><span style='color: #BB0000;'>0.658</span><span>  0.255   0.181        0.402
-#&gt; 
-#&gt; $attribute
-#&gt; </span><span style='color: #555555;'># Results of: sensory attributes &lt;dim 1 and 2&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>#
+#&gt; # Description of: Sensory attribute &lt;12 lexicons&gt;</span><span>
+#&gt; </span><span style='color: #555555;'># Dimension:      Dim 1 x Dim 2</span><span>
 #&gt;    attribute   dim1    dim2 cor_to_dim1 cor_to_dim2 quality contribution
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> spicy      0.872  0.460        0.872      0.460    0.971         9.40
@@ -306,38 +279,7 @@
 #&gt; </span><span style='color: #555555;'> 9</span><span> woody      0.641  0.600        0.641      0.600    0.772         7.47
 #&gt; </span><span style='color: #555555;'>10</span><span> marine    -</span><span style='color: #BB0000;'>0.866</span><span>  0.056</span><span style='text-decoration: underline;'>0</span><span>      -</span><span style='color: #BB0000;'>0.866</span><span>      0.056</span><span style='text-decoration: underline;'>0</span><span>   0.753         7.29
 #&gt; </span><span style='color: #555555;'>11</span><span> citrus    -</span><span style='color: #BB0000;'>0.814</span><span>  0.227       -</span><span style='color: #BB0000;'>0.814</span><span>      0.227    0.714         6.91
-#&gt; </span><span style='color: #555555;'>12</span><span> green     -</span><span style='color: #BB0000;'>0.741</span><span>  0.314       -</span><span style='color: #BB0000;'>0.741</span><span>      0.314    0.648         6.27
-#&gt; 
-#&gt; $res_global
-#&gt; **Results for the Principal Component Analysis (PCA)**
-#&gt; The analysis was performed on 12 individuals, described by 12 variables
-#&gt; *The results are available in the following objects:
-#&gt; 
-#&gt;    name               description                          
-#&gt; 1  "$eig"             "eigenvalues"                        
-#&gt; 2  "$var"             "results for the variables"          
-#&gt; 3  "$var$coord"       "coord. for the variables"           
-#&gt; 4  "$var$cor"         "correlations variables - dimensions"
-#&gt; 5  "$var$cos2"        "cos2 for the variables"             
-#&gt; 6  "$var$contrib"     "contributions of the variables"     
-#&gt; 7  "$ind"             "results for the individuals"        
-#&gt; 8  "$ind$coord"       "coord. for the individuals"         
-#&gt; 9  "$ind$cos2"        "cos2 for the individuals"           
-#&gt; 10 "$ind$contrib"     "contributions of the individuals"   
-#&gt; 11 "$call"            "summary statistics"                 
-#&gt; 12 "$call$centre"     "mean of the variables"              
-#&gt; 13 "$call$ecart.type" "standard error of the variables"    
-#&gt; 14 "$call$row.w"      "weights for the individuals"        
-#&gt; 15 "$call$col.w"      "weights for the variables"          
-#&gt; 
-#&gt; attr(,"class")
-#&gt; [1] "list"               "tbl_sensory_global"
-#&gt; attr(,"method")
-#&gt; [1] "QDA"
-#&gt; attr(,"method_local")
-#&gt; [1] "PCA"
-#&gt; attr(,"hedonic")
-#&gt; [1] "NULL"</div></span></pre>
+#&gt; </span><span style='color: #555555;'>12</span><span> green     -</span><span style='color: #BB0000;'>0.741</span><span>  0.314       -</span><span style='color: #BB0000;'>0.741</span><span>      0.314    0.648         6.27</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

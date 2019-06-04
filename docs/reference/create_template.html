@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create template for data input — create_template • sensehubr</title>
+<title>Create template for sensory data — create_template • sensehubr</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Create template for data input — create_template" />
+<meta property="og:title" content="Create template for sensory data — create_template" />
 
-<meta property="og:description" content="Create template for inputting data collected from sensory research" />
+<meta property="og:description" content="Create template for inputting data that collected from sensory research." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">sensehubr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -99,29 +99,25 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create template for data input</h1>
-    <small class="dont-index">Source: <a href='https://github.com/aswansyahputra/sensehubr/blob/master/R/create_template.R'><code>R/create_template.R</code></a></small>
+    <h1>Create template for sensory data</h1>
+    <small class="dont-index">Source: <a href='https://github.com/aswansyahputra/sensehubr/blob/master/R/create-template.R'><code>R/create-template.R</code></a></small>
     <div class="hidden name"><code>create_template.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Create template for inputting data collected from sensory research</p>
+    <p>Create template for inputting data that collected from sensory research.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>create_template</span>(<span class='no'>.data</span>, <span class='no'>panelist</span>, <span class='no'>attribute</span>)</pre>
+    <pre class="usage"><span class='fu'>create_template</span>(<span class='no'>.data</span>, <span class='no'>attribute</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>.data</th>
-      <td><p>output from <code>generate_design</code> function</p></td>
-    </tr>
-    <tr>
-      <th>panelist</th>
-      <td><p>column containing panelist information</p></td>
+      <td><p>output from <code>prepare</code> function</p></td>
     </tr>
     <tr>
       <th>attribute</th>
@@ -131,51 +127,53 @@
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Returns a dataframe of sensory design with Panelist, Order, Product, and Sensory Attributes columns</p>
+    <p>Returns a dataframe of sensory design with panelist, presentation order, product, blind code (optional) and sensory attributes columns</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='no'>design</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='generate_design.html'>generate_design</a></span>(<span class='kw'>n_panelist</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>product</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>use_coding</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='no'>design</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 20 x 6</span><span>
-#&gt;    Panelist   Order1        Order2        Order3       Order4       Order5      
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> Panelist1  Product1 (47… Product2 (72… Product5 (2… Product3 (2… Product4 (9…
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> Panelist2  Product2 (72… Product3 (23… Product1 (4… Product4 (9… Product5 (2…
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> Panelist3  Product3 (23… Product4 (90… Product2 (7… Product5 (2… Product1 (4…
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> Panelist4  Product4 (90… Product5 (21… Product3 (2… Product1 (4… Product2 (7…
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> Panelist5  Product5 (21… Product1 (47… Product4 (9… Product2 (7… Product3 (2…
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> Panelist6  Product4 (90… Product3 (23… Product5 (2… Product2 (7… Product1 (4…
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> Panelist7  Product5 (21… Product4 (90… Product1 (4… Product3 (2… Product2 (7…
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> Panelist8  Product1 (47… Product5 (21… Product2 (7… Product4 (9… Product3 (2…
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> Panelist9  Product2 (72… Product1 (47… Product3 (2… Product5 (2… Product4 (9…
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> Panelist10 Product3 (23… Product2 (72… Product4 (9… Product1 (4… Product5 (2…
-#&gt; </span><span style='color: #BCBCBC;'>11</span><span> Panelist11 Product1 (47… Product2 (72… Product5 (2… Product3 (2… Product4 (9…
-#&gt; </span><span style='color: #BCBCBC;'>12</span><span> Panelist12 Product2 (72… Product3 (23… Product1 (4… Product4 (9… Product5 (2…
-#&gt; </span><span style='color: #BCBCBC;'>13</span><span> Panelist13 Product3 (23… Product4 (90… Product2 (7… Product5 (2… Product1 (4…
-#&gt; </span><span style='color: #BCBCBC;'>14</span><span> Panelist14 Product4 (90… Product5 (21… Product3 (2… Product1 (4… Product2 (7…
-#&gt; </span><span style='color: #BCBCBC;'>15</span><span> Panelist15 Product5 (21… Product1 (47… Product4 (9… Product2 (7… Product3 (2…
-#&gt; </span><span style='color: #BCBCBC;'>16</span><span> Panelist16 Product4 (90… Product3 (23… Product5 (2… Product2 (7… Product1 (4…
-#&gt; </span><span style='color: #BCBCBC;'>17</span><span> Panelist17 Product5 (21… Product4 (90… Product1 (4… Product3 (2… Product2 (7…
-#&gt; </span><span style='color: #BCBCBC;'>18</span><span> Panelist18 Product1 (47… Product5 (21… Product2 (7… Product4 (9… Product3 (2…
-#&gt; </span><span style='color: #BCBCBC;'>19</span><span> Panelist19 Product2 (72… Product1 (47… Product3 (2… Product5 (2… Product4 (9…
-#&gt; </span><span style='color: #BCBCBC;'>20</span><span> Panelist20 Product3 (23… Product2 (72… Product4 (9… Product1 (4… Product5 (2…</div><div class='input'>
-<span class='fu'>create_template</span>(<span class='no'>design</span>, <span class='kw'>panelist</span> <span class='kw'>=</span> <span class='no'>Panelist</span>, <span class='kw'>attribute</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"Sweetness"</span>, <span class='st'>"Mint"</span>, <span class='st'>"Green"</span>, <span class='st'>"Herbal"</span>))</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 100 x 7</span><span>
-#&gt;    Panelist  Order  Product        Sweetness  Mint Green Herbal
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>              </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> Panelist1 Order1 Product1 (474)        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>     </span><span style='color: #BB0000;'>NA</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> Panelist1 Order2 Product2 (724)        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>     </span><span style='color: #BB0000;'>NA</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> Panelist1 Order3 Product5 (211)        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>     </span><span style='color: #BB0000;'>NA</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> Panelist1 Order4 Product3 (233)        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>     </span><span style='color: #BB0000;'>NA</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> Panelist1 Order5 Product4 (904)        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>     </span><span style='color: #BB0000;'>NA</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> Panelist2 Order1 Product2 (724)        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>     </span><span style='color: #BB0000;'>NA</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> Panelist2 Order2 Product3 (233)        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>     </span><span style='color: #BB0000;'>NA</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> Panelist2 Order3 Product1 (474)        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>     </span><span style='color: #BB0000;'>NA</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> Panelist2 Order4 Product4 (904)        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>     </span><span style='color: #BB0000;'>NA</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> Panelist2 Order5 Product5 (211)        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>     </span><span style='color: #BB0000;'>NA</span><span>
-#&gt; </span><span style='color: #949494;'># … with 90 more rows</span><span></div><div class='input'>
-
-</div></span></pre>
+    <pre class="examples"><div class='input'><span class='no'>design</span> <span class='kw'>&lt;-</span> <span class='fu'>prepare</span>(<span class='kw'>n_panelist</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>product</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>blind_code</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='no'>design</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A sensory table: Design of Experiment</span><span>
+#&gt; </span><span style='color: #555555;'># Panelist:        20 subjects</span><span>
+#&gt; </span><span style='color: #555555;'># Product:         5 items</span><span>
+#&gt;    panelist order_1       order_2       order_3       order_4       order_5     
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       
+#&gt; </span><span style='color: #555555;'> 1</span><span> ind_001  prod_03 (635) prod_02 (576) prod_01 (746) prod_05 (148) prod_04 (54…
+#&gt; </span><span style='color: #555555;'> 2</span><span> ind_002  prod_02 (576) prod_05 (148) prod_03 (635) prod_04 (543) prod_01 (74…
+#&gt; </span><span style='color: #555555;'> 3</span><span> ind_003  prod_05 (148) prod_04 (543) prod_02 (576) prod_01 (746) prod_03 (63…
+#&gt; </span><span style='color: #555555;'> 4</span><span> ind_004  prod_04 (543) prod_01 (746) prod_05 (148) prod_03 (635) prod_02 (57…
+#&gt; </span><span style='color: #555555;'> 5</span><span> ind_005  prod_01 (746) prod_03 (635) prod_04 (543) prod_02 (576) prod_05 (14…
+#&gt; </span><span style='color: #555555;'> 6</span><span> ind_006  prod_04 (543) prod_05 (148) prod_01 (746) prod_02 (576) prod_03 (63…
+#&gt; </span><span style='color: #555555;'> 7</span><span> ind_007  prod_01 (746) prod_04 (543) prod_03 (635) prod_05 (148) prod_02 (57…
+#&gt; </span><span style='color: #555555;'> 8</span><span> ind_008  prod_03 (635) prod_01 (746) prod_02 (576) prod_04 (543) prod_05 (14…
+#&gt; </span><span style='color: #555555;'> 9</span><span> ind_009  prod_02 (576) prod_03 (635) prod_05 (148) prod_01 (746) prod_04 (54…
+#&gt; </span><span style='color: #555555;'>10</span><span> ind_010  prod_05 (148) prod_02 (576) prod_04 (543) prod_03 (635) prod_01 (74…
+#&gt; </span><span style='color: #555555;'>11</span><span> ind_011  prod_03 (635) prod_02 (576) prod_01 (746) prod_05 (148) prod_04 (54…
+#&gt; </span><span style='color: #555555;'>12</span><span> ind_012  prod_02 (576) prod_05 (148) prod_03 (635) prod_04 (543) prod_01 (74…
+#&gt; </span><span style='color: #555555;'>13</span><span> ind_013  prod_05 (148) prod_04 (543) prod_02 (576) prod_01 (746) prod_03 (63…
+#&gt; </span><span style='color: #555555;'>14</span><span> ind_014  prod_04 (543) prod_01 (746) prod_05 (148) prod_03 (635) prod_02 (57…
+#&gt; </span><span style='color: #555555;'>15</span><span> ind_015  prod_01 (746) prod_03 (635) prod_04 (543) prod_02 (576) prod_05 (14…
+#&gt; </span><span style='color: #555555;'>16</span><span> ind_016  prod_04 (543) prod_05 (148) prod_01 (746) prod_02 (576) prod_03 (63…
+#&gt; </span><span style='color: #555555;'>17</span><span> ind_017  prod_01 (746) prod_04 (543) prod_03 (635) prod_05 (148) prod_02 (57…
+#&gt; </span><span style='color: #555555;'>18</span><span> ind_018  prod_03 (635) prod_01 (746) prod_02 (576) prod_04 (543) prod_05 (14…
+#&gt; </span><span style='color: #555555;'>19</span><span> ind_019  prod_02 (576) prod_03 (635) prod_05 (148) prod_01 (746) prod_04 (54…
+#&gt; </span><span style='color: #555555;'>20</span><span> ind_020  prod_05 (148) prod_02 (576) prod_04 (543) prod_03 (635) prod_01 (74…</div><div class='input'>
+<span class='fu'>create_template</span>(<span class='no'>design</span>, <span class='kw'>attribute</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"Sweetness"</span>, <span class='st'>"Mint"</span>, <span class='st'>"Green"</span>, <span class='st'>"Herbal"</span>))</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A sensory table: Design of Experiment</span><span>
+#&gt; </span><span style='color: #555555;'># Panelist:        20 subjects</span><span>
+#&gt; </span><span style='color: #555555;'># Product:         5 items</span><span>
+#&gt; </span><span style='color: #555555;'># Attribute:       4 lexicons</span><span>
+#&gt;    panelist pres_order product blind_code Sweetness Mint  Green Herbal
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> 
+#&gt; </span><span style='color: #555555;'> 1</span><span> ind_001  order_1    prod_03 635        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'> 2</span><span> ind_001  order_2    prod_02 576        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'> 3</span><span> ind_001  order_3    prod_01 746        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'> 4</span><span> ind_001  order_4    prod_05 148        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'> 5</span><span> ind_001  order_5    prod_04 543        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'> 6</span><span> ind_002  order_1    prod_02 576        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'> 7</span><span> ind_002  order_2    prod_05 148        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'> 8</span><span> ind_002  order_3    prod_03 635        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'> 9</span><span> ind_002  order_4    prod_04 543        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'>10</span><span> ind_002  order_5    prod_01 746        </span><span style='color: #BB0000;'>NA</span><span>        </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'># … with 90 more rows</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
