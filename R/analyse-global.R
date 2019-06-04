@@ -75,26 +75,7 @@ analyse_global.tbl_sensory_qda <- function(.data, ...) {
     column_to_rownames("product") %>% 
     PCA(quanti.sup = meta_hedonic, graph = FALSE)
   
-  tbl_eig <- 
-    get_eig(res_global) %>% 
-    as_tibble(rownames = "dimension") %>% 
-    transmute(dimension = str_remove_all(dimension, "Dim\\."),
-              dimension = as.numeric(dimension),
-              eigenvalue,
-              pct_variance = variance.percent,
-              pct_cum_variance = cumulative.variance.percent)
-  
-  
-  tbl_eig <- trunc_mat(as_tibble(tbl_eig))
-  
-  tbl_eig$summary <- c(
-    "A sensory table" = meta_info(.data, "method"),
-    "Type" = "Global analysis",
-    "Method" = "PCA",
-    "Active individual" = paste(attr(.data, "n_product"), "products as active individuals"),
-    "Active variable" = paste(attr(.data, "n_attribute"), "sensory attributes as active variables"),
-    "Suplementary variable" = paste(ifelse(attr(.data, "hedonic") == "NULL", "None", attr(.data, "hedonic")), "as supplementary quantitative variable")
-  )
+  tbl_eig <- glance_eigenvalue(res_global)
   
   tbl_product <- glance_product(res_global)
   
@@ -107,11 +88,13 @@ analyse_global.tbl_sensory_qda <- function(.data, ...) {
     res_global = res_global
   )
   
-  class(res) <- append(class(res), "tbl_sensory_global")
-  
   attr(res, "method") <- attr(.data, "method")
-  attr(res, "method_local") <- "PCA"
+  attr(res, "method_global") <- "PCA"
+  attr(res, "n_product") <- attr(.data, "n_product")
+  attr(res, "n_attribute") <- attr(.data, "n_attribute")
   attr(res, "hedonic") <- attr(.data, "hedonic")
+  
+  class(res) <- append(class(res), "tbl_sensory_global")
   
   return(res)
 }

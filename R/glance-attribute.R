@@ -7,7 +7,7 @@
 #' 
 #' @import dplyr
 #' @importFrom factoextra facto_summarize get_pca_var
-#' @importFrom tibble as_tibble trunc_mat
+#' @importFrom tibble new_tibble
 #'
 #' @return a dataframe
 #' @export
@@ -67,9 +67,11 @@ glance_attribute.PCA <- function(res_global, dimension = c(1, 2)) {
     rename_at(vars(starts_with("Dim")), ~tolower(sub("\\.", "", .x))) %>% 
     arrange(desc(contribution))
   
-  res <- trunc_mat(as_tibble(tbl), width = Inf)
-  
-  res$summary <- c("Results of" = paste("sensory attributes", angle_brackets(paste("dim", dimension[1], "and", dimension[2]))))
+  res <- new_tibble(tbl,
+                    "n_attribute" = NROW(tbl),
+                    "dimension" = c(dimension[[1]], dimension[[2]]),
+                    nrow = NROW(tbl), 
+                    class = "tbl_sensory_global_attribute")
   
   return(res)
 }

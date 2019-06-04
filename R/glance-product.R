@@ -7,7 +7,7 @@
 #' 
 #' @import dplyr
 #' @importFrom factoextra facto_summarize
-#' @importFrom tibble as_tibble trunc_mat
+#' @importFrom tibble new_tibble
 #'
 #' @return a dataframe
 #' @export
@@ -62,14 +62,16 @@ glance_product.PCA <- function(res_global, dimension = c(1, 2)) {
     rename_at(vars(starts_with("Dim")), ~tolower(sub("\\.", "", .x))) %>% 
     arrange(desc(contribution))
   
-  res <- trunc_mat(as_tibble(tbl))
-  
-  res$summary <- c("Results of" = paste("product", angle_brackets(paste("dim", dimension[1], "and", dimension[2]))))
+  res <- new_tibble(tbl,
+                    "n_product" = NROW(tbl),
+                    "dimension" = c(dimension[[1]], dimension[[2]]),
+                    nrow = NROW(tbl), 
+                    class = "tbl_sensory_global_product")
   
   return(res)
 }
 
-# @export
+#' @export
 glance_product.tbl_sensory_global <- function(res_global, dimension = c(1, 2)) {
   res_global_extracted <- res_global$res_global
   res <- glance_product(res_global_extracted, dimension = dimension)
