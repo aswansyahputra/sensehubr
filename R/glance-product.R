@@ -5,7 +5,7 @@
 #' @param res_global output of global analysis
 #' @param dimension dimension to focus, integer vector of length 2
 #' 
-#' @import dplyr
+#' @importFrom dplyr mutate left_join select rename_at arrange vars desc
 #' @importFrom factoextra facto_summarize
 #' @importFrom tibble new_tibble
 #'
@@ -18,11 +18,6 @@ glance_product <- function(res_global, dimension = c(1, 2)) {
 
 #' @export
 glance_product.default <- function(res_global, dimension = c(1, 2)) {
-  stop("`res_global` is not valid.", call. = FALSE)
-}
-
-#' @export
-glance_product.PCA <- function(res_global, dimension = c(1, 2)) {
   if (!is.numeric(dimension)) {
     stop("`dimension` should be an integer vector.", call. = FALSE)
   }
@@ -39,13 +34,19 @@ glance_product.PCA <- function(res_global, dimension = c(1, 2)) {
     stop("`dimension` should be subsequential with increase of 1.", call. = FALSE)
   }
   
-  coord <- facto_summarize(res_global, element = "ind", result = "coord", axes = dimension) %>% 
+  if (any(class(res_global) %in% "PCA")) {
+    element <- "ind"
+  } else if (any(class(res_global) %in% "CA")) {
+    element <- "row"
+  }
+  
+  coord <- facto_summarize(res_global, element = element, result = "coord", axes = dimension) %>% 
     mutate(name = as.character(name))
   
-  cos2 <- facto_summarize(res_global, element = "ind", result = "cos2", axes = dimension) %>% 
+  cos2 <- facto_summarize(res_global, element = element, result = "cos2", axes = dimension) %>% 
     mutate(name = as.character(name))
   
-  contrib <- facto_summarize(res_global, element = "ind", result = "contrib", axes = dimension) %>% 
+  contrib <- facto_summarize(res_global, element = element, result = "contrib", axes = dimension) %>% 
     mutate(name = as.character(name))
   
   tbl <- 

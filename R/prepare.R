@@ -6,8 +6,9 @@
 #' @param product a numeric value of number or product or vector of product names
 #' @param blind_code wheteher to generate random three digit number for labeling
 #'
-#' @import dplyr
+#' @importFrom dplyr rename_all mutate_all mutate
 #' @importFrom stringr str_pad
+#' @importFrom stats setNames
 #' @importFrom SensoMineR WilliamsDesign
 #' @importFrom tibble as_tibble rownames_to_column
 #' @importFrom purrr map_df
@@ -39,16 +40,15 @@ prepare <- function(n_panelist, product, blind_code = FALSE) {
     nms <- paste0(nms, " (", cds, ")")
   }
   
-  names(nms) <- seq_len(n_product)
+  nms <- setNames(nms, seq_len(n_product))
   
   tbl <- WilliamsDesign(n_product) %>% 
     as_tibble() %>% 
     rename_all(~paste0("order_", seq_len(n_product))) %>% 
-    map_df(rep, n_panelist) %>% 
+    map_df(rep, length.out = n_panelist) %>% 
     mutate_all(~recode(.x, !!!nms)) %>% 
     rownames_to_column("panelist") %>% 
-    mutate(panelist = paste0("ind_", str_pad(panelist, width = 3, pad = "0"))) %>% 
-    slice(seq_len(n_panelist))
+    mutate(panelist = paste0("ind_", str_pad(panelist, width = 3, pad = "0")))
   
   res <- new_tibble(tbl,
                     "n_panelist" = n_panelist,

@@ -34,6 +34,7 @@ Imports:
     factoextra,
     ggplot2,
     ggradar (>= 0.1),
-    scales
-Remotes:  
+    scales,
+    RVAideMemoire
+Remotes: 
     ricardo-bion/ggradar

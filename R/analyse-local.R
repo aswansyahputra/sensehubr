@@ -1,37 +1,10 @@
 #' Local analysis of sensory data
 #' 
 #' Perform local analysis on sensory table.
+#' 
 #' @param .data a sensory table
 #' @param ... other arguments to pass on specific method
 #' 
-#' @export
-analyse_local <- function(.data, ...) {
-  UseMethod("analyse_local")
-}
-
-#' @export
-analyse_local.default <- function(.data, ...) {
-  stop("`.data` should be a sensory table.", call. = FALSE)
-}
-
-#' Local analysis of sensory data
-#' 
-#' Perform local analysis on sensory table.
-#'
-#' @param .data a sensory table
-#' @param ... not yet implemented
-#' 
-#' @import dplyr
-#' @importFrom tidyr gather spread nest unnest
-#' @importFrom purrr map
-#' @importFrom broom tidy
-#' @importFrom tibble new_tibble
-#' 
-#' @return a sensory table of local analysis
-#' @export
-#' 
-#' @name analyse-local_qda
-#'
 #' @examples
 #' data(perfume_qda_consumers)
 #' (df <- specify(.data = perfume_qda_consumers, 
@@ -54,6 +27,24 @@ analyse_local.default <- function(.data, ...) {
 #'   method = "QDA"
 #' ) %>% 
 #' analyse_local()
+#' 
+#' @export
+analyse_local <- function(.data, ...) {
+  UseMethod("analyse_local")
+}
+
+#' @export
+analyse_local.default <- function(.data, ...) {
+  stop("`.data` should be a sensory table.", call. = FALSE)
+}
+
+#' @importFrom dplyr select group_by mutate arrange
+#' @importFrom tidyr gather spread nest unnest
+#' @importFrom purrr map
+#' @importFrom broom tidy
+#' @importFrom tibble new_tibble
+#' 
+#' @export
 analyse_local.tbl_sensory_qda <- function(.data, ...) {
   meta_panelist <- attr(.data, "panelist")
   meta_product <- attr(.data, "product")
@@ -114,6 +105,51 @@ analyse_local.tbl_sensory_qda <- function(.data, ...) {
   res <- new_tibble(tbl, 
                     "method" = attr(.data, "method"),
                     "method_local" = "Analysis of Variance",
+                    "model" = fmla,
+                    nrow = NROW(tbl), 
+                    class = "tbl_sensory_local")
+  
+  return(res)
+}
+
+#' @importFrom dplyr select group_by mutate arrange
+#' @importFrom tidyr gather spread nest unnest
+#' @importFrom purrr map map_dbl
+#' @importFrom RVAideMemoire cochran.qtest
+#' @importFrom tibble enframe new_tibble
+#' 
+#' @export
+analyse_local.tbl_sensory_cata <- function(.data, ...) {
+  meta_panelist <- attr(.data, "panelist")
+  meta_product <- attr(.data, "product")
+  meta_attribute <- attr(.data, "attribute")
+  
+  fmla <- "value ~ product | panelist"
+  
+  tbl <- .data %>% 
+    select(panelist = meta_panelist,
+           product = meta_product,
+           meta_attribute) %>% 
+    gather("attribute", "value", meta_attribute) %>%
+    group_by(attribute) %>% 
+    nest() %>% 
+    mutate(
+      model = map(
+        data, ~ cochran.qtest(as.formula(fmla), data = .x)
+      ),
+      statistic = map_dbl(model, "statistic"),
+      p.value = map_dbl(model, "p.value"),
+      probs = map(model, ~`[[`(.x, "estimate") %>%
+                    enframe(name = "product") %>%
+                    mutate(product = str_remove_all(product, "proba in group ")))
+    ) %>% 
+    unnest(probs) %>%
+    spread(key = product, value = value) %>%
+    arrange(desc(statistic))
+  
+  res <- new_tibble(tbl, 
+                    "method" = attr(.data, "method"),
+                    "method_local" = "Cochran's Q test",
                     "model" = fmla,
                     nrow = NROW(tbl), 
                     class = "tbl_sensory_local")

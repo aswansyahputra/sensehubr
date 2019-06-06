@@ -14,3 +14,27 @@ analyse_global(.data, ...)
 \description{
 Perform global analysis on sensory table.
 }
+\examples{
+data(perfume_qda_consumers)
+(df <- specify(.data = perfume_qda_consumers, 
+  panelist = consumer, 
+  product = product, 
+  attribute = intensity:green, 
+  hedonic = NULL,
+  method = "QDA"))
+analyse_global(df)
+
+# Using pipe \%>\%
+data(perfume_qda_experts)
+perfume_qda_experts \%>\% 
+specify(
+  panelist = panelist,
+  product = product,
+  session = session,
+  pres_order = rank,
+  attribute = spicy:wrapping,
+  method = "QDA"
+) \%>\% 
+analyse_global()
+
+}

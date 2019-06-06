@@ -3,16 +3,16 @@
 #' Specify sensory informations into a raw dataframe. The minimal sensory informations are the panelist, the product, the sensory attributes, and the method in which the evaluation was conducted. Additonally the session, the presentation order and hedonic evaluation can also be specified.
 #'
 #' @param .data a dataframe
+#' @param method method of sensory evaluation, available methods are QDA, CATA, RATA, FCP, FP, JAR, IPM
 #' @param panelist panelist column
 #' @param product product column
 #' @param session session column
 #' @param pres_order presentation order column
 #' @param attribute sensory attribute columns
 #' @param hedonic hedonic column
-#' @param method sensory method, i.e. QDA, CATA, RATA, FCP, FP, JAR, IPM
 #' 
-#' @import dplyr
-#' @importFrom rlang as_label
+#' @importFrom dplyr select mutate_at
+#' @importFrom rlang arg_match as_label
 #' @importFrom tidyselect vars_select
 #' @importFrom tibble new_tibble
 #'
@@ -23,11 +23,11 @@
 #' @examples
 #' data(perfume_qda_consumer)
 #' (df <- specify(.data = perfume_qda_consumers, 
+#'   method = "QDA",
 #'   panelist = consumer, 
 #'   product = product, 
 #'   attribute = intensity:green, 
-#'   hedonic = NULL,
-#'   method = "QDA"))
+#'   hedonic = NULL))
 #'
 #' data(perfume_qda_experts)
 #' perfume_qda_experts %>% 
@@ -40,7 +40,10 @@
 #'   method = "QDA"
 #' )
 
-specify <- function(.data, panelist = NULL, product = NULL, session = NULL, pres_order = NULL, attribute = NULL, hedonic = NULL, method = c("QDA", "CATA", "RATA", "FCP", "FP", "JAR", "IPM")) {
+specify <- function(.data, method = c("QDA", "CATA", "RATA", "FCP", "FP", "JAR", "IPM"), panelist, product, session = NULL, pres_order = NULL, attribute, hedonic = NULL) {
+  
+  method <- arg_match(method)
+  
   tbl <- .data %>% 
     select(!!enquo(panelist),
            !!enquo(product),

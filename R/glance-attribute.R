@@ -5,7 +5,7 @@
 #' @param res_global output of global analysis
 #' @param dimension dimension to focus, integer vector of length 2
 #' 
-#' @import dplyr
+#' @importFrom dplyr mutate left_join select rename_at arrange vars desc
 #' @importFrom factoextra facto_summarize get_pca_var
 #' @importFrom tibble new_tibble
 #'
@@ -18,11 +18,6 @@ glance_attribute <- function(res_global, dimension = c(1, 2)) {
 
 #' @export
 glance_attribute.default <- function(res_global, dimension = c(1, 2)) {
-  stop("`res_global` is not valid.", call. = FALSE)
-}
-
-#' @export
-glance_attribute.PCA <- function(res_global, dimension = c(1, 2)) {
   if (!is.numeric(dimension)) {
     stop("`dimension` should be an integer vector.", call. = FALSE)
   }
@@ -39,22 +34,23 @@ glance_attribute.PCA <- function(res_global, dimension = c(1, 2)) {
     stop("`dimension` should be subsequential with increase of 1.", call. = FALSE)
   }
   
-  coord <- facto_summarize(res_global, element = "var", result = "coord", axes = dimension) %>% 
+  if (any(class(res_global) %in% "PCA")) {
+    element <- "var"
+  } else if (any(class(res_global) %in% "CA")) {
+    element <- "col"
+  }
+  
+  coord <- facto_summarize(res_global, element = element, result = "coord", axes = dimension) %>% 
     mutate(name = as.character(name))
   
-  cor <- get_pca_var(res_global)[["cor"]][,dimension] %>% 
-    as_tibble(rownames = "name") %>% 
-    rename_at(vars(starts_with("Dim")), ~paste0("cor_to_", tolower(sub("\\.", "", .x))))
-  
-  cos2 <- facto_summarize(res_global, element = "var", result = "cos2", axes = dimension) %>% 
+  cos2 <- facto_summarize(res_global, element = element, result = "cos2", axes = dimension) %>% 
     mutate(name = as.character(name))
   
-  contrib <- facto_summarize(res_global, element = "var", result = "contrib", axes = dimension) %>% 
+  contrib <- facto_summarize(res_global, element = element, result = "contrib", axes = dimension) %>% 
     mutate(name = as.character(name))
   
   tbl <- 
     coord %>% 
-    left_join(cor, by = "name") %>% 
     left_join(cos2, by = "name") %>% 
     left_join(contrib, by = "name") %>% 
     select(
@@ -74,6 +70,7 @@ glance_attribute.PCA <- function(res_global, dimension = c(1, 2)) {
                     class = "tbl_sensory_global_attribute")
   
   return(res)
+  
 }
 
 #' @export

@@ -5,8 +5,9 @@
 #' @param .data output from \code{prepare} function
 #' @param attribute a numeric value of number or sensory attributes or vector of sensory terms (lexicon)
 #'
-#' @import dplyr
+#' @importFrom dplyr arrange mutate
 #' @importFrom stringr str_pad str_replace_all str_remove_all
+#' @importFrom stats setNames
 #' @importFrom tidyr extract
 #'
 #' @return Returns a dataframe of sensory design with panelist, presentation order, product, blind code (optional) and sensory attributes columns
@@ -29,8 +30,8 @@ create_template <- function(.data, attribute) {
     nms <- str_replace_all(attribute, "([:punct:]|[:space:])", "_")
   }
   
-  empty_attribute <- rep(NA_character_, length(nms))
-  names(empty_attribute) <- nms
+  empty_attribute <- rep(NA_character_, length(nms)) %>% 
+    setNames(nms)
   
   tbl <- .data %>% 
     gather("pres_order", "product", -panelist) %>% 
