@@ -139,12 +139,12 @@ analyse_local.tbl_sensory_cata <- function(.data, ...) {
       ),
       statistic = map_dbl(model, "statistic"),
       p.value = map_dbl(model, "p.value"),
-      probs = map(model, ~`[[`(.x, "estimate") %>%
-                    enframe(name = "product") %>%
-                    mutate(product = str_remove_all(product, "proba in group ")))
+      values = map(model, ~`[[`(.x, "estimate") %>%
+                     enframe(name = "product", value = "values") %>%
+                     mutate(product = str_remove_all(product, "proba in group ")))
     ) %>% 
-    unnest(probs) %>%
-    spread(key = product, value = value) %>%
+    unnest(values) %>% 
+    spread(product, values) %>%
     arrange(desc(statistic))
   
   res <- new_tibble(tbl, 
