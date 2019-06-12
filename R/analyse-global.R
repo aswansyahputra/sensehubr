@@ -7,23 +7,23 @@
 #' @examples
 #' data(perfume_qda_consumers)
 #' (df <- specify(.data = perfume_qda_consumers, 
+#'   sensory_method = "QDA",
 #'   panelist = consumer, 
 #'   product = product, 
 #'   attribute = intensity:green, 
-#'   hedonic = NULL,
-#'   method = "QDA"))
+#'   hedonic = NULL))
 #' analyse_global(df)
 #' 
 #' # Using pipe %>%
 #' data(perfume_qda_experts)
 #' perfume_qda_experts %>% 
 #' specify(
+#'   sensory_method = "QDA",
 #'   panelist = panelist,
 #'   product = product,
 #'   session = session,
 #'   pres_order = rank,
-#'   attribute = spicy:wrapping,
-#'   method = "QDA"
+#'   attribute = spicy:wrapping
 #' ) %>% 
 #' analyse_global()
 #' 
@@ -43,11 +43,11 @@ analyse_global.default <- function(.data, ...) {
 #' 
 #' @export
 analyse_global.tbl_sensory_qda <- function(.data, ...) {
-  meta_product <- attr(.data, "product")
-  meta_attribute <- attr(.data, "attribute")
+  meta_product <- parse_meta(.data, "product")
+  meta_attribute <- parse_meta(.data, "attribute")
+  meta_hedonic <- parse_meta(.data, "hedonic")
   
-  if (attr(.data, "hedonic") == "NULL") {
-    meta_hedonic <- NULL
+  if (is.null(meta_hedonic)) {
     res_global <- .data %>% 
       select(product = meta_product,
              meta_attribute,
@@ -57,28 +57,25 @@ analyse_global.tbl_sensory_qda <- function(.data, ...) {
       as.data.frame() %>% 
       column_to_rownames("product") %>% 
       PCA(quanti.sup = NULL, graph = FALSE)
-  } else {
-    meta_hedonic <- attr(.data, "hedonic")
-    res_global <- .data %>% 
-      select(product = meta_product,
-             meta_attribute,
-             meta_hedonic) %>% 
-      group_by(product) %>% {
-        left_join(
-          summarise_at(., vars(meta_attribute), ~mean(.x, na.rm = TRUE)),
-          summarise_at(., vars(meta_hedonic), ~mean(.x, na.rm = TRUE)),
-          by = "product"
-        )
-      } %>% 
-      as.data.frame() %>% 
-      column_to_rownames("product") %>% 
-      PCA(quanti.sup = NCOL(.), graph = FALSE)
   }
   
+  res_global <- .data %>% 
+    select(product = meta_product,
+           meta_attribute,
+           meta_hedonic) %>% 
+    group_by(product) %>% {
+      left_join(
+        summarise_at(., vars(meta_attribute), ~mean(.x, na.rm = TRUE)),
+        summarise_at(., vars(meta_hedonic), ~mean(.x, na.rm = TRUE)),
+        by = "product"
+      )
+    } %>% 
+    as.data.frame() %>% 
+    column_to_rownames("product") %>% 
+    PCA(quanti.sup = NCOL(.), graph = FALSE)
+  
   tbl_eig <- glance_eigenvalue(res_global)
-  
   tbl_product <- glance_product(res_global)
-  
   tbl_attribute <- glance_attribute(res_global)
   
   res <- list(
@@ -88,14 +85,12 @@ analyse_global.tbl_sensory_qda <- function(.data, ...) {
     res_global = res_global
   )
   
-  attr(res, "method") <- attr(.data, "method")
-  attr(res, "method_global") <- "PCA"
-  attr(res, "n_product") <- attr(.data, "n_product")
-  attr(res, "n_attribute") <- attr(.data, "n_attribute")
-  attr(res, "hedonic") <- attr(.data, "hedonic")
-  
+  attr(res, "sensory_method") <- parse_meta(.data, "sensory_method")
+  attr(res, "method_global") <- "Principal Component Analysis"
+  attr(res, "n_product") <- parse_meta(.data, "n_product")
+  attr(res, "n_attribute") <- parse_meta(.data, "n_attribute")
+  attr(res, "hedonic") <- parse_meta(.data, "hedonic")
   class(res) <- append(class(res), "tbl_sensory_global")
-  
   return(res)
 }
 
@@ -105,11 +100,11 @@ analyse_global.tbl_sensory_qda <- function(.data, ...) {
 #' 
 #' @export
 analyse_global.tbl_sensory_cata <- function(.data, ...) {
-  meta_product <- attr(.data, "product")
-  meta_attribute <- attr(.data, "attribute")
+  meta_product <- parse_meta(.data, "product")
+  meta_attribute <- parse_meta(.data, "attribute")
+  meta_hedonic <- parse_meta(.data, "hedonic")
   
-  if (attr(.data, "hedonic") == "NULL") {
-    meta_hedonic <- NULL
+  if (is.null(meta_hedonic)) {
     res_global <- .data %>% 
       select(product = meta_product,
              meta_attribute,
@@ -119,28 +114,25 @@ analyse_global.tbl_sensory_cata <- function(.data, ...) {
       as.data.frame() %>% 
       column_to_rownames("product") %>% 
       CA(quanti.sup = NULL, graph = FALSE)
-  } else {
-    meta_hedonic <- attr(.data, "hedonic")
-    res_global <- .data %>% 
-      select(product = meta_product,
-             meta_attribute,
-             meta_hedonic) %>% 
-      group_by(product) %>% {
-        left_join(
-          summarise_at(., vars(meta_attribute), ~sum(.x, na.rm = TRUE)),
-          summarise_at(., vars(meta_hedonic), ~mean(.x, na.rm = TRUE)),
-          by = "product"
-        )
-      } %>% 
-      as.data.frame() %>% 
-      column_to_rownames("product") %>% 
-      CA(quanti.sup = NCOL(.), graph = FALSE)
   }
   
+  res_global <- .data %>% 
+    select(product = meta_product,
+           meta_attribute,
+           meta_hedonic) %>% 
+    group_by(product) %>% {
+      left_join(
+        summarise_at(., vars(meta_attribute), ~sum(.x, na.rm = TRUE)),
+        summarise_at(., vars(meta_hedonic), ~mean(.x, na.rm = TRUE)),
+        by = "product"
+      )
+    } %>% 
+    as.data.frame() %>% 
+    column_to_rownames("product") %>% 
+    CA(quanti.sup = NCOL(.), graph = FALSE)
+  
   tbl_eig <- glance_eigenvalue(res_global)
-  
   tbl_product <- glance_product(res_global)
-  
   tbl_attribute <- glance_attribute(res_global)
   
   res <- list(
@@ -150,13 +142,11 @@ analyse_global.tbl_sensory_cata <- function(.data, ...) {
     res_global = res_global
   )
   
-  attr(res, "method") <- attr(.data, "method")
-  attr(res, "method_global") <- "CA"
-  attr(res, "n_product") <- attr(.data, "n_product")
-  attr(res, "n_attribute") <- attr(.data, "n_attribute")
-  attr(res, "hedonic") <- attr(.data, "hedonic")
-  
+  attr(res, "sensory_method") <- parse_meta(.data, "sensory_method")
+  attr(res, "method_global") <- "Correspondance Analysis"
+  attr(res, "n_product") <- parse_meta(.data, "n_product")
+  attr(res, "n_attribute") <- parse_meta(.data, "n_attribute")
+  attr(res, "hedonic") <- parse_meta(.data, "hedonic")
   class(res) <- append(class(res), "tbl_sensory_global")
-  
   return(res)
 }

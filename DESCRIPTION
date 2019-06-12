@@ -35,6 +35,7 @@ Imports:
     ggplot2,
     ggradar (>= 0.1),
     scales,
-    RVAideMemoire
+    RVAideMemoire,
+    glue
 Remotes: 
     ricardo-bion/ggradar

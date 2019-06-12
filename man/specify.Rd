@@ -4,14 +4,14 @@
 \alias{specify}
 \title{Specify sensory table}
 \usage{
-specify(.data, method = c("QDA", "CATA", "RATA", "FCP", "FP", "JAR",
-  "IPM"), panelist, product, session = NULL, pres_order = NULL,
+specify(.data, sensory_method = c("QDA", "CATA", "RATA", "FCP", "FP",
+  "JAR", "IPM"), panelist, product, session = NULL, pres_order = NULL,
   attribute, hedonic = NULL)
 }
 \arguments{
 \item{.data}{a dataframe}
 
-\item{method}{method of sensory evaluation, available methods are QDA, CATA, RATA, FCP, FP, JAR, IPM}
+\item{sensory_method}{method of sensory evaluation, available methods are QDA, CATA, RATA, FCP, FP, JAR, IPM}
 
 \item{panelist}{panelist column}
 
@@ -34,7 +34,7 @@ Specify sensory informations into a raw dataframe. The minimal sensory informati
 \examples{
 data(perfume_qda_consumer)
 (df <- specify(.data = perfume_qda_consumers, 
-  method = "QDA",
+  sensory_method = "QDA",
   panelist = consumer, 
   product = product, 
   attribute = intensity:green, 
@@ -43,11 +43,11 @@ data(perfume_qda_consumer)
 data(perfume_qda_experts)
 perfume_qda_experts \%>\% 
 specify(
+  sensory_method = "QDA",
   panelist = panelist,
   product = product,
   session = session,
   pres_order = rank,
-  attribute = spicy:wrapping,
-  method = "QDA"
+  attribute = spicy:wrapping
 )
 }

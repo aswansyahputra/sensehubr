@@ -5,6 +5,7 @@
 #' @param n_panelist number of panelist
 #' @param product a numeric value of number or product or vector of product names
 #' @param blind_code wheteher to generate random three digit number for labeling
+#' @param seed an integer for anchoring randomisation
 #'
 #' @importFrom dplyr rename_all mutate_all mutate
 #' @importFrom stringr str_pad
@@ -23,7 +24,7 @@
 #'
 #' design <- prepare(n_panelist = 20, product = 5, blind_code = TRUE)
 #' design
-prepare <- function(n_panelist, product, blind_code = FALSE) {
+prepare <- function(n_panelist, product, blind_code = FALSE, seed = NULL) {
   if (is.numeric(product) & length(product) == 1) {
     n_product <- product
     nms <- paste0("prod_", str_pad(seq_len(n_product), width = 2, pad = "0"))
@@ -35,14 +36,14 @@ prepare <- function(n_panelist, product, blind_code = FALSE) {
   if (!isTRUE(blind_code)) {
     nms <- nms
   } else {
-    set.seed(n_product + n_panelist)
+    set.seed(seed)
     cds <- sample(100:999, n_product, replace = FALSE)
     nms <- paste0(nms, " (", cds, ")")
   }
   
   nms <- setNames(nms, seq_len(n_product))
   
-  tbl <- WilliamsDesign(n_product) %>% 
+  tbl <- WilliamsDesign(n_product, seed = seed) %>% 
     as_tibble() %>% 
     rename_all(~paste0("order_", seq_len(n_product))) %>% 
     map_df(rep, length.out = n_panelist) %>% 

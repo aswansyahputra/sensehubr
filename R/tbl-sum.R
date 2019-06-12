@@ -1,51 +1,53 @@
 #' @export
 tbl_sum.tbl_sensory_design <- function(x){
   c(
-    "A sensory table" = "Design of Experiment",
-    "Panelist" = paste(attr(x, "n_panelist"), "subjects"),
-    "Product" = paste(attr(x, "n_product"), "items")
+    "Design of Experiment" = print_meta(x, "dimension"),
+    "Panelist" = print_meta(x, "n_panelist"),
+    "Product" = print_meta(x, "n_product")
   )
 }
 
 #' @export
 tbl_sum.tbl_sensory_template <- function(x){
   c(
-    "A sensory table" = "Design of Experiment",
-    "Panelist" = paste(attr(x, "n_panelist"), "subjects"),
-    "Product" = paste(attr(x, "n_product"), "items"),
-    "Attribute" = paste(attr(x, "n_attribute"), "lexicons") 
+    "A sensory table" = print_meta(x, "dimension"),
+    "Panelist" = print_meta(x, "panelist"),
+    "Product" = print_meta(x, "product"),
+    "Attribute" = print_meta(x, "attribute") 
   )
 }
 
 #' @export
 tbl_sum.tbl_sensory_qda <- function(x){
   c(
-    "A sensory table" = meta_info(x, "sensory_table"),
-    "Panelist" = meta_info(x, "panelist"),
-    "Product" = meta_info(x, "product"),
-    "Attribute" = meta_info(x, "attribute"),
-    "Hedonic" = meta_info(x, "hedonic")
+    "A sensory table" = print_meta(x, "dimension"),
+    "Sensory method" = print_meta(x, "sensory_method"),
+    "Panelist" = print_meta(x, "panelist"),
+    "Product" = print_meta(x, "product"),
+    "Attribute" = print_meta(x, "attribute"),
+    "Hedonic" = print_meta(x, "hedonic")
   )
 }
 
 #' @export
 tbl_sum.tbl_sensory_cata <- function(x){
   c(
-    "A sensory table" = meta_info(x, "sensory_table"),
-    "Panelist" = meta_info(x, "panelist"),
-    "Product" = meta_info(x, "product"),
-    "Attribute" = meta_info(x, "attribute"),
-    "Hedonic" = meta_info(x, "hedonic")
+    "A sensory table" = print_meta(x, "dimension"),
+    "Sensory method" = print_meta(x, "sensory_method"),
+    "Panelist" = print_meta(x, "panelist"),
+    "Product" = print_meta(x, "product"),
+    "Attribute" = print_meta(x, "attribute"),
+    "Hedonic" = print_meta(x, "hedonic")
   )
 }
 
 #' @export
 tbl_sum.tbl_sensory_local <- function(x) {
   c(
-    "A sensory table" = meta_info(x, "method"),
-    "Type" = "Local analysis",
-    "Method" = attr(x, "method_local"),
-    "Model" = attr(x, "model")
+    "Local analysis" = "",
+    "Sensory method" = print_meta(x, "sensory_method"),
+    "Analytical method" = print_meta(x, "method_local"),
+    "Model" = print_meta(x, "model")
   )
 }
 
@@ -57,59 +59,49 @@ tbl_sum.tbl_sensory_global_eigenvalue <- function(x) {
   )
 }
 
+#' @importFrom glue glue
 #' @export
 tbl_sum.tbl_sensory_global_product <- function(x) {
   c(
-    "Description of" = paste("Product", 
-                             angle_brackets(paste(attr(x, "n_product"), "items"))),
-    "Dimension" = paste("Dim", 
-                        attr(x, "dimension")[[1]], 
-                        "x", 
-                        "Dim", 
-                        attr(x, "dimension")[[2]])
+    "Description of" = glue("Product <{print_meta(x, 'n_product')}>"),
+    "Dimension" = print_meta(x, "dimension")
   )
 }
 
-#' @export
-tbl_sum.tbl_sensory_global_product <- function(x) {
-  c(
-    "Description of" = paste("Product", 
-                             angle_brackets(paste(attr(x, "n_product"), "items"))),
-    "Dimension" = paste("Dim", 
-                        attr(x, "dimension")[[1]], 
-                        "x", 
-                        "Dim", 
-                        attr(x, "dimension")[[2]])
-  )
-}
-
+#' @importFrom glue glue
 #' @export
 tbl_sum.tbl_sensory_global_attribute <- function(x) {
   c(
-    "Description of" = paste("Sensory attribute", 
-                             angle_brackets(paste(attr(x, "n_attribute"), "lexicons"))),
-    "Dimension" = paste("Dim", 
-                        attr(x, "dimension")[[1]], 
-                        "x", 
-                        "Dim", 
-                        attr(x, "dimension")[[2]])
+    "Description of" = glue("Sensory attribute <{print_meta(x, 'n_attribute')}>"),
+    "Dimension" = print_meta(x, "dimension")
   )
 }
 
-#' @importFrom stringr str_pad
-#' @export
-print.tbl_sensory_global <- function(x, ...){
-  cat_subtle(paste("#", str_pad("A sensory table:", width = 23, side = "right"), attr(x, "method"), "\n"))
-  cat_subtle(paste("#", str_pad("Type:", width = 23, side = "right"), "Global analysis", "\n"))
-  cat_subtle(paste("#", str_pad("Method:", width = 23, side = "right"), attr(x, "method_global"), "\n"))
-  cat_subtle(paste("#", str_pad("Active individual:", width = 23, side = "right"), attr(x, "n_product"), "products", "\n"))
-  cat_subtle(paste("#", str_pad("Active variable:", width = 23, side = "right"), attr(x, "n_attribute"), "sensory attributes", "\n"))
-  cat_subtle(paste("#", str_pad("Supplementary variable:", width = 23, side = "right"), ifelse(attr(x, "hedonic") == "NULL", "None", attr(x, "hedonic")), "\n"))
+print.tbl_sensory_global <- function(x, ...) {
+  cat_subtle(
+    glue(
+      "
+    {pad('# Global analysis:')}
+    {pad('# Sensory method:')} {sensory_method}
+    {pad('# Method:')} {method_global}
+    {pad('# Active individual:')} {active_individual}
+    {pad('# Active variable:')} {active_variable}
+    {pad('# Supplementary variable:')} {supplementary_variable}
+    #
+    
+    ",
+      sensory_method = print_meta(x, "sensory_method"),
+      method_global = print_meta(x, "method_global"),
+      active_individual = print_meta(x, "n_product"),
+      active_variable = print_meta(x, "n_attribute"),
+      supplementary_variable = print_meta(x, "hedonic")
+    )
+  )
+  print(x$eigenvalue)
   cat_subtle("#\n")
-  print.tbl(x$eigenvalue)
+  print(x$product)
   cat_subtle("#\n")
-  print.tbl(x$product)
-  cat_subtle("#\n")
-  print.tbl(x$attribute)
+  print(x$attribute)
+  
   invisible(x)
 }

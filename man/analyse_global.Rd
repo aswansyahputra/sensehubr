@@ -17,23 +17,23 @@ Perform global analysis on sensory table.
 \examples{
 data(perfume_qda_consumers)
 (df <- specify(.data = perfume_qda_consumers, 
+  sensory_method = "QDA",
   panelist = consumer, 
   product = product, 
   attribute = intensity:green, 
-  hedonic = NULL,
-  method = "QDA"))
+  hedonic = NULL))
 analyse_global(df)
 
 # Using pipe \%>\%
 data(perfume_qda_experts)
 perfume_qda_experts \%>\% 
 specify(
+  sensory_method = "QDA",
   panelist = panelist,
   product = product,
   session = session,
   pres_order = rank,
-  attribute = spicy:wrapping,
-  method = "QDA"
+  attribute = spicy:wrapping
 ) \%>\% 
 analyse_global()
 

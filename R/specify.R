@@ -3,7 +3,7 @@
 #' Specify sensory informations into a raw dataframe. The minimal sensory informations are the panelist, the product, the sensory attributes, and the method in which the evaluation was conducted. Additonally the session, the presentation order and hedonic evaluation can also be specified.
 #'
 #' @param .data a dataframe
-#' @param method method of sensory evaluation, available methods are QDA, CATA, RATA, FCP, FP, JAR, IPM
+#' @param sensory_method method of sensory evaluation, available methods are QDA, CATA, RATA, FCP, FP, JAR, IPM
 #' @param panelist panelist column
 #' @param product product column
 #' @param session session column
@@ -23,7 +23,7 @@
 #' @examples
 #' data(perfume_qda_consumer)
 #' (df <- specify(.data = perfume_qda_consumers, 
-#'   method = "QDA",
+#'   sensory_method = "QDA",
 #'   panelist = consumer, 
 #'   product = product, 
 #'   attribute = intensity:green, 
@@ -32,17 +32,16 @@
 #' data(perfume_qda_experts)
 #' perfume_qda_experts %>% 
 #' specify(
+#'   sensory_method = "QDA",
 #'   panelist = panelist,
 #'   product = product,
 #'   session = session,
 #'   pres_order = rank,
-#'   attribute = spicy:wrapping,
-#'   method = "QDA"
+#'   attribute = spicy:wrapping
 #' )
-
-specify <- function(.data, method = c("QDA", "CATA", "RATA", "FCP", "FP", "JAR", "IPM"), panelist, product, session = NULL, pres_order = NULL, attribute, hedonic = NULL) {
+specify <- function(.data, sensory_method = c("QDA", "CATA", "RATA", "FCP", "FP", "JAR", "IPM"), panelist, product, session = NULL, pres_order = NULL, attribute, hedonic = NULL) {
   
-  method <- arg_match(method)
+  method <- arg_match(sensory_method)
   
   tbl <- .data %>% 
     select(!!enquo(panelist),
@@ -57,7 +56,7 @@ specify <- function(.data, method = c("QDA", "CATA", "RATA", "FCP", "FP", "JAR",
                    !!enquo(pres_order)), 
                    ~as.factor(.x))
   
-  tbl_class <- switch(method[[1]],
+  tbl_class <- switch(sensory_method[[1]],
                       "QDA" = "tbl_sensory_qda",
                       "CATA" = "tbl_sensory_cata",
                       "RATA" = "tbl_sensory_rata",
@@ -67,7 +66,7 @@ specify <- function(.data, method = c("QDA", "CATA", "RATA", "FCP", "FP", "JAR",
                       "IPM" = "tbl_sensory_ipm")
   
   res <- new_tibble(tbl,
-                    "method" = method[[1]],
+                    "sensory_method" = sensory_method[[1]],
                     "panelist" = as_label(enquo(panelist)),
                     "n_panelist" = length(unique(pull(tbl, !!enquo(panelist)))),
                     "product" = as_label(enquo(product)),
@@ -81,4 +80,3 @@ specify <- function(.data, method = c("QDA", "CATA", "RATA", "FCP", "FP", "JAR",
                     class = tbl_class)
   return(res)
 }
-

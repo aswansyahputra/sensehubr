@@ -4,7 +4,7 @@
 \alias{prepare}
 \title{Prepare sensory experiment}
 \usage{
-prepare(n_panelist, product, blind_code = FALSE)
+prepare(n_panelist, product, blind_code = FALSE, seed = NULL)
 }
 \arguments{
 \item{n_panelist}{number of panelist}
@@ -12,6 +12,8 @@ prepare(n_panelist, product, blind_code = FALSE)
 \item{product}{a numeric value of number or product or vector of product names}
 
 \item{blind_code}{wheteher to generate random three digit number for labeling}
+
+\item{seed}{an integer for anchoring randomisation}
 }
 \value{
 a dataframe of sensory design with panelist column and order of product presentation columns

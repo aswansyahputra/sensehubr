@@ -11,9 +11,6 @@ glance_product(res_global, dimension = c(1, 2))
 
 \item{dimension}{dimension to focus, integer vector of length 2}
 }
-\value{
-a dataframe
-}
 \description{
 Evaluate product in global analysis.
 }

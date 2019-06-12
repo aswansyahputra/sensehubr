@@ -45,10 +45,12 @@ create_template <- function(.data, attribute) {
   }
   
   res <- new_tibble(tbl, 
-                    "n_panelist" = attr(.data, "n_panelist"),
-                    "n_product" = attr(.data, "n_product"),
+                    "panelist" = "panelist",
+                    "n_panelist" = parse_meta(.data, "n_panelist"),
+                    "product" = "product",
+                    "n_product" = parse_meta(.data, "n_product"),
+                    "attribute" = nms,
                     "n_attribute" = length(empty_attribute),
-                    "blind_code" = attr(.data, "blind_code"),
                     nrow = NROW(tbl),
                     class = "tbl_sensory_template")
   return(res)

@@ -37,12 +37,12 @@ Create representation of sensory properties of each product in form of radar plo
 data(perfume_qda_experts)
 perfume_qda_experts \%>\%
   specify(
+    sensory_method = "QDA",
     panelist = panelist,
     product = product,
     session = session,
     pres_order = rank,
-    attribute = spicy:wrapping,
-    method = "QDA"
+    attribute = spicy:wrapping
   ) \%>\%
   analyse_local() \%>\%
   visualise()

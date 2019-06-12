@@ -8,23 +8,23 @@
 #' @examples
 #' data(perfume_qda_consumers)
 #' (df <- specify(.data = perfume_qda_consumers, 
+#'   sensory_method = "QDA",
 #'   panelist = consumer, 
 #'   product = product, 
 #'   attribute = intensity:green, 
-#'   hedonic = NULL,
-#'   method = "QDA"))
+#'   hedonic = NULL))
 #' analyse_local(df)
 #' 
 #' # Using pipe %>%
 #' data(perfume_qda_experts)
 #' perfume_qda_experts %>% 
 #' specify(
+#'   sensory_method = "QDA",
 #'   panelist = panelist,
 #'   product = product,
 #'   session = session,
 #'   pres_order = rank,
-#'   attribute = spicy:wrapping,
-#'   method = "QDA"
+#'   attribute = spicy:wrapping
 #' ) %>% 
 #' analyse_local()
 #' 
@@ -46,26 +46,22 @@ analyse_local.default <- function(.data, ...) {
 #' 
 #' @export
 analyse_local.tbl_sensory_qda <- function(.data, ...) {
-  meta_panelist <- attr(.data, "panelist")
-  meta_product <- attr(.data, "product")
-  meta_attribute <- attr(.data, "attribute")
+  meta_panelist <- parse_meta(.data, "panelist")
+  meta_product <- parse_meta(.data, "product")
+  meta_session <- parse_meta(.data, "session")
+  meta_pres_order <- parse_meta(.data, "pres_order")
+  meta_attribute <- parse_meta(.data, "attribute")
   
-  if (attr(.data, "session") != "NULL") {
-    meta_session <- attr(.data, "session")
-    if (attr(.data, "pres_order") != "NULL") {
-      meta_pres_order <- attr(.data, "pres_order")
+  if (!is.null(meta_session)) {
+    if (!is.null(meta_pres_order)) {
       fmla <- "value ~ product + panelist + session + panelist:product + panelist:session + product:session + pres_order"
-    } else if (attr(.data, "pres_order") == "NULL") {
-      meta_pres_order <- NULL
+    } else if (is.null(meta_pres_order)) {
       fmla <- "value ~ product + panelist + session + panelist:product + panelist:session + product:session"
     }
-  } else if (attr(.data, "session") == "NULL") {
-    meta_session <- NULL
-    if (attr(.data, "pres_order") != "NULL") {
-      meta_pres_order <- attr(.data, "pres_order")
+  } else if (is.null(meta_session)) {
+    if (!is.null(meta_pres_order)) {
       fmla <- "value ~ product + panelist + pres_order"
-    } else if (attr(.data, "pres_order") == "NULL") {
-      meta_pres_order <- NULL
+    } else if (is.null(meta_pres_order)) {
       fmla <- "value ~ product + panelist"
     }
   }
@@ -103,7 +99,7 @@ analyse_local.tbl_sensory_qda <- function(.data, ...) {
     arrange(desc(statistic))
   
   res <- new_tibble(tbl, 
-                    "method" = attr(.data, "method"),
+                    "sensory_method" = parse_meta(.data, "sensory_method"),
                     "method_local" = "Analysis of Variance",
                     "model" = fmla,
                     nrow = NROW(tbl), 
@@ -120,9 +116,9 @@ analyse_local.tbl_sensory_qda <- function(.data, ...) {
 #' 
 #' @export
 analyse_local.tbl_sensory_cata <- function(.data, ...) {
-  meta_panelist <- attr(.data, "panelist")
-  meta_product <- attr(.data, "product")
-  meta_attribute <- attr(.data, "attribute")
+  meta_panelist <- parse_meta(.data, "panelist")
+  meta_product <- parse_meta(.data, "product")
+  meta_attribute <- parse_meta(.data, "attribute")
   
   fmla <- "value ~ product | panelist"
   
@@ -148,7 +144,7 @@ analyse_local.tbl_sensory_cata <- function(.data, ...) {
     arrange(desc(statistic))
   
   res <- new_tibble(tbl, 
-                    "method" = attr(.data, "method"),
+                    "sensory_method" = parse_meta(.data, "sensory_method"),
                     "method_local" = "Cochran's Q test",
                     "model" = fmla,
                     nrow = NROW(tbl), 

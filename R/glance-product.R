@@ -5,17 +5,15 @@
 #' @param res_global output of global analysis
 #' @param dimension dimension to focus, integer vector of length 2
 #' 
-#' @importFrom dplyr mutate left_join select rename_at arrange vars desc
-#' @importFrom factoextra facto_summarize
-#' @importFrom tibble new_tibble
-#'
-#' @return a dataframe
 #' @export
-
 glance_product <- function(res_global, dimension = c(1, 2)) {
   UseMethod("glance_product")
 }
 
+#' @importFrom dplyr mutate left_join select rename_at arrange vars desc
+#' @importFrom factoextra facto_summarize
+#' @importFrom tibble new_tibble
+#' 
 #' @export
 glance_product.default <- function(res_global, dimension = c(1, 2)) {
   if (!is.numeric(dimension)) {
@@ -68,7 +66,6 @@ glance_product.default <- function(res_global, dimension = c(1, 2)) {
                     "dimension" = c(dimension[[1]], dimension[[2]]),
                     nrow = NROW(tbl), 
                     class = "tbl_sensory_global_product")
-  
   return(res)
 }
 
