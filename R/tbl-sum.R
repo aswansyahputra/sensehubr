@@ -18,6 +18,54 @@ tbl_sum.tbl_sensory_template <- function(x){
 }
 
 #' @export
+tbl_sum.tbl_sensory_performance_panel <- function(x) {
+  c(
+    "Description of" = "Panel performance",
+    "Metric" = "Discrimination, Agreement, Consistency"
+  )
+}
+
+#' @export
+tbl_sum.tbl_sensory_performance_panelist <- function(x) {
+  c(
+    "Description of" = "Panelist performance",
+    "Metric" = switch(attr(x, "metric"),
+                      "discrimination" = "Discrimination",
+                      "agreement" = "Agreement",
+                      "consistency" = "Consistency")
+  )
+}
+
+#' @export
+print.tbl_sensory_performance <- function(x, ...) {
+  cat_subtle(
+    glue(
+      "
+    {pad('# Performance analysis:')}
+    {pad('# Method:')} {method_local}
+    {pad('# Model for panel:')} {panel_model}
+    {pad('# Model for panelist:')} {panelist_model}
+    #
+    
+    ",
+      method_local = print_meta(x, "method_local"),
+      panel_model = print_meta(x, "panel_model"),
+      panelist_model = print_meta(x, "panelist_model")
+    )
+  )
+  print(x$panel)
+  cat_subtle("#\n")
+  print(x$panelist_discrimination)
+  cat_subtle("#\n")
+  print(x$panelist_agreement)
+  cat_subtle("#\n")
+  print(x$panelist_consistency)
+  
+  invisible(x)
+}
+
+
+#' @export
 tbl_sum.tbl_sensory_qda <- function(x){
   c(
     "A sensory table" = print_meta(x, "dimension"),
@@ -77,6 +125,8 @@ tbl_sum.tbl_sensory_global_attribute <- function(x) {
   )
 }
 
+#' @importFrom glue glue
+#' @export
 print.tbl_sensory_global <- function(x, ...) {
   cat_subtle(
     glue(

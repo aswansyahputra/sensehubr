@@ -24,7 +24,7 @@ parse_meta <- function(x, meta = c("sensory_method", "method_local", "model", "m
 
 #' @importFrom rlang arg_match
 #' @importFrom glue glue glue_collapse
-print_meta <- function(x, meta = c("dimension", "sensory_method", "method_local", "model", "method_global", "panelist", "n_panelist", "product", "n_product", "attribute", "n_attribute","hedonic")) {
+print_meta <- function(x, meta = c("dimension", "sensory_method", "panel_model", "panelist_model", "method_local", "model", "method_global", "panelist", "n_panelist", "product", "n_product", "attribute", "n_attribute","hedonic")) {
   meta <- arg_match(meta)
   
   if (meta[[1]] == "dimension") {
@@ -45,6 +45,24 @@ print_meta <- function(x, meta = c("dimension", "sensory_method", "method_local"
                   "IPM" = "Ideal Profile Method")
   }
   
+  if (meta[[1]] == "panel_model") {
+    res <- switch(attr(x, "panel_model"),
+                  "~ product + panelist" = "Attribute ~ Product + Panelist",
+                  "~ product + panelist + pres_order" = "Attribute ~ Product + Panelist + Presentation Order",
+                  "~ product + panelist + session + panelist:product + panelist:session + product:session" = "Attribute ~ Product + Panelist + Session + PanelistXProduct + PanelistXSession + ProductXSession",
+                  "~ product + panelist + session + panelist:product + panelist:session + product:session + pres_order" = "Attribute ~ Product + Panelist + Session + PanelistXProduct + PanelistXSession + ProductXSession + Presentation Order")
+  }
+  
+  if (meta[[1]] == "panelist_model") {
+    res <- switch(attr(x, "panelist_model"),
+                  "~ product" = "Attribute ~ Product",
+                  "~ product + pres_order" = "Attribute ~ Product + Presentation Order",
+                  "~ product + session" = "Attribute ~ Product + Session",
+                  "~ product + session + pres_order" = "Attribute ~ Product + Session + Presentation Order")
+  }
+  
+  
+  
   if (meta[[1]] == "method_local") {
     res <- parse_meta(x, "method_local")
   }
@@ -53,8 +71,8 @@ print_meta <- function(x, meta = c("dimension", "sensory_method", "method_local"
     res <- switch(attr(x, "model"),
                   "value ~ product + panelist" = "Attribute ~ Product + Panelist",
                   "value ~ product + panelist + pres_order" = "Attribute ~ Product + Panelist + Presentation Order",
-                  "value ~ product + panelist + session + panelist:product + panelist:session + product:session" = "Attribute ~ Product + Panelist + PanelistXSession + ProductXSession",
-                  "value ~ product + panelist + session + panelist:product + panelist:session + product:session + pres_order" = "Attribute ~ Product + Panelist + PanelistXSession + ProductXSession + Presentation Order",
+                  "value ~ product + panelist + session + panelist:product + panelist:session + product:session" = "Attribute ~ Product + Panelist + Session + PanelistXProduct + PanelistXSession + ProductXSession",
+                  "value ~ product + panelist + session + panelist:product + panelist:session + product:session + pres_order" = "Attribute ~ Product + Panelist + Session + PanelistXProduct + PanelistXSession + ProductXSession + Presentation Order",
                   
                   "value ~ product | panelist" = "Attribute ~ Product | Panelist")
   }
