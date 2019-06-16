@@ -1,5 +1,5 @@
 #' @export
-tbl_sum.tbl_sensory_design <- function(x){
+tbl_sum.tbl_sensory_design <- function(x) {
   c(
     "Design of Experiment" = print_meta(x, "dimension"),
     "Panelist" = print_meta(x, "n_panelist"),
@@ -8,12 +8,12 @@ tbl_sum.tbl_sensory_design <- function(x){
 }
 
 #' @export
-tbl_sum.tbl_sensory_template <- function(x){
+tbl_sum.tbl_sensory_template <- function(x) {
   c(
     "A sensory table" = print_meta(x, "dimension"),
     "Panelist" = print_meta(x, "panelist"),
     "Product" = print_meta(x, "product"),
-    "Attribute" = print_meta(x, "attribute") 
+    "Attribute" = print_meta(x, "attribute")
   )
 }
 
@@ -30,9 +30,10 @@ tbl_sum.tbl_sensory_performance_panelist <- function(x) {
   c(
     "Description of" = "Panelist performance",
     "Metric" = switch(attr(x, "metric"),
-                      "discrimination" = "Discrimination",
-                      "agreement" = "Agreement",
-                      "consistency" = "Consistency")
+      "discrimination" = "Discrimination",
+      "agreement" = "Agreement",
+      "consistency" = "Consistency"
+    )
   )
 }
 
@@ -60,13 +61,13 @@ print.tbl_sensory_performance <- function(x, ...) {
   print(x$panelist_agreement)
   cat_subtle("#\n")
   print(x$panelist_consistency)
-  
+
   invisible(x)
 }
 
 
 #' @export
-tbl_sum.tbl_sensory_qda <- function(x){
+tbl_sum.tbl_sensory_qda <- function(x) {
   c(
     "A sensory table" = print_meta(x, "dimension"),
     "Sensory method" = print_meta(x, "sensory_method"),
@@ -78,7 +79,7 @@ tbl_sum.tbl_sensory_qda <- function(x){
 }
 
 #' @export
-tbl_sum.tbl_sensory_cata <- function(x){
+tbl_sum.tbl_sensory_cata <- function(x) {
   c(
     "A sensory table" = print_meta(x, "dimension"),
     "Sensory method" = print_meta(x, "sensory_method"),
@@ -152,6 +153,6 @@ print.tbl_sensory_global <- function(x, ...) {
   print(x$product)
   cat_subtle("#\n")
   print(x$attribute)
-  
+
   invisible(x)
 }

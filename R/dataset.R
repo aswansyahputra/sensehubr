@@ -27,9 +27,9 @@
 "perfume_qda_experts"
 
 #' Sensory data for 6 chocolates
-#' 
+#'
 #' The data used here refer to the sensory description of six varieties of chocolates sold in France: each chocolate was evaluated twice by 29 panelists according to 14 sensory descriptors.
-#' 
+#'
 #' \describe{
 #'   \item{panelist}{panelists' id}
 #'   \item{session}{code of sensory evalutation session}
@@ -37,6 +37,6 @@
 #'   \item{product}{chocolates}
 #'   \item{cocoa_a - granular}{lexicons regarding chocolate}
 #' }
-#' 
+#'
 #' @source SensoMineR package
 "sensochoc"

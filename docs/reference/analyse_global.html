@@ -126,12 +126,174 @@
     </table>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>perfume_qda_consumers</span>)
+(<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>specify</span>(
+  <span class='kw'>.data</span> <span class='kw'>=</span> <span class='no'>perfume_qda_consumers</span>,
+  <span class='kw'>sensory_method</span> <span class='kw'>=</span> <span class='st'>"QDA"</span>,
+  <span class='kw'>panelist</span> <span class='kw'>=</span> <span class='no'>consumer</span>,
+  <span class='kw'>product</span> <span class='kw'>=</span> <span class='no'>product</span>,
+  <span class='kw'>attribute</span> <span class='kw'>=</span> <span class='no'>intensity</span>:<span class='no'>green</span>,
+  <span class='kw'>hedonic</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+))</div><div class='output co'>#&gt; <span style='color: #555555;'># A sensory table: &lt;1236 x 23&gt;</span><span>
+#&gt; </span><span style='color: #555555;'># Sensory method:  Quantitative Descriptive Analysis</span><span>
+#&gt; </span><span style='color: #555555;'># Panelist:        consumer &lt;103 subjects&gt;</span><span>
+#&gt; </span><span style='color: #555555;'># Product:         product &lt;12 items&gt;</span><span>
+#&gt; </span><span style='color: #555555;'># Attribute:       intensity, freshness, jasmin, ro...&lt;21 lexicons&gt;</span><span>
+#&gt; </span><span style='color: #555555;'># Hedonic:         None</span><span>
+#&gt;    consumer product intensity freshness jasmin  rose camomille fresh_lemon
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> 171      Angel        77        36.1   30    13.3      15.2        15.2
+#&gt; </span><span style='color: #555555;'> 2</span><span> 171      Aromat…      69.7      26.7   75.2  17.9      15.5        16.7
+#&gt; </span><span style='color: #555555;'> 3</span><span> 171      Chanel…      52.7      50.6   41.5  45.8      18.8        17.6
+#&gt; </span><span style='color: #555555;'> 4</span><span> 171      Cinema       70        60.9   26.4  21.8      18.8        20.6
+#&gt; </span><span style='color: #555555;'> 5</span><span> 171      Coco M…      73        66.1   40.6  18.2      15.2        15.2
+#&gt; </span><span style='color: #555555;'> 6</span><span> 171      J'ador…      61.8      58.5   30    14.2      16.7        20.9
+#&gt; </span><span style='color: #555555;'> 7</span><span> 171      J'ador…      48.8      50.9   46.1  48.2      18.2        22.7
+#&gt; </span><span style='color: #555555;'> 8</span><span> 171      L'inst…      67.3      22.7   15.8  16.1      14.5        36.1
+#&gt; </span><span style='color: #555555;'> 9</span><span> 171      Lolita…      76.7      19.1   27.9  17        16.1        16.7
+#&gt; </span><span style='color: #555555;'>10</span><span> 171      Pleasu…      52.4      67.6   49.4  62.7      20.9        46.4
+#&gt; </span><span style='color: #555555;'># … with 1,226 more rows, and 15 more variables: vanilla </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, citrus </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+#&gt; #   anis </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, sweet_fruit </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, honey </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, caramel </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, spicy </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+#&gt; #   woody </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, leather </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, nutty </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, musk </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, animal </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
+#&gt; #   earthy </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, incense </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, green </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'><span class='fu'>analyse_global</span>(<span class='no'>df</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># Global analysis:       
+#&gt; # Sensory method:         Quantitative Descriptive Analysis
+#&gt; # Method:                 Principal Component Analysis
+#&gt; # Active individual:      12 items
+#&gt; # Active variable:        21 lexicons
+#&gt; # Supplementary variable: None
+#&gt; #
+#&gt; # Description of:      Eigenvalue</span><span>
+#&gt; </span><span style='color: #555555;'># Number of dimension: 11</span><span>
+#&gt;    dimension eigenvalue pct_variance pct_cum_variance
+#&gt;        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span>         1    13.5          67.5               67.5
+#&gt; </span><span style='color: #555555;'> 2</span><span>         2     3.77         18.9               86.4
+#&gt; </span><span style='color: #555555;'> 3</span><span>         3     1.04          5.22              91.6
+#&gt; </span><span style='color: #555555;'> 4</span><span>         4     0.581         2.91              94.5
+#&gt; </span><span style='color: #555555;'> 5</span><span>         5     0.422         2.11              96.6
+#&gt; </span><span style='color: #555555;'> 6</span><span>         6     0.232         1.16              97.8
+#&gt; </span><span style='color: #555555;'> 7</span><span>         7     0.170         0.852             98.7
+#&gt; </span><span style='color: #555555;'> 8</span><span>         8     0.116         0.580             99.2
+#&gt; </span><span style='color: #555555;'> 9</span><span>         9     0.084</span><span style='text-decoration: underline;'>9</span><span>        0.425             99.7
+#&gt; </span><span style='color: #555555;'>10</span><span>        10     0.040</span><span style='text-decoration: underline;'>5</span><span>        0.202             99.9
+#&gt; </span><span style='color: #555555;'>11</span><span>        11     0.026</span><span style='text-decoration: underline;'>6</span><span>        0.133            100  
+#&gt; </span><span style='color: #555555;'>#
+#&gt; # Description of: Product &lt;12 items&gt;</span><span>
+#&gt; </span><span style='color: #555555;'># Dimension:      Dim 1 x 2</span><span>
+#&gt;    attribute            dim1   dim2 quality contribution
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>               </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> Angel              7.23    1.96    0.932        27.1 
+#&gt; </span><span style='color: #555555;'> 2</span><span> Shalimar           5.36   -</span><span style='color: #BB0000;'>1.27</span><span>    0.895        14.6 
+#&gt; </span><span style='color: #555555;'> 3</span><span> Aromatics Elixir   3.66   -</span><span style='color: #BB0000;'>4.03</span><span>    0.947        14.3 
+#&gt; </span><span style='color: #555555;'> 4</span><span> J'adore ET        -</span><span style='color: #BB0000;'>4.90</span><span>   -</span><span style='color: #BB0000;'>0.221</span><span>   0.880        11.6 
+#&gt; </span><span style='color: #555555;'> 5</span><span> J'adore EP        -</span><span style='color: #BB0000;'>4.34</span><span>    0.396   0.874         9.17
+#&gt; </span><span style='color: #555555;'> 6</span><span> Pleasures         -</span><span style='color: #BB0000;'>3.74</span><span>   -</span><span style='color: #BB0000;'>0.677</span><span>   0.901         6.95
+#&gt; </span><span style='color: #555555;'> 7</span><span> Lolita Lempicka    0.971   3.28    0.844         5.63
+#&gt; </span><span style='color: #555555;'> 8</span><span> Coco Mademoiselle -</span><span style='color: #BB0000;'>2.24</span><span>   -</span><span style='color: #BB0000;'>0.887</span><span>   0.682         2.79
+#&gt; </span><span style='color: #555555;'> 9</span><span> Pure Poison       -</span><span style='color: #BB0000;'>2.12</span><span>   -</span><span style='color: #BB0000;'>0.935</span><span>   0.759         2.59
+#&gt; </span><span style='color: #555555;'>10</span><span> L'instant         -</span><span style='color: #BB0000;'>0.046</span><span style='color: #BB0000;text-decoration: underline;'>4</span><span>  2.01    0.670         1.95
+#&gt; </span><span style='color: #555555;'>11</span><span> Cinema            -</span><span style='color: #BB0000;'>0.357</span><span>   1.98    0.495         1.95
+#&gt; </span><span style='color: #555555;'>12</span><span> Chanel N5          0.518  -</span><span style='color: #BB0000;'>1.60</span><span>    0.480         1.36
+#&gt; </span><span style='color: #555555;'>#
+#&gt; # Description of: Sensory attribute &lt;20 lexicons&gt;</span><span>
+#&gt; </span><span style='color: #555555;'># Dimension:      Dim 1 x 2</span><span>
+#&gt;    attribute     dim1    dim2 quality contribution
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> spicy        0.855 -</span><span style='color: #BB0000;'>0.500</span><span>    0.980         5.67
+#&gt; </span><span style='color: #555555;'> 2</span><span> leather      0.957 -</span><span style='color: #BB0000;'>0.179</span><span>    0.949         5.49
+#&gt; </span><span style='color: #555555;'> 3</span><span> nutty        0.929  0.293    0.948         5.49
+#&gt; </span><span style='color: #555555;'> 4</span><span> musk         0.964 -</span><span style='color: #BB0000;'>0.121</span><span>    0.943         5.46
+#&gt; </span><span style='color: #555555;'> 5</span><span> woody        0.948 -</span><span style='color: #BB0000;'>0.169</span><span>    0.927         5.37
+#&gt; </span><span style='color: #555555;'> 6</span><span> caramel      0.671  0.688    0.924         5.35
+#&gt; </span><span style='color: #555555;'> 7</span><span> incense      0.944 -</span><span style='color: #BB0000;'>0.166</span><span>    0.919         5.32
+#&gt; </span><span style='color: #555555;'> 8</span><span> freshness   -</span><span style='color: #BB0000;'>0.953</span><span>  0.046</span><span style='text-decoration: underline;'>2</span><span>   0.910         5.27
+#&gt; </span><span style='color: #555555;'> 9</span><span> earthy       0.918 -</span><span style='color: #BB0000;'>0.258</span><span>    0.909         5.26
+#&gt; </span><span style='color: #555555;'>10</span><span> anis         0.731  0.608    0.903         5.23
+#&gt; </span><span style='color: #555555;'>11</span><span> vanilla      0.267  0.903    0.886         5.13
+#&gt; </span><span style='color: #555555;'>12</span><span> animal       0.936 -</span><span style='color: #BB0000;'>0.066</span><span style='color: #BB0000;text-decoration: underline;'>7</span><span>   0.881         5.10
+#&gt; </span><span style='color: #555555;'>13</span><span> citrus      -</span><span style='color: #BB0000;'>0.831</span><span>  0.420    0.867         5.02
+#&gt; </span><span style='color: #555555;'>14</span><span> honey        0.446  0.809    0.854         4.94
+#&gt; </span><span style='color: #555555;'>15</span><span> fresh_lemon -</span><span style='color: #BB0000;'>0.857</span><span> -</span><span style='color: #BB0000;'>0.229</span><span>    0.787         4.55
+#&gt; </span><span style='color: #555555;'>16</span><span> intensity    0.731 -</span><span style='color: #BB0000;'>0.498</span><span>    0.783         4.53
+#&gt; </span><span style='color: #555555;'>17</span><span> sweet_fruit -</span><span style='color: #BB0000;'>0.815</span><span>  0.338    0.779         4.51
+#&gt; </span><span style='color: #555555;'>18</span><span> jasmin      -</span><span style='color: #BB0000;'>0.879</span><span> -</span><span style='color: #BB0000;'>0.048</span><span style='color: #BB0000;text-decoration: underline;'>3</span><span>   0.776         4.49
+#&gt; </span><span style='color: #555555;'>19</span><span> rose        -</span><span style='color: #BB0000;'>0.859</span><span> -</span><span style='color: #BB0000;'>0.046</span><span style='color: #BB0000;text-decoration: underline;'>4</span><span>   0.739         4.28
+#&gt; </span><span style='color: #555555;'>20</span><span> camomille    0.515  0.593    0.617         3.57</div><div class='input'>
+<span class='co'># Using pipe %&gt;%</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>perfume_qda_experts</span>)
+<span class='no'>perfume_qda_experts</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'>specify</span>(
+    <span class='kw'>sensory_method</span> <span class='kw'>=</span> <span class='st'>"QDA"</span>,
+    <span class='kw'>panelist</span> <span class='kw'>=</span> <span class='no'>panelist</span>,
+    <span class='kw'>product</span> <span class='kw'>=</span> <span class='no'>product</span>,
+    <span class='kw'>session</span> <span class='kw'>=</span> <span class='no'>session</span>,
+    <span class='kw'>pres_order</span> <span class='kw'>=</span> <span class='no'>rank</span>,
+    <span class='kw'>attribute</span> <span class='kw'>=</span> <span class='no'>spicy</span>:<span class='no'>wrapping</span>
+  ) <span class='kw'>%&gt;%</span>
+  <span class='fu'>analyse_global</span>()</div><div class='output co'>#&gt; </span><span style='color: #555555;'># Global analysis:       
+#&gt; # Sensory method:         Quantitative Descriptive Analysis
+#&gt; # Method:                 Principal Component Analysis
+#&gt; # Active individual:      12 items
+#&gt; # Active variable:        12 lexicons
+#&gt; # Supplementary variable: None
+#&gt; #
+#&gt; # Description of:      Eigenvalue</span><span>
+#&gt; </span><span style='color: #555555;'># Number of dimension: 11</span><span>
+#&gt;    dimension eigenvalue pct_variance pct_cum_variance
+#&gt;        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span>         1   6.79         61.7                 61.7
+#&gt; </span><span style='color: #555555;'> 2</span><span>         2   2.61         23.7                 85.4
+#&gt; </span><span style='color: #555555;'> 3</span><span>         3   0.560         5.10                90.5
+#&gt; </span><span style='color: #555555;'> 4</span><span>         4   0.377         3.42                93.9
+#&gt; </span><span style='color: #555555;'> 5</span><span>         5   0.361         3.28                97.2
+#&gt; </span><span style='color: #555555;'> 6</span><span>         6   0.205         1.86                99.1
+#&gt; </span><span style='color: #555555;'> 7</span><span>         7   0.051</span><span style='text-decoration: underline;'>9</span><span>        0.472               99.5
+#&gt; </span><span style='color: #555555;'> 8</span><span>         8   0.028</span><span style='text-decoration: underline;'>3</span><span>        0.257               99.8
+#&gt; </span><span style='color: #555555;'> 9</span><span>         9   0.015</span><span style='text-decoration: underline;'>8</span><span>        0.143               99.9
+#&gt; </span><span style='color: #555555;'>10</span><span>        10   0.005</span><span style='text-decoration: underline;'>27</span><span>       0.047</span><span style='text-decoration: underline;'>9</span><span>             100.0
+#&gt; </span><span style='color: #555555;'>11</span><span>        11   0.000</span><span style='text-decoration: underline;'>469</span><span>      0.004</span><span style='text-decoration: underline;'>26</span><span>            100  
+#&gt; </span><span style='color: #555555;'>#
+#&gt; # Description of: Product &lt;12 items&gt;</span><span>
+#&gt; </span><span style='color: #555555;'># Dimension:      Dim 1 x 2</span><span>
+#&gt;    attribute           dim1   dim2 quality contribution
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> Aromatics Elixir   3.62   2.32    0.990       16.4  
+#&gt; </span><span style='color: #555555;'> 2</span><span> Shalimar           3.56   2.05    0.943       15.0  
+#&gt; </span><span style='color: #555555;'> 3</span><span> Pleasures         -</span><span style='color: #BB0000;'>3.88</span><span>   1.20    0.822       14.6  
+#&gt; </span><span style='color: #555555;'> 4</span><span> J'adore EP        -</span><span style='color: #BB0000;'>3.82</span><span>   0.710   0.902       13.4  
+#&gt; </span><span style='color: #555555;'> 5</span><span> Angel              3.21  -</span><span style='color: #BB0000;'>2.14</span><span>    0.953       13.2  
+#&gt; </span><span style='color: #555555;'> 6</span><span> Lolita Lempicka    1.45  -</span><span style='color: #BB0000;'>3.23</span><span>    0.932       11.1  
+#&gt; </span><span style='color: #555555;'> 7</span><span> J'adore ET        -</span><span style='color: #BB0000;'>2.50</span><span>   0.221   0.729        5.59 
+#&gt; </span><span style='color: #555555;'> 8</span><span> Chanel N5          1.82   1.25    0.618        4.33 
+#&gt; </span><span style='color: #555555;'> 9</span><span> Coco Mademoiselle -</span><span style='color: #BB0000;'>1.78</span><span>  -</span><span style='color: #BB0000;'>0.199</span><span>   0.807        2.84 
+#&gt; </span><span style='color: #555555;'>10</span><span> Cinema            -</span><span style='color: #BB0000;'>0.526</span><span> -</span><span style='color: #BB0000;'>1.43</span><span>    0.731        2.05 
+#&gt; </span><span style='color: #555555;'>11</span><span> L'instant         -</span><span style='color: #BB0000;'>0.560</span><span> -</span><span style='color: #BB0000;'>1.02</span><span>    0.409        1.20 
+#&gt; </span><span style='color: #555555;'>12</span><span> Pure Poison       -</span><span style='color: #BB0000;'>0.590</span><span>  0.260   0.156        0.369
+#&gt; </span><span style='color: #555555;'>#
+#&gt; # Description of: Sensory attribute &lt;11 lexicons&gt;</span><span>
+#&gt; </span><span style='color: #555555;'># Dimension:      Dim 1 x 2</span><span>
+#&gt;    attribute   dim1    dim2 quality contribution
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> spicy      0.887  0.435    0.975        10.4 
+#&gt; </span><span style='color: #555555;'> 2</span><span> vanilla    0.532 -</span><span style='color: #BB0000;'>0.818</span><span>    0.952        10.1 
+#&gt; </span><span style='color: #555555;'> 3</span><span> greedy     0.256 -</span><span style='color: #BB0000;'>0.939</span><span>    0.947        10.1 
+#&gt; </span><span style='color: #555555;'> 4</span><span> oriental   0.919  0.314    0.944        10.0 
+#&gt; </span><span style='color: #555555;'> 5</span><span> fruity    -</span><span style='color: #BB0000;'>0.904</span><span> -</span><span style='color: #BB0000;'>0.288</span><span>    0.900         9.58
+#&gt; </span><span style='color: #555555;'> 6</span><span> heady      0.927  0.200    0.900         9.58
+#&gt; </span><span style='color: #555555;'> 7</span><span> floral    -</span><span style='color: #BB0000;'>0.867</span><span>  0.365    0.885         9.42
+#&gt; </span><span style='color: #555555;'> 8</span><span> woody      0.667  0.579    0.780         8.30
+#&gt; </span><span style='color: #555555;'> 9</span><span> marine    -</span><span style='color: #BB0000;'>0.866</span><span>  0.080</span><span style='text-decoration: underline;'>1</span><span>   0.756         8.05
+#&gt; </span><span style='color: #555555;'>10</span><span> citrus    -</span><span style='color: #BB0000;'>0.811</span><span>  0.251    0.720         7.66
+#&gt; </span><span style='color: #555555;'>11</span><span> green     -</span><span style='color: #BB0000;'>0.726</span><span>  0.332    0.637         6.78</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+            
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

@@ -13,9 +13,15 @@ analyse_performance(.data)
 Perform global analysis on sensory table.
 }
 \examples{
-data(sensochoc) 
+data(sensochoc)
 sensochoc \%>\%
-specify(sensory_method = "QDA", panelist = panelist, product = product, session = session, pres_order = rank, attribute = cocoa_a:granular) \%>\% 
-analyse_performance()
-
+  specify(
+    sensory_method = "QDA",
+    panelist = panelist,
+    product = product,
+    session = session,
+    pres_order = rank,
+    attribute = cocoa_a:granular
+  ) \%>\%
+  analyse_performance()
 }

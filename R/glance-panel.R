@@ -1,9 +1,9 @@
 #' Glance panel
-#' 
+#'
 #' Evaluate panel performance.
 #'
 #' @param res_performance output of performance analysis
-#' 
+#'
 #' @export
 glance_panel <- function(res_performance) {
   UseMethod("glance_panel")
@@ -12,17 +12,18 @@ glance_panel <- function(res_performance) {
 #' @importFrom tibble as_tibble new_tibble
 #' @importFrom janitor clean_names
 #' @importFrom dplyr arrange
-#' 
+#'
 #' @export
 glance_panel.default <- function(res_performance) {
-  tbl <- res_performance$p.value %>% 
-    as_tibble(rownames = "attribute") %>% 
-    clean_names() %>% 
+  tbl <- res_performance$p.value %>%
+    as_tibble(rownames = "attribute") %>%
+    clean_names() %>%
     arrange(product)
-  
+
   res <- new_tibble(tbl,
-                    nrow = NROW(tbl), 
-                    class = "tbl_sensory_performance_panel")
+    nrow = NROW(tbl),
+    class = "tbl_sensory_performance_panel"
+  )
   return(res)
 }
 

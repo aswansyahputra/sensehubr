@@ -110,9 +110,9 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>specify</span>(<span class='no'>.data</span>, <span class='kw'>panelist</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>product</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>session</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>pres_order</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>attribute</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>hedonic</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"QDA"</span>, <span class='st'>"CATA"</span>, <span class='st'>"RATA"</span>, <span class='st'>"FCP"</span>, <span class='st'>"FP"</span>, <span class='st'>"JAR"</span>, <span class='st'>"IPM"</span>))</pre>
+    <pre class="usage"><span class='fu'>specify</span>(<span class='no'>.data</span>, <span class='kw'>sensory_method</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"QDA"</span>, <span class='st'>"CATA"</span>, <span class='st'>"RATA"</span>, <span class='st'>"FCP"</span>, <span class='st'>"FP"</span>,
+  <span class='st'>"JAR"</span>, <span class='st'>"IPM"</span>), <span class='no'>panelist</span>, <span class='no'>product</span>, <span class='kw'>session</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>pres_order</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='no'>attribute</span>, <span class='kw'>hedonic</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -120,6 +120,10 @@
     <tr>
       <th>.data</th>
       <td><p>a dataframe</p></td>
+    </tr>
+    <tr>
+      <th>sensory_method</th>
+      <td><p>method of sensory evaluation, available methods are QDA, CATA, RATA, FCP, FP, JAR, IPM</p></td>
     </tr>
     <tr>
       <th>panelist</th>
@@ -145,10 +149,6 @@
       <th>hedonic</th>
       <td><p>hedonic column</p></td>
     </tr>
-    <tr>
-      <th>method</th>
-      <td><p>sensory method, i.e. QDA, CATA, RATA, FCP, FP, JAR, IPM</p></td>
-    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -157,15 +157,18 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>perfume_qda_consumer</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: data set ‘perfume_qda_consumer’ not found</span></div><div class='input'>(<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>specify</span>(<span class='kw'>.data</span> <span class='kw'>=</span> <span class='no'>perfume_qda_consumers</span>,
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>perfume_qda_consumer</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: data set ‘perfume_qda_consumer’ not found</span></div><div class='input'>(<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>specify</span>(
+  <span class='kw'>.data</span> <span class='kw'>=</span> <span class='no'>perfume_qda_consumers</span>,
+  <span class='kw'>sensory_method</span> <span class='kw'>=</span> <span class='st'>"QDA"</span>,
   <span class='kw'>panelist</span> <span class='kw'>=</span> <span class='no'>consumer</span>,
   <span class='kw'>product</span> <span class='kw'>=</span> <span class='no'>product</span>,
   <span class='kw'>attribute</span> <span class='kw'>=</span> <span class='no'>intensity</span>:<span class='no'>green</span>,
-  <span class='kw'>hedonic</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"QDA"</span>))</div><div class='output co'>#&gt; <span style='color: #555555;'># A sensory table: QDA &lt;1236 x 23&gt;</span><span>
+  <span class='kw'>hedonic</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+))</div><div class='output co'>#&gt; <span style='color: #555555;'># A sensory table: &lt;1236 x 23&gt;</span><span>
+#&gt; </span><span style='color: #555555;'># Sensory method:  Quantitative Descriptive Analysis</span><span>
 #&gt; </span><span style='color: #555555;'># Panelist:        consumer &lt;103 subjects&gt;</span><span>
 #&gt; </span><span style='color: #555555;'># Product:         product &lt;12 items&gt;</span><span>
-#&gt; </span><span style='color: #555555;'># Attribute:       intensity, freshness, jasmin, ro... &lt;21 lexicons&gt;</span><span>
+#&gt; </span><span style='color: #555555;'># Attribute:       intensity, freshness, jasmin, ro...&lt;21 lexicons&gt;</span><span>
 #&gt; </span><span style='color: #555555;'># Hedonic:         None</span><span>
 #&gt;    consumer product intensity freshness jasmin  rose camomille fresh_lemon
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
@@ -185,17 +188,18 @@
 #&gt; #   earthy </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, incense </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, green </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>perfume_qda_experts</span>)
 <span class='no'>perfume_qda_experts</span> <span class='kw'>%&gt;%</span>
-<span class='fu'>specify</span>(
-  <span class='kw'>panelist</span> <span class='kw'>=</span> <span class='no'>panelist</span>,
-  <span class='kw'>product</span> <span class='kw'>=</span> <span class='no'>product</span>,
-  <span class='kw'>session</span> <span class='kw'>=</span> <span class='no'>session</span>,
-  <span class='kw'>pres_order</span> <span class='kw'>=</span> <span class='no'>rank</span>,
-  <span class='kw'>attribute</span> <span class='kw'>=</span> <span class='no'>spicy</span>:<span class='no'>wrapping</span>,
-  <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"QDA"</span>
-)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A sensory table: QDA &lt;288 x 16&gt;</span><span>
+  <span class='fu'>specify</span>(
+    <span class='kw'>sensory_method</span> <span class='kw'>=</span> <span class='st'>"QDA"</span>,
+    <span class='kw'>panelist</span> <span class='kw'>=</span> <span class='no'>panelist</span>,
+    <span class='kw'>product</span> <span class='kw'>=</span> <span class='no'>product</span>,
+    <span class='kw'>session</span> <span class='kw'>=</span> <span class='no'>session</span>,
+    <span class='kw'>pres_order</span> <span class='kw'>=</span> <span class='no'>rank</span>,
+    <span class='kw'>attribute</span> <span class='kw'>=</span> <span class='no'>spicy</span>:<span class='no'>wrapping</span>
+  )</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A sensory table: &lt;288 x 16&gt;</span><span>
+#&gt; </span><span style='color: #555555;'># Sensory method:  Quantitative Descriptive Analysis</span><span>
 #&gt; </span><span style='color: #555555;'># Panelist:        panelist &lt;12 subjects&gt;</span><span>
 #&gt; </span><span style='color: #555555;'># Product:         product &lt;12 items&gt;</span><span>
-#&gt; </span><span style='color: #555555;'># Attribute:       spicy, heady, fruity, green, van... &lt;12 lexicons&gt;</span><span>
+#&gt; </span><span style='color: #555555;'># Attribute:       spicy, heady, fruity, green, van...&lt;12 lexicons&gt;</span><span>
 #&gt; </span><span style='color: #555555;'># Hedonic:         None</span><span>
 #&gt;    panelist product session rank  spicy heady fruity green vanilla floral woody
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>

@@ -33,21 +33,23 @@ Specify sensory informations into a raw dataframe. The minimal sensory informati
 }
 \examples{
 data(perfume_qda_consumer)
-(df <- specify(.data = perfume_qda_consumers, 
+(df <- specify(
+  .data = perfume_qda_consumers,
   sensory_method = "QDA",
-  panelist = consumer, 
-  product = product, 
-  attribute = intensity:green, 
-  hedonic = NULL))
+  panelist = consumer,
+  product = product,
+  attribute = intensity:green,
+  hedonic = NULL
+))
 
 data(perfume_qda_experts)
-perfume_qda_experts \%>\% 
-specify(
-  sensory_method = "QDA",
-  panelist = panelist,
-  product = product,
-  session = session,
-  pres_order = rank,
-  attribute = spicy:wrapping
-)
+perfume_qda_experts \%>\%
+  specify(
+    sensory_method = "QDA",
+    panelist = panelist,
+    product = product,
+    session = session,
+    pres_order = rank,
+    attribute = spicy:wrapping
+  )
 }

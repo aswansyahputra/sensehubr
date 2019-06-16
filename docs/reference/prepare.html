@@ -110,7 +110,7 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>prepare</span>(<span class='no'>n_panelist</span>, <span class='no'>product</span>, <span class='kw'>blind_code</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>prepare</span>(<span class='no'>n_panelist</span>, <span class='no'>product</span>, <span class='kw'>blind_code</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -127,6 +127,10 @@
       <th>blind_code</th>
       <td><p>wheteher to generate random three digit number for labeling</p></td>
     </tr>
+    <tr>
+      <th>seed</th>
+      <td><p>an integer for anchoring randomisation</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -135,65 +139,65 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>prepare</span>(<span class='kw'>n_panelist</span> <span class='kw'>=</span> <span class='fl'>30</span>, <span class='kw'>product</span> <span class='kw'>=</span> <span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>14</span>], <span class='kw'>blind_code</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A sensory table: Design of Experiment</span><span>
-#&gt; </span><span style='color: #555555;'># Panelist:        30 subjects</span><span>
-#&gt; </span><span style='color: #555555;'># Product:         14 items</span><span>
+    <pre class="examples"><div class='input'><span class='fu'>prepare</span>(<span class='kw'>n_panelist</span> <span class='kw'>=</span> <span class='fl'>30</span>, <span class='kw'>product</span> <span class='kw'>=</span> <span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>14</span>], <span class='kw'>blind_code</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># Design of Experiment: &lt;30 x 15&gt;</span><span>
+#&gt; </span><span style='color: #555555;'># Panelist:             30 subjects</span><span>
+#&gt; </span><span style='color: #555555;'># Product:              14 items</span><span>
 #&gt;    panelist order_1 order_2 order_3 order_4 order_5 order_6 order_7 order_8
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  
-#&gt; </span><span style='color: #555555;'> 1</span><span> ind_001  a       h       c       m       e       n       i       k      
-#&gt; </span><span style='color: #555555;'> 2</span><span> ind_002  h       m       a       n       c       k       e       g      
-#&gt; </span><span style='color: #555555;'> 3</span><span> ind_003  m       n       h       k       a       g       c       d      
-#&gt; </span><span style='color: #555555;'> 4</span><span> ind_004  n       k       m       g       h       d       a       f      
-#&gt; </span><span style='color: #555555;'> 5</span><span> ind_005  k       g       n       d       m       f       h       l      
-#&gt; </span><span style='color: #555555;'> 6</span><span> ind_006  g       d       k       f       n       l       m       b      
-#&gt; </span><span style='color: #555555;'> 7</span><span> ind_007  d       f       g       l       k       b       n       j      
-#&gt; </span><span style='color: #555555;'> 8</span><span> ind_008  f       l       d       b       g       j       k       i      
-#&gt; </span><span style='color: #555555;'> 9</span><span> ind_009  l       b       f       j       d       i       g       e      
-#&gt; </span><span style='color: #555555;'>10</span><span> ind_010  b       j       l       i       f       e       d       c      
+#&gt; </span><span style='color: #555555;'> 1</span><span> ind_001  j       d       a       g       k       n       m       b      
+#&gt; </span><span style='color: #555555;'> 2</span><span> ind_002  d       g       j       n       a       b       k       e      
+#&gt; </span><span style='color: #555555;'> 3</span><span> ind_003  g       n       d       b       j       e       a       f      
+#&gt; </span><span style='color: #555555;'> 4</span><span> ind_004  n       b       g       e       d       f       j       h      
+#&gt; </span><span style='color: #555555;'> 5</span><span> ind_005  b       e       n       f       g       h       d       l      
+#&gt; </span><span style='color: #555555;'> 6</span><span> ind_006  e       f       b       h       n       l       g       i      
+#&gt; </span><span style='color: #555555;'> 7</span><span> ind_007  f       h       e       l       b       i       n       c      
+#&gt; </span><span style='color: #555555;'> 8</span><span> ind_008  h       l       f       i       e       c       b       m      
+#&gt; </span><span style='color: #555555;'> 9</span><span> ind_009  l       i       h       c       f       m       e       k      
+#&gt; </span><span style='color: #555555;'>10</span><span> ind_010  i       c       l       m       h       k       f       a      
 #&gt; </span><span style='color: #555555;'># … with 20 more rows, and 6 more variables: order_9 </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, order_10 </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   order_11 </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, order_12 </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, order_13 </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, order_14 </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span></div><div class='input'><span class='fu'>prepare</span>(<span class='kw'>n_panelist</span> <span class='kw'>=</span> <span class='fl'>30</span>, <span class='kw'>product</span> <span class='kw'>=</span> <span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>14</span>], <span class='kw'>blind_code</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A sensory table: Design of Experiment</span><span>
-#&gt; </span><span style='color: #555555;'># Panelist:        30 subjects</span><span>
-#&gt; </span><span style='color: #555555;'># Product:         14 items</span><span>
+#&gt; #   order_11 </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, order_12 </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, order_13 </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, order_14 </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span></div><div class='input'><span class='fu'>prepare</span>(<span class='kw'>n_panelist</span> <span class='kw'>=</span> <span class='fl'>30</span>, <span class='kw'>product</span> <span class='kw'>=</span> <span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>14</span>], <span class='kw'>blind_code</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># Design of Experiment: &lt;30 x 15&gt;</span><span>
+#&gt; </span><span style='color: #555555;'># Panelist:             30 subjects</span><span>
+#&gt; </span><span style='color: #555555;'># Product:              14 items</span><span>
 #&gt;    panelist order_1 order_2 order_3 order_4 order_5 order_6 order_7 order_8
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  
-#&gt; </span><span style='color: #555555;'> 1</span><span> ind_001  j (108) c (598) n (705) a (692) f (735) m (978) h (488) b (206)
-#&gt; </span><span style='color: #555555;'> 2</span><span> ind_002  c (598) a (692) j (108) m (978) n (705) b (206) f (735) l (581)
-#&gt; </span><span style='color: #555555;'> 3</span><span> ind_003  a (692) m (978) c (598) b (206) j (108) l (581) n (705) k (610)
-#&gt; </span><span style='color: #555555;'> 4</span><span> ind_004  m (978) b (206) a (692) l (581) c (598) k (610) j (108) i (867)
-#&gt; </span><span style='color: #555555;'> 5</span><span> ind_005  b (206) l (581) m (978) k (610) a (692) i (867) c (598) e (283)
-#&gt; </span><span style='color: #555555;'> 6</span><span> ind_006  l (581) k (610) b (206) i (867) m (978) e (283) a (692) d (161)
-#&gt; </span><span style='color: #555555;'> 7</span><span> ind_007  k (610) i (867) l (581) e (283) b (206) d (161) m (978) g (756)
-#&gt; </span><span style='color: #555555;'> 8</span><span> ind_008  i (867) e (283) k (610) d (161) l (581) g (756) b (206) h (488)
-#&gt; </span><span style='color: #555555;'> 9</span><span> ind_009  e (283) d (161) i (867) g (756) k (610) h (488) l (581) f (735)
-#&gt; </span><span style='color: #555555;'>10</span><span> ind_010  d (161) g (756) e (283) h (488) i (867) f (735) k (610) n (705)
+#&gt; </span><span style='color: #555555;'> 1</span><span> ind_001  e (529) f (576) b (300) j (641) g (668) c (347) l (963) k (423)
+#&gt; </span><span style='color: #555555;'> 2</span><span> ind_002  f (576) j (641) e (529) c (347) b (300) k (423) g (668) i (275)
+#&gt; </span><span style='color: #555555;'> 3</span><span> ind_003  j (641) c (347) f (576) k (423) e (529) i (275) b (300) d (685)
+#&gt; </span><span style='color: #555555;'> 4</span><span> ind_004  c (347) k (423) j (641) i (275) f (576) d (685) e (529) m (506)
+#&gt; </span><span style='color: #555555;'> 5</span><span> ind_005  k (423) i (275) c (347) d (685) j (641) m (506) f (576) h (515)
+#&gt; </span><span style='color: #555555;'> 6</span><span> ind_006  i (275) d (685) k (423) m (506) c (347) h (515) j (641) n (794)
+#&gt; </span><span style='color: #555555;'> 7</span><span> ind_007  d (685) m (506) i (275) h (515) k (423) n (794) c (347) a (700)
+#&gt; </span><span style='color: #555555;'> 8</span><span> ind_008  m (506) h (515) d (685) n (794) i (275) a (700) k (423) l (963)
+#&gt; </span><span style='color: #555555;'> 9</span><span> ind_009  h (515) n (794) m (506) a (700) d (685) l (963) i (275) g (668)
+#&gt; </span><span style='color: #555555;'>10</span><span> ind_010  n (794) a (700) h (515) l (963) m (506) g (668) d (685) b (300)
 #&gt; </span><span style='color: #555555;'># … with 20 more rows, and 6 more variables: order_9 </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, order_10 </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
 #&gt; #   order_11 </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, order_12 </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, order_13 </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, order_14 </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span></div><div class='input'>
 <span class='no'>design</span> <span class='kw'>&lt;-</span> <span class='fu'>prepare</span>(<span class='kw'>n_panelist</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>product</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>blind_code</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-<span class='no'>design</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A sensory table: Design of Experiment</span><span>
-#&gt; </span><span style='color: #555555;'># Panelist:        20 subjects</span><span>
-#&gt; </span><span style='color: #555555;'># Product:         5 items</span><span>
+<span class='no'>design</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># Design of Experiment: &lt;20 x 6&gt;</span><span>
+#&gt; </span><span style='color: #555555;'># Panelist:             20 subjects</span><span>
+#&gt; </span><span style='color: #555555;'># Product:              5 items</span><span>
 #&gt;    panelist order_1       order_2       order_3       order_4       order_5     
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       
-#&gt; </span><span style='color: #555555;'> 1</span><span> ind_001  prod_03 (635) prod_02 (576) prod_01 (746) prod_05 (148) prod_04 (54…
-#&gt; </span><span style='color: #555555;'> 2</span><span> ind_002  prod_02 (576) prod_05 (148) prod_03 (635) prod_04 (543) prod_01 (74…
-#&gt; </span><span style='color: #555555;'> 3</span><span> ind_003  prod_05 (148) prod_04 (543) prod_02 (576) prod_01 (746) prod_03 (63…
-#&gt; </span><span style='color: #555555;'> 4</span><span> ind_004  prod_04 (543) prod_01 (746) prod_05 (148) prod_03 (635) prod_02 (57…
-#&gt; </span><span style='color: #555555;'> 5</span><span> ind_005  prod_01 (746) prod_03 (635) prod_04 (543) prod_02 (576) prod_05 (14…
-#&gt; </span><span style='color: #555555;'> 6</span><span> ind_006  prod_04 (543) prod_05 (148) prod_01 (746) prod_02 (576) prod_03 (63…
-#&gt; </span><span style='color: #555555;'> 7</span><span> ind_007  prod_01 (746) prod_04 (543) prod_03 (635) prod_05 (148) prod_02 (57…
-#&gt; </span><span style='color: #555555;'> 8</span><span> ind_008  prod_03 (635) prod_01 (746) prod_02 (576) prod_04 (543) prod_05 (14…
-#&gt; </span><span style='color: #555555;'> 9</span><span> ind_009  prod_02 (576) prod_03 (635) prod_05 (148) prod_01 (746) prod_04 (54…
-#&gt; </span><span style='color: #555555;'>10</span><span> ind_010  prod_05 (148) prod_02 (576) prod_04 (543) prod_03 (635) prod_01 (74…
-#&gt; </span><span style='color: #555555;'>11</span><span> ind_011  prod_03 (635) prod_02 (576) prod_01 (746) prod_05 (148) prod_04 (54…
-#&gt; </span><span style='color: #555555;'>12</span><span> ind_012  prod_02 (576) prod_05 (148) prod_03 (635) prod_04 (543) prod_01 (74…
-#&gt; </span><span style='color: #555555;'>13</span><span> ind_013  prod_05 (148) prod_04 (543) prod_02 (576) prod_01 (746) prod_03 (63…
-#&gt; </span><span style='color: #555555;'>14</span><span> ind_014  prod_04 (543) prod_01 (746) prod_05 (148) prod_03 (635) prod_02 (57…
-#&gt; </span><span style='color: #555555;'>15</span><span> ind_015  prod_01 (746) prod_03 (635) prod_04 (543) prod_02 (576) prod_05 (14…
-#&gt; </span><span style='color: #555555;'>16</span><span> ind_016  prod_04 (543) prod_05 (148) prod_01 (746) prod_02 (576) prod_03 (63…
-#&gt; </span><span style='color: #555555;'>17</span><span> ind_017  prod_01 (746) prod_04 (543) prod_03 (635) prod_05 (148) prod_02 (57…
-#&gt; </span><span style='color: #555555;'>18</span><span> ind_018  prod_03 (635) prod_01 (746) prod_02 (576) prod_04 (543) prod_05 (14…
-#&gt; </span><span style='color: #555555;'>19</span><span> ind_019  prod_02 (576) prod_03 (635) prod_05 (148) prod_01 (746) prod_04 (54…
-#&gt; </span><span style='color: #555555;'>20</span><span> ind_020  prod_05 (148) prod_02 (576) prod_04 (543) prod_03 (635) prod_01 (74…</div></span></pre>
+#&gt; </span><span style='color: #555555;'> 1</span><span> ind_001  prod_04 (689) prod_02 (954) prod_03 (740) prod_01 (658) prod_05 (39…
+#&gt; </span><span style='color: #555555;'> 2</span><span> ind_002  prod_02 (954) prod_01 (658) prod_04 (689) prod_05 (396) prod_03 (74…
+#&gt; </span><span style='color: #555555;'> 3</span><span> ind_003  prod_01 (658) prod_05 (396) prod_02 (954) prod_03 (740) prod_04 (68…
+#&gt; </span><span style='color: #555555;'> 4</span><span> ind_004  prod_05 (396) prod_03 (740) prod_01 (658) prod_04 (689) prod_02 (95…
+#&gt; </span><span style='color: #555555;'> 5</span><span> ind_005  prod_03 (740) prod_04 (689) prod_05 (396) prod_02 (954) prod_01 (65…
+#&gt; </span><span style='color: #555555;'> 6</span><span> ind_006  prod_05 (396) prod_01 (658) prod_03 (740) prod_02 (954) prod_04 (68…
+#&gt; </span><span style='color: #555555;'> 7</span><span> ind_007  prod_03 (740) prod_05 (396) prod_04 (689) prod_01 (658) prod_02 (95…
+#&gt; </span><span style='color: #555555;'> 8</span><span> ind_008  prod_04 (689) prod_03 (740) prod_02 (954) prod_05 (396) prod_01 (65…
+#&gt; </span><span style='color: #555555;'> 9</span><span> ind_009  prod_02 (954) prod_04 (689) prod_01 (658) prod_03 (740) prod_05 (39…
+#&gt; </span><span style='color: #555555;'>10</span><span> ind_010  prod_01 (658) prod_02 (954) prod_05 (396) prod_04 (689) prod_03 (74…
+#&gt; </span><span style='color: #555555;'>11</span><span> ind_011  prod_04 (689) prod_02 (954) prod_03 (740) prod_01 (658) prod_05 (39…
+#&gt; </span><span style='color: #555555;'>12</span><span> ind_012  prod_02 (954) prod_01 (658) prod_04 (689) prod_05 (396) prod_03 (74…
+#&gt; </span><span style='color: #555555;'>13</span><span> ind_013  prod_01 (658) prod_05 (396) prod_02 (954) prod_03 (740) prod_04 (68…
+#&gt; </span><span style='color: #555555;'>14</span><span> ind_014  prod_05 (396) prod_03 (740) prod_01 (658) prod_04 (689) prod_02 (95…
+#&gt; </span><span style='color: #555555;'>15</span><span> ind_015  prod_03 (740) prod_04 (689) prod_05 (396) prod_02 (954) prod_01 (65…
+#&gt; </span><span style='color: #555555;'>16</span><span> ind_016  prod_05 (396) prod_01 (658) prod_03 (740) prod_02 (954) prod_04 (68…
+#&gt; </span><span style='color: #555555;'>17</span><span> ind_017  prod_03 (740) prod_05 (396) prod_04 (689) prod_01 (658) prod_02 (95…
+#&gt; </span><span style='color: #555555;'>18</span><span> ind_018  prod_04 (689) prod_03 (740) prod_02 (954) prod_05 (396) prod_01 (65…
+#&gt; </span><span style='color: #555555;'>19</span><span> ind_019  prod_02 (954) prod_04 (689) prod_01 (658) prod_03 (740) prod_05 (39…
+#&gt; </span><span style='color: #555555;'>20</span><span> ind_020  prod_01 (658) prod_02 (954) prod_05 (396) prod_04 (689) prod_03 (74…</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
