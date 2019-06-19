@@ -37,6 +37,7 @@ Imports:
     scales,
     RVAideMemoire,
     glue,
-    janitor
+    janitor,
+    ggrepel
 Remotes: 
     ricardo-bion/ggradar

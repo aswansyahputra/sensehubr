@@ -38,7 +38,6 @@ visualise.default <- function(res, ...) {
 #'
 #' @export
 #' @examples
-#' data(perfume_qda_experts)
 #' perfume_qda_experts %>%
 #'   specify(
 #'     sensory_method = "QDA",
@@ -96,7 +95,6 @@ visualise.tbl_sensory_local <- function(res, min_scales = 0, max_scales = 10, po
 #' @name visualise-global
 #'
 #' @examples
-#' data(perfume_qda_experts)
 #' perfume_qda_experts %>%
 #'   specify(
 #'     sensory_method = "QDA",
@@ -178,5 +176,67 @@ visualise.tbl_sensory_global <- function(res, choice = c("product", "attribute",
       }
   }
 
+  return(res)
+}
+
+#' Visualise penalty
+#'
+#' Plot liking drop and citing frequency from penalty analysis.
+#'
+#' @param res output penalty analysis
+#' @param product product of interest (only one product)
+#' @param frequency_threshold threshold for citing frequency
+#' @param drop_threshold threshold for iking drop
+#' @param title a title to use in plot
+#' @param xlab label for x-axis
+#' @param ylab label for y-axis
+#' @param ... not yet implemented
+#'
+#' @importFrom rlang arg_match
+#' @importFrom dplyr filter
+#' @importFrom ggplot2 ggplot aes geom_point geom_vline geom_hline scale_x_continuous scale_colour_manual labs theme_minimal
+#' @importFrom ggrepel geom_text_repel
+#' @importFrom scales percent_format
+#'
+#' @return a ggplot object
+#' @export
+#'
+#' @name visualise-penalty
+#'
+#' @examples
+#' perfume_jar %>%
+#'   specify(
+#'     sensory_method = "JAR",
+#'     panelist = consumer,
+#'     product = product,
+#'     attribute = intensity:green,
+#'     hedonic = liking
+#'   ) %>%
+#'   analyse_penalty(reference_value = 0) %>% 
+#'   visualise("Chanel N5")
+visualise.tbl_sensory_penalty <- function(res, product, frequency_threshold = 20, drop_threshold = 1, title = "Penalty analysis", xlab = "Citing frequency (%)", ylab = "Mean of liking drop", ...) {
+  subproduct <- arg_match(product, values = unique(res$product))
+  
+  if (length(product) > 1) {
+    stop("Please select only one product.", call. = FALSE)
+  }
+  
+  res <- res %>%
+    filter(product == subproduct) %>% 
+    ggplot(aes(x = frequency, y = penalty, colour = category)) +
+    geom_point() +
+    ggrepel::geom_text_repel(aes(label = attribute), show.legend = FALSE) +
+    geom_vline(xintercept = frequency_threshold, lty = 2, colour = "grey30") +
+    geom_hline(yintercept = drop_threshold, lty = 2, colour = "grey30") +
+    scale_x_continuous(labels = percent_format()) +
+    scale_colour_manual(values = c("blue", "red")) +
+    labs(
+      title = title,
+      x = xlab,
+      y = ylab,
+      colour = NULL
+    ) +
+    theme_minimal()
+    
   return(res)
 }
