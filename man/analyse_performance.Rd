@@ -13,7 +13,6 @@ analyse_performance(.data)
 Perform global analysis on sensory table.
 }
 \examples{
-data(sensochoc)
 sensochoc \%>\%
   specify(
     sensory_method = "QDA",

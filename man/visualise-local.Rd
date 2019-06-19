@@ -34,7 +34,6 @@ a ggplot object
 Create representation of sensory properties of each product in form of radar plot.
 }
 \examples{
-data(perfume_qda_experts)
 perfume_qda_experts \%>\%
   specify(
     sensory_method = "QDA",

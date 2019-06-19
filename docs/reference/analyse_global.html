@@ -136,8 +136,7 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>perfume_qda_consumers</span>)
-(<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>specify</span>(
+    <pre class="examples"><div class='input'>(<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>specify</span>(
   <span class='kw'>.data</span> <span class='kw'>=</span> <span class='no'>perfume_qda_consumers</span>,
   <span class='kw'>sensory_method</span> <span class='kw'>=</span> <span class='st'>"QDA"</span>,
   <span class='kw'>panelist</span> <span class='kw'>=</span> <span class='no'>consumer</span>,
@@ -230,7 +229,6 @@
 #&gt; </span><span style='color: #555555;'>19</span><span> rose        -</span><span style='color: #BB0000;'>0.859</span><span> -</span><span style='color: #BB0000;'>0.046</span><span style='color: #BB0000;text-decoration: underline;'>4</span><span>   0.739         4.28
 #&gt; </span><span style='color: #555555;'>20</span><span> camomille    0.515  0.593    0.617         3.57</div><div class='input'>
 <span class='co'># Using pipe %&gt;%</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>perfume_qda_experts</span>)
 <span class='no'>perfume_qda_experts</span> <span class='kw'>%&gt;%</span>
   <span class='fu'>specify</span>(
     <span class='kw'>sensory_method</span> <span class='kw'>=</span> <span class='st'>"QDA"</span>,

@@ -15,7 +15,6 @@ analyse_local(.data, ...)
 Perform local analysis on sensory table.
 }
 \examples{
-data(perfume_qda_consumers)
 (df <- specify(
   .data = perfume_qda_consumers,
   sensory_method = "QDA",
@@ -27,7 +26,6 @@ data(perfume_qda_consumers)
 analyse_local(df)
 
 # Using pipe \%>\%
-data(perfume_qda_experts)
 perfume_qda_experts \%>\%
   specify(
     sensory_method = "QDA",

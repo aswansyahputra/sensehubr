@@ -32,7 +32,6 @@ a ggplot object
 Plot product representations or attributes on sensory spaces.
 }
 \examples{
-data(perfume_qda_experts)
 perfume_qda_experts \%>\%
   specify(
     sensory_method = "QDA",

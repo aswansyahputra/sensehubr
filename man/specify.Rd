@@ -32,7 +32,6 @@ a sensory table (dataframe with class of \code{tbl_sensory})
 Specify sensory informations into a raw dataframe. The minimal sensory informations are the panelist, the product, the sensory attributes, and the method in which the evaluation was conducted. Additonally the session, the presentation order and hedonic evaluation can also be specified.
 }
 \examples{
-data(perfume_qda_consumer)
 (df <- specify(
   .data = perfume_qda_consumers,
   sensory_method = "QDA",
@@ -42,7 +41,6 @@ data(perfume_qda_consumer)
   hedonic = NULL
 ))
 
-data(perfume_qda_experts)
 perfume_qda_experts \%>\%
   specify(
     sensory_method = "QDA",
