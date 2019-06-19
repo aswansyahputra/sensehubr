@@ -5,6 +5,20 @@
 #' \describe{
 #'   \item{consumer}{consumers' id}
 #'   \item{product}{perfumes}
+#'   \item{freshness-green}{lexicons regarding perfume, using JAR scale with 0 as JAR value}
+#'   \item{liking}{hedonic liking score}
+#' }
+#'
+#' @source Analyzing Sensory Data with R \url{www.sensorywithr.org}
+"perfume_jar"
+
+#' Perfume QDA Consumers
+#'
+#' This dataset containing information about 12 perfumes that evaluated by 103 consumer panelists using predefined lexicons
+#'
+#' \describe{
+#'   \item{consumer}{consumers' id}
+#'   \item{product}{perfumes}
 #'   \item{intensity-green}{lexicons regarding perfume}
 #' }
 #'

@@ -91,6 +91,28 @@ tbl_sum.tbl_sensory_cata <- function(x) {
 }
 
 #' @export
+tbl_sum.tbl_sensory_jar <- function(x) {
+  c(
+    "A sensory table" = print_meta(x, "dimension"),
+    "Sensory method" = print_meta(x, "sensory_method"),
+    "Panelist" = print_meta(x, "panelist"),
+    "Product" = print_meta(x, "product"),
+    "Attribute" = print_meta(x, "attribute"),
+    "Hedonic" = print_meta(x, "hedonic")
+  )
+}
+
+#' @export
+tbl_sum.tbl_sensory_penalty <- function(x) {
+  c(
+    "Penalty analysis" = "",
+    "Sensory method" = print_meta(x, "sensory_method"),
+    "Analytical method" = print_meta(x, "method_local"),
+    "Model" = print_meta(x, "model")
+  )
+}
+
+#' @export
 tbl_sum.tbl_sensory_local <- function(x) {
   c(
     "Local analysis" = "",
@@ -134,7 +156,7 @@ print.tbl_sensory_global <- function(x, ...) {
       "
     {pad('# Global analysis:')}
     {pad('# Sensory method:')} {sensory_method}
-    {pad('# Method:')} {method_global}
+    {pad('# Analytical method:')} {method_global}
     {pad('# Active individual:')} {active_individual}
     {pad('# Active variable:')} {active_variable}
     {pad('# Supplementary variable:')} {supplementary_variable}

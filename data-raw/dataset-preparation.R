@@ -23,3 +23,8 @@ sensochoc %>%
 sensochoc <- read_csv("data-raw/sensochoc.csv")
 sensochoc
 use_data(sensochoc, overwrite = TRUE)
+
+
+perfume_jar <- read_csv("data-raw/perfume_jar") %>% clean_names()
+perfume_jar
+use_data(perfume_jar, overwrite = TRUE)
