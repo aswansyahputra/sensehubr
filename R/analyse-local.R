@@ -6,7 +6,6 @@
 #' @param ... other arguments to pass on specific method
 #'
 #' @examples
-#' data(perfume_qda_consumers)
 #' (df <- specify(
 #'   .data = perfume_qda_consumers,
 #'   sensory_method = "QDA",
@@ -18,7 +17,6 @@
 #' analyse_local(df)
 #'
 #' # Using pipe %>%
-#' data(perfume_qda_experts)
 #' perfume_qda_experts %>%
 #'   specify(
 #'     sensory_method = "QDA",

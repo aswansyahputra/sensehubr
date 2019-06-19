@@ -7,7 +7,6 @@
 #' @importFrom SensoMineR paneliperf
 #'
 #' @examples
-#' data(sensochoc)
 #' sensochoc %>%
 #'   specify(
 #'     sensory_method = "QDA",

@@ -21,7 +21,6 @@
 #' @export
 #'
 #' @examples
-#' data(perfume_qda_consumer)
 #' (df <- specify(
 #'   .data = perfume_qda_consumers,
 #'   sensory_method = "QDA",
@@ -31,7 +30,6 @@
 #'   hedonic = NULL
 #' ))
 #'
-#' data(perfume_qda_experts)
 #' perfume_qda_experts %>%
 #'   specify(
 #'     sensory_method = "QDA",

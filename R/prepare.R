@@ -15,7 +15,6 @@
 #' @importFrom purrr map_df
 #'
 #' @return a dataframe of sensory design with panelist column and order of product presentation columns
-
 #' @export
 #'
 #' @examples
