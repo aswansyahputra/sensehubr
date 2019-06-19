@@ -1,4 +1,4 @@
-# sensehubr
+# sensehubr <img src='man/figures/logo.png' align="right" height="139" />
 
 [![Travis build status](https://travis-ci.org/aswansyahputra/sensehubr.svg?branch=master)](https://travis-ci.org/aswansyahputra/sensehubr)
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Visualise sensory space — visualise-global • sensehubr</title>
+<title>Penalty analysis of sensory data — analyse_penalty • sensehubr</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -37,9 +37,9 @@
 
 
 
-<meta property="og:title" content="Visualise sensory space — visualise-global" />
+<meta property="og:title" content="Penalty analysis of sensory data — analyse_penalty" />
 
-<meta property="og:description" content="Plot product representations or attributes on sensory spaces." />
+<meta property="og:description" content="Perform penalty analysis on sensory table." />
 
 <meta property="og:image" content="https://aswansyahputra.github.io/senshubr/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -108,82 +108,65 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Visualise sensory space</h1>
-    <small class="dont-index">Source: <a href='https://github.com/aswansyahputra/sensehubr/blob/master/R/visualise.R'><code>R/visualise.R</code></a></small>
-    <div class="hidden name"><code>visualise-global.Rd</code></div>
+    <h1>Penalty analysis of sensory data</h1>
+    <small class="dont-index">Source: <a href='https://github.com/aswansyahputra/sensehubr/blob/master/R/analyse-penalty.R'><code>R/analyse-penalty.R</code></a></small>
+    <div class="hidden name"><code>analyse_penalty.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Plot product representations or attributes on sensory spaces.</p>
+    <p>Perform penalty analysis on sensory table.</p>
     
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for tbl_sensory_global</span>
-<span class='fu'>visualise</span>(<span class='no'>res</span>, <span class='kw'>choice</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"product"</span>,
-  <span class='st'>"attribute"</span>, <span class='st'>"eigenvalue"</span>), <span class='kw'>dimension</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>), <span class='kw'>repel</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>colour_by</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"none"</span>, <span class='st'>"quality"</span>, <span class='st'>"contribution"</span>), <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"default"</span>,
-  <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>analyse_penalty</span>(<span class='no'>.data</span>, <span class='no'>reference_value</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>res</th>
-      <td><p>output of global analysis</p></td>
+      <th>.data</th>
+      <td><p>a sensory table</p></td>
     </tr>
     <tr>
-      <th>choice</th>
-      <td><p>component of interest, valid values are "product" and "attribute"</p></td>
-    </tr>
-    <tr>
-      <th>dimension</th>
-      <td><p>dimension to focus, integer vector of length 2</p></td>
-    </tr>
-    <tr>
-      <th>repel</th>
-      <td><p>avoid overplotting of text label</p></td>
-    </tr>
-    <tr>
-      <th>colour_by</th>
-      <td><p>colour point or line based on specific properties, valid values are "quality" and "contribution"</p></td>
-    </tr>
-    <tr>
-      <th>title</th>
-      <td><p>a title to use in plot</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>not yet implemented</p></td>
+      <th>reference_value</th>
+      <td><p>a score used as JAR value (reference)</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>a ggplot object</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>perfume_qda_experts</span>)
-<span class='no'>perfume_qda_experts</span> <span class='kw'>%&gt;%</span>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>perfume_jar</span>)
+<span class='no'>perfume_jar</span> <span class='kw'>%&gt;%</span>
   <span class='fu'>specify</span>(
-    <span class='kw'>sensory_method</span> <span class='kw'>=</span> <span class='st'>"QDA"</span>,
-    <span class='kw'>panelist</span> <span class='kw'>=</span> <span class='no'>panelist</span>,
+    <span class='kw'>sensory_method</span> <span class='kw'>=</span> <span class='st'>"JAR"</span>,
+    <span class='kw'>panelist</span> <span class='kw'>=</span> <span class='no'>consumer</span>,
     <span class='kw'>product</span> <span class='kw'>=</span> <span class='no'>product</span>,
-    <span class='kw'>session</span> <span class='kw'>=</span> <span class='no'>session</span>,
-    <span class='kw'>pres_order</span> <span class='kw'>=</span> <span class='no'>rank</span>,
-    <span class='kw'>attribute</span> <span class='kw'>=</span> <span class='no'>spicy</span>:<span class='no'>wrapping</span>
+    <span class='kw'>attribute</span> <span class='kw'>=</span> <span class='no'>intensity</span>:<span class='no'>green</span>,
+    <span class='kw'>hedonic</span> <span class='kw'>=</span> <span class='no'>liking</span>
   ) <span class='kw'>%&gt;%</span>
-  <span class='fu'>analyse_global</span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'>visualise</span>(<span class='kw'>choice</span> <span class='kw'>=</span> <span class='st'>"attribute"</span>, <span class='kw'>colour_by</span> <span class='kw'>=</span> <span class='st'>"contribution"</span>)</div><div class='img'><img src='visualise-global-1.png' alt='' width='700' height='433' /></div></pre>
+  <span class='fu'>analyse_penalty</span>(<span class='kw'>reference_value</span> <span class='kw'>=</span> <span class='fl'>0</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># Penalty analysis: </span><span>
+#&gt; </span><span style='color: #555555;'># Sensory method:    Just-about-Right</span><span>
+#&gt; </span><span style='color: #555555;'># Analytical method: T-test</span><span>
+#&gt;    product attribute  category   frequency penalty std.error statistic   p.value
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> Angel   intensity* Too high        62.1  2.12       0.462   -</span><span style='color: #BB0000;'>4.58</span><span>   0.000</span><span style='text-decoration: underline;'>013</span><span>3
+#&gt; </span><span style='color: #555555;'> 2</span><span> Angel   intensity  Not enough      11.7  0.018</span><span style='text-decoration: underline;'>5</span><span>     0.699   -</span><span style='color: #BB0000;'>0.026</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span> 0.979    
+#&gt; </span><span style='color: #555555;'> 3</span><span> Angel   freshness* Too high        10.7  1.91       0.746   -</span><span style='color: #BB0000;'>2.56</span><span>   0.012</span><span style='text-decoration: underline;'>0</span><span>   
+#&gt; </span><span style='color: #555555;'> 4</span><span> Angel   freshness* Not enough      63.1  2          0.477   -</span><span style='color: #BB0000;'>4.19</span><span>   0.000</span><span style='text-decoration: underline;'>060</span><span>5
+#&gt; </span><span style='color: #555555;'> 5</span><span> Angel   jasmin*    Too high        20.4  1.36       0.576   -</span><span style='color: #BB0000;'>2.36</span><span>   0.020</span><span style='text-decoration: underline;'>0</span><span>   
+#&gt; </span><span style='color: #555555;'> 6</span><span> Angel   jasmin*    Not enough      42.7  1.73       0.469   -</span><span style='color: #BB0000;'>3.70</span><span>   0.000</span><span style='text-decoration: underline;'>358</span><span> 
+#&gt; </span><span style='color: #555555;'> 7</span><span> Angel   rose*      Too high        10.7  2.59       0.691   -</span><span style='color: #BB0000;'>3.75</span><span>   0.000</span><span style='text-decoration: underline;'>298</span><span> 
+#&gt; </span><span style='color: #555555;'> 8</span><span> Angel   rose*      Not enough      46.6  1.67       0.428   -</span><span style='color: #BB0000;'>3.91</span><span>   0.000</span><span style='text-decoration: underline;'>167</span><span> 
+#&gt; </span><span style='color: #555555;'> 9</span><span> Angel   camomille  Too high        21.4  1.00       0.575   -</span><span style='color: #BB0000;'>1.74</span><span>   0.084</span><span style='text-decoration: underline;'>5</span><span>   
+#&gt; </span><span style='color: #555555;'>10</span><span> Angel   camomille  Not enough      33.0  0.634      0.502   -</span><span style='color: #BB0000;'>1.26</span><span>   0.209    
+#&gt; </span><span style='color: #555555;'># … with 494 more rows</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-      
+            
       <li><a href="#examples">Examples</a></li>
     </ul>
 
