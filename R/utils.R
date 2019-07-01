@@ -15,7 +15,7 @@ pad <- function(...) {
 parse_meta <- function(x, meta = c("sensory_method", "method_local", "model", "method_global", "panelist", "n_panelist", "product", "n_product", "session", "pres_order", "attribute", "n_attribute", "hedonic")) {
   meta <- arg_match(meta)
 
-  res <- attr(x, meta)
+  res <- attr(x, meta[[1]])
   if (length(res) == 1 && res == "NULL") {
     res <- NULL
   }
