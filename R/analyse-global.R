@@ -1,12 +1,12 @@
 #' Global analysis of sensory data
 #'
 #' Perform global analysis on sensory table.
-#' @param .data a sensory table
+#' @param data a sensory table
 #' @param ... other arguments to pass on specific method
 #'
 #' @examples
 #' (df <- specify(
-#'   .data = perfume_qda_consumers,
+#'   data = perfume_qda_consumers,
 #'   sensory_method = "QDA",
 #'   panelist = consumer,
 #'   product = product,
@@ -27,13 +27,13 @@
 #'   ) %>%
 #'   analyse_global()
 #' @export
-analyse_global <- function(.data, ...) {
+analyse_global <- function(data, ...) {
   UseMethod("analyse_global")
 }
 
 #' @export
-analyse_global.default <- function(.data, ...) {
-  stop("`.data` should be a sensory table.", call. = FALSE)
+analyse_global.default <- function(data, ...) {
+  stop("`data` should be a sensory table.", call. = FALSE)
 }
 
 #' @importFrom dplyr select group_by summarise_all left_join
@@ -41,13 +41,13 @@ analyse_global.default <- function(.data, ...) {
 #' @importFrom FactoMineR PCA
 #'
 #' @export
-analyse_global.tbl_sensory_qda <- function(.data, ...) {
-  meta_product <- parse_meta(.data, "product")
-  meta_attribute <- parse_meta(.data, "attribute")
-  meta_hedonic <- parse_meta(.data, "hedonic")
+analyse_global.tbl_sensory_qda <- function(data, ...) {
+  meta_product <- parse_meta(data, "product")
+  meta_attribute <- parse_meta(data, "attribute")
+  meta_hedonic <- parse_meta(data, "hedonic")
 
   if (is.null(meta_hedonic)) {
-    res_global <- .data %>%
+    res_global <- data %>%
       select(
         product = meta_product,
         meta_attribute,
@@ -60,7 +60,7 @@ analyse_global.tbl_sensory_qda <- function(.data, ...) {
       PCA(quanti.sup = NULL, graph = FALSE)
   }
 
-  res_global <- .data %>%
+  res_global <- data %>%
     select(
       product = meta_product,
       meta_attribute,
@@ -89,11 +89,11 @@ analyse_global.tbl_sensory_qda <- function(.data, ...) {
     res_global = res_global
   )
 
-  attr(res, "sensory_method") <- parse_meta(.data, "sensory_method")
+  attr(res, "sensory_method") <- parse_meta(data, "sensory_method")
   attr(res, "method_global") <- "Principal Component Analysis"
-  attr(res, "n_product") <- parse_meta(.data, "n_product")
-  attr(res, "n_attribute") <- parse_meta(.data, "n_attribute")
-  attr(res, "hedonic") <- parse_meta(.data, "hedonic")
+  attr(res, "n_product") <- parse_meta(data, "n_product")
+  attr(res, "n_attribute") <- parse_meta(data, "n_attribute")
+  attr(res, "hedonic") <- parse_meta(data, "hedonic")
   class(res) <- append(class(res), "tbl_sensory_global")
   return(res)
 }
@@ -103,13 +103,13 @@ analyse_global.tbl_sensory_qda <- function(.data, ...) {
 #' @importFrom FactoMineR CA
 #'
 #' @export
-analyse_global.tbl_sensory_cata <- function(.data, ...) {
-  meta_product <- parse_meta(.data, "product")
-  meta_attribute <- parse_meta(.data, "attribute")
-  meta_hedonic <- parse_meta(.data, "hedonic")
+analyse_global.tbl_sensory_cata <- function(data, ...) {
+  meta_product <- parse_meta(data, "product")
+  meta_attribute <- parse_meta(data, "attribute")
+  meta_hedonic <- parse_meta(data, "hedonic")
 
   if (is.null(meta_hedonic)) {
-    res_global <- .data %>%
+    res_global <- data %>%
       select(
         product = meta_product,
         meta_attribute,
@@ -122,7 +122,7 @@ analyse_global.tbl_sensory_cata <- function(.data, ...) {
       CA(quanti.sup = NULL, graph = FALSE)
   }
 
-  res_global <- .data %>%
+  res_global <- data %>%
     select(
       product = meta_product,
       meta_attribute,
@@ -151,11 +151,11 @@ analyse_global.tbl_sensory_cata <- function(.data, ...) {
     res_global = res_global
   )
 
-  attr(res, "sensory_method") <- parse_meta(.data, "sensory_method")
+  attr(res, "sensory_method") <- parse_meta(data, "sensory_method")
   attr(res, "method_global") <- "Correspondance Analysis"
-  attr(res, "n_product") <- parse_meta(.data, "n_product")
-  attr(res, "n_attribute") <- parse_meta(.data, "n_attribute")
-  attr(res, "hedonic") <- parse_meta(.data, "hedonic")
+  attr(res, "n_product") <- parse_meta(data, "n_product")
+  attr(res, "n_attribute") <- parse_meta(data, "n_attribute")
+  attr(res, "hedonic") <- parse_meta(data, "hedonic")
   class(res) <- append(class(res), "tbl_sensory_global")
   return(res)
 }

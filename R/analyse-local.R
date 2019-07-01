@@ -2,12 +2,12 @@
 #'
 #' Perform local analysis on sensory table.
 #'
-#' @param .data a sensory table
+#' @param data a sensory table
 #' @param ... other arguments to pass on specific method
 #'
 #' @examples
 #' (df <- specify(
-#'   .data = perfume_qda_consumers,
+#'   data = perfume_qda_consumers,
 #'   sensory_method = "QDA",
 #'   panelist = consumer,
 #'   product = product,
@@ -28,13 +28,13 @@
 #'   ) %>%
 #'   analyse_local()
 #' @export
-analyse_local <- function(.data, ...) {
+analyse_local <- function(data, ...) {
   UseMethod("analyse_local")
 }
 
 #' @export
-analyse_local.default <- function(.data, ...) {
-  stop("`.data` should be a sensory table.", call. = FALSE)
+analyse_local.default <- function(data, ...) {
+  stop("`data` should be a sensory table.", call. = FALSE)
 }
 
 #' @importFrom dplyr select group_by mutate arrange
@@ -44,12 +44,12 @@ analyse_local.default <- function(.data, ...) {
 #' @importFrom tibble new_tibble
 #'
 #' @export
-analyse_local.tbl_sensory_qda <- function(.data, ...) {
-  meta_panelist <- parse_meta(.data, "panelist")
-  meta_product <- parse_meta(.data, "product")
-  meta_session <- parse_meta(.data, "session")
-  meta_pres_order <- parse_meta(.data, "pres_order")
-  meta_attribute <- parse_meta(.data, "attribute")
+analyse_local.tbl_sensory_qda <- function(data, ...) {
+  meta_panelist <- parse_meta(data, "panelist")
+  meta_product <- parse_meta(data, "product")
+  meta_session <- parse_meta(data, "session")
+  meta_pres_order <- parse_meta(data, "pres_order")
+  meta_attribute <- parse_meta(data, "attribute")
 
   if (!is.null(meta_session)) {
     if (!is.null(meta_pres_order)) {
@@ -65,7 +65,7 @@ analyse_local.tbl_sensory_qda <- function(.data, ...) {
     }
   }
 
-  tbl <- .data %>%
+  tbl <- data %>%
     select(
       panelist = meta_panelist,
       product = meta_product,
@@ -102,7 +102,7 @@ analyse_local.tbl_sensory_qda <- function(.data, ...) {
     arrange(desc(statistic))
 
   res <- new_tibble(tbl,
-    "sensory_method" = parse_meta(.data, "sensory_method"),
+    "sensory_method" = parse_meta(data, "sensory_method"),
     "method_local" = "Analysis of Variance",
     "model" = fmla,
     nrow = NROW(tbl),
@@ -119,14 +119,14 @@ analyse_local.tbl_sensory_qda <- function(.data, ...) {
 #' @importFrom tibble enframe new_tibble
 #'
 #' @export
-analyse_local.tbl_sensory_cata <- function(.data, ...) {
-  meta_panelist <- parse_meta(.data, "panelist")
-  meta_product <- parse_meta(.data, "product")
-  meta_attribute <- parse_meta(.data, "attribute")
+analyse_local.tbl_sensory_cata <- function(data, ...) {
+  meta_panelist <- parse_meta(data, "panelist")
+  meta_product <- parse_meta(data, "product")
+  meta_attribute <- parse_meta(data, "attribute")
 
   fmla <- "value ~ product | panelist"
 
-  tbl <- .data %>%
+  tbl <- data %>%
     select(
       panelist = meta_panelist,
       product = meta_product,
@@ -150,7 +150,7 @@ analyse_local.tbl_sensory_cata <- function(.data, ...) {
     arrange(desc(statistic))
 
   res <- new_tibble(tbl,
-    "sensory_method" = parse_meta(.data, "sensory_method"),
+    "sensory_method" = parse_meta(data, "sensory_method"),
     "method_local" = "Cochran's Q test",
     "model" = fmla,
     nrow = NROW(tbl),
@@ -167,14 +167,14 @@ analyse_local.tbl_sensory_cata <- function(.data, ...) {
 #'
 #' @export
 
-analyse_local.tbl_sensory_rata <- function(.data, ...) {
-  meta_panelist <- parse_meta(.data, "panelist")
-  meta_product <- parse_meta(.data, "product")
-  meta_attribute <- parse_meta(.data, "attribute")
+analyse_local.tbl_sensory_rata <- function(data, ...) {
+  meta_panelist <- parse_meta(data, "panelist")
+  meta_product <- parse_meta(data, "product")
+  meta_attribute <- parse_meta(data, "attribute")
 
   fmla <- "value ~ product | panelist"
 
-  tbl <- .data %>%
+  tbl <- data %>%
     select(
       panelist = meta_panelist,
       product = meta_product,
@@ -198,7 +198,7 @@ analyse_local.tbl_sensory_rata <- function(.data, ...) {
     arrange(desc(statistic))
 
   res <- new_tibble(tbl,
-    "sensory_method" = parse_meta(.data, "sensory_method"),
+    "sensory_method" = parse_meta(data, "sensory_method"),
     "method_local" = "Cochran's Q test",
     "model" = fmla,
     nrow = NROW(tbl),

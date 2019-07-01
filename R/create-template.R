@@ -2,7 +2,7 @@
 #'
 #' Create template for inputting data that collected from sensory research.
 #'
-#' @param .data output from \code{prepare} function
+#' @param data output from \code{prepare} function
 #' @param attribute a numeric value of number or sensory attributes or vector of sensory terms (lexicon)
 #'
 #' @importFrom dplyr arrange mutate
@@ -19,9 +19,9 @@
 #' design
 #'
 #' create_template(design, attribute = c("Sweetness", "Mint", "Green", "Herbal"))
-create_template <- function(.data, attribute) {
-  if (!any(class(.data) == "tbl_sensory_design")) {
-    stop("`.data` should be a sensory table of design.", call. = FALSE)
+create_template <- function(data, attribute) {
+  if (!any(class(data) == "tbl_sensory_design")) {
+    stop("`data` should be a sensory table of design.", call. = FALSE)
   }
 
   if (is.numeric(attribute) & length(attribute) == 1) {
@@ -33,12 +33,12 @@ create_template <- function(.data, attribute) {
   empty_attribute <- rep(NA_character_, length(nms)) %>%
     setNames(nms)
 
-  tbl <- .data %>%
+  tbl <- data %>%
     gather("pres_order", "product", -panelist) %>%
     arrange(panelist) %>%
     mutate(!!!empty_attribute)
 
-  if (attr(.data, "blind_code") == "TRUE") {
+  if (attr(data, "blind_code") == "TRUE") {
     tbl <- tbl %>%
       extract("product", "blind_code", regex = "(\\d{3})", remove = FALSE) %>%
       mutate(product = str_remove_all(product, "\\s\\(\\d{3}\\)$"))
@@ -46,9 +46,9 @@ create_template <- function(.data, attribute) {
 
   res <- new_tibble(tbl,
     "panelist" = "panelist",
-    "n_panelist" = parse_meta(.data, "n_panelist"),
+    "n_panelist" = parse_meta(data, "n_panelist"),
     "product" = "product",
-    "n_product" = parse_meta(.data, "n_product"),
+    "n_product" = parse_meta(data, "n_product"),
     "attribute" = nms,
     "n_attribute" = length(empty_attribute),
     nrow = NROW(tbl),

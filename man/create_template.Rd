@@ -4,10 +4,10 @@
 \alias{create_template}
 \title{Create template for sensory data}
 \usage{
-create_template(.data, attribute)
+create_template(data, attribute)
 }
 \arguments{
-\item{.data}{output from \code{prepare} function}
+\item{data}{output from \code{prepare} function}
 
 \item{attribute}{a numeric value of number or sensory attributes or vector of sensory terms (lexicon)}
 }

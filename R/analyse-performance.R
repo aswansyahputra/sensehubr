@@ -1,7 +1,7 @@
 #' Global analysis of sensory data
 #'
 #' Perform global analysis on sensory table.
-#' @param .data a sensory table
+#' @param data a sensory table
 #'
 #' @importFrom dplyr select
 #' @importFrom SensoMineR paneliperf
@@ -18,12 +18,12 @@
 #'   ) %>%
 #'   analyse_performance()
 #' @export
-analyse_performance <- function(.data) {
-  meta_panelist <- parse_meta(.data, "panelist")
-  meta_product <- parse_meta(.data, "product")
-  meta_session <- parse_meta(.data, "session")
-  meta_pres_order <- parse_meta(.data, "pres_order")
-  meta_attribute <- parse_meta(.data, "attribute")
+analyse_performance <- function(data) {
+  meta_panelist <- parse_meta(data, "panelist")
+  meta_product <- parse_meta(data, "product")
+  meta_session <- parse_meta(data, "session")
+  meta_pres_order <- parse_meta(data, "pres_order")
+  meta_attribute <- parse_meta(data, "attribute")
 
   if (!is.null(meta_session)) {
     if (!is.null(meta_pres_order)) {
@@ -43,7 +43,7 @@ analyse_performance <- function(.data) {
     }
   }
 
-  tbl <- select(.data,
+  tbl <- select(data,
     panelist = meta_panelist,
     product = meta_product,
     session = meta_session,

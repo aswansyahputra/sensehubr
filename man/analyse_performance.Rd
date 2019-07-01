@@ -4,10 +4,10 @@
 \alias{analyse_performance}
 \title{Global analysis of sensory data}
 \usage{
-analyse_performance(.data)
+analyse_performance(data)
 }
 \arguments{
-\item{.data}{a sensory table}
+\item{data}{a sensory table}
 }
 \description{
 Perform global analysis on sensory table.

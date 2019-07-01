@@ -2,7 +2,7 @@
 #'
 #' Perform penalty analysis on sensory table.
 #'
-#' @param .data a sensory table
+#' @param data a sensory table
 #' @param reference_value a score used as JAR value (reference)
 #'
 #' @examples
@@ -16,13 +16,13 @@
 #'   ) %>%
 #'   analyse_penalty(reference_value = 0)
 #' @export
-analyse_penalty <- function(.data, reference_value) {
+analyse_penalty <- function(data, reference_value) {
   UseMethod("analyse_penalty")
 }
 
 #' @export
-analyse_penalty.default <- function(.data, reference_value) {
-  stop("`.data` should be a sensory table.", call. = FALSE)
+analyse_penalty.default <- function(data, reference_value) {
+  stop("`data` should be a sensory table.", call. = FALSE)
 }
 
 #' @importFrom dplyr select filter group_by mutate mutate_at transmute case_when arrange
@@ -32,15 +32,15 @@ analyse_penalty.default <- function(.data, reference_value) {
 #' @importFrom tibble new_tibble
 #'
 #' @export
-analyse_penalty.tbl_sensory_jar <- function(.data, reference_value) {
-  meta_panelist <- parse_meta(.data, "panelist")
-  meta_product <- parse_meta(.data, "product")
-  meta_attribute <- parse_meta(.data, "attribute")
-  meta_hedonic <- parse_meta(.data, "hedonic")
+analyse_penalty.tbl_sensory_jar <- function(data, reference_value) {
+  meta_panelist <- parse_meta(data, "panelist")
+  meta_product <- parse_meta(data, "product")
+  meta_attribute <- parse_meta(data, "attribute")
+  meta_hedonic <- parse_meta(data, "hedonic")
 
   fmla <- "liking ~ category"
   
-  tbl <- .data %>%
+  tbl <- data %>%
     select(
       panelist = meta_panelist,
       product = meta_product,
@@ -90,7 +90,7 @@ analyse_penalty.tbl_sensory_jar <- function(.data, reference_value) {
     arrange(product)
 
   res <- new_tibble(tbl,
-    "sensory_method" = parse_meta(.data, "sensory_method"),
+    "sensory_method" = parse_meta(data, "sensory_method"),
     "method_local" = "T-test",
     "model" = fmla,
     nrow = NROW(tbl),

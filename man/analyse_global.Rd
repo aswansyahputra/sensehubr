@@ -4,10 +4,10 @@
 \alias{analyse_global}
 \title{Global analysis of sensory data}
 \usage{
-analyse_global(.data, ...)
+analyse_global(data, ...)
 }
 \arguments{
-\item{.data}{a sensory table}
+\item{data}{a sensory table}
 
 \item{...}{other arguments to pass on specific method}
 }
@@ -16,7 +16,7 @@ Perform global analysis on sensory table.
 }
 \examples{
 (df <- specify(
-  .data = perfume_qda_consumers,
+  data = perfume_qda_consumers,
   sensory_method = "QDA",
   panelist = consumer,
   product = product,

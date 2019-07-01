@@ -2,7 +2,7 @@
 #'
 #' Specify sensory informations into a raw dataframe. The minimal sensory informations are the panelist, the product, the sensory attributes, and the method in which the evaluation was conducted. Additonally the session, the presentation order and hedonic evaluation can also be specified.
 #'
-#' @param .data a dataframe
+#' @param data a dataframe
 #' @param sensory_method method of sensory evaluation, available methods are QDA, CATA, RATA, FCP, FP, JAR, IPM
 #' @param panelist panelist column
 #' @param product product column
@@ -22,7 +22,7 @@
 #'
 #' @examples
 #' (df <- specify(
-#'   .data = perfume_qda_consumers,
+#'   data = perfume_qda_consumers,
 #'   sensory_method = "QDA",
 #'   panelist = consumer,
 #'   product = product,
@@ -39,10 +39,10 @@
 #'     pres_order = rank,
 #'     attribute = spicy:wrapping
 #'   )
-specify <- function(.data, sensory_method = c("QDA", "CATA", "RATA", "FCP", "FP", "JAR", "IPM"), panelist, product, session = NULL, pres_order = NULL, attribute, hedonic = NULL) {
+specify <- function(data, sensory_method = c("QDA", "CATA", "RATA", "FCP", "FP", "JAR", "IPM"), panelist, product, session = NULL, pres_order = NULL, attribute, hedonic = NULL) {
   method <- arg_match(sensory_method)
 
-  tbl <- .data %>%
+  tbl <- data %>%
     select(
       !!enquo(panelist),
       !!enquo(product),

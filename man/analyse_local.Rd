@@ -4,10 +4,10 @@
 \alias{analyse_local}
 \title{Local analysis of sensory data}
 \usage{
-analyse_local(.data, ...)
+analyse_local(data, ...)
 }
 \arguments{
-\item{.data}{a sensory table}
+\item{data}{a sensory table}
 
 \item{...}{other arguments to pass on specific method}
 }
@@ -16,7 +16,7 @@ Perform local analysis on sensory table.
 }
 \examples{
 (df <- specify(
-  .data = perfume_qda_consumers,
+  data = perfume_qda_consumers,
   sensory_method = "QDA",
   panelist = consumer,
   product = product,

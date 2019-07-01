@@ -4,10 +4,10 @@
 \alias{analyse_penalty}
 \title{Penalty analysis of sensory data}
 \usage{
-analyse_penalty(.data, reference_value)
+analyse_penalty(data, reference_value)
 }
 \arguments{
-\item{.data}{a sensory table}
+\item{data}{a sensory table}
 
 \item{reference_value}{a score used as JAR value (reference)}
 }
