@@ -1,4 +1,4 @@
-#' Glance sensory attribute
+#' Inspect sensory attribute
 #'
 #' Evaluate sensory attribute in global analysis.
 #'
@@ -6,15 +6,15 @@
 #' @param dimension dimension to focus, integer vector of length 2
 #'
 #' @export
-glance_attribute <- function(res_global, dimension = c(1, 2)) {
-  UseMethod("glance_attribute")
+inspect_attribute <- function(res_global, dimension = c(1, 2)) {
+  UseMethod("inspect_attribute")
 }
 
 #' @importFrom dplyr mutate left_join select rename_at arrange vars desc
 #' @importFrom factoextra facto_summarize get_pca_var
 #' @importFrom tibble new_tibble
 #' @export
-glance_attribute.default <- function(res_global, dimension = c(1, 2)) {
+inspect_attribute.default <- function(res_global, dimension = c(1, 2)) {
   if (!is.numeric(dimension)) {
     stop("`dimension` should be an integer vector.", call. = FALSE)
   }
@@ -70,8 +70,8 @@ glance_attribute.default <- function(res_global, dimension = c(1, 2)) {
 }
 
 #' @export
-glance_attribute.tbl_sensory_global <- function(res_global, dimension = c(1, 2)) {
+inspect_attribute.tbl_sensory_global <- function(res_global, dimension = c(1, 2)) {
   res_global_extracted <- res_global$res_global
-  res <- glance_attribute(res_global_extracted, dimension = dimension)
+  res <- inspect_attribute(res_global_extracted, dimension = dimension)
   return(res)
 }

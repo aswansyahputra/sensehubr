@@ -1,4 +1,4 @@
-#' Glance eigenvalues
+#' Inspect sensory space
 #'
 #' Evaluate the dimension of sensory space in global analysis.
 #'
@@ -11,16 +11,16 @@
 #' @return a dataframe
 #' @export
 
-glance_eigenvalue <- function(res_global) {
-  UseMethod("glance_eigenvalue")
+inspect_space <- function(res_global) {
+  UseMethod("inspect_space")
 }
 
 #' @export
-glance_eigenvalue.default <- function(res_global) {
+inspect_space.default <- function(res_global) {
   stop("`res_global` is not valid.", call. = FALSE)
 }
 
-glance_eigenvalue.PCA <- function(res_global) {
+inspect_space.PCA <- function(res_global) {
   tbl <- get_eig(res_global) %>%
     as_tibble(rownames = "dimension") %>%
     transmute(
@@ -41,7 +41,7 @@ glance_eigenvalue.PCA <- function(res_global) {
 }
 
 #' @export
-glance_eigenvalue.CA <- function(res_global) {
+inspect_space.CA <- function(res_global) {
   tbl <- get_eig(res_global) %>%
     as_tibble(rownames = "dimension") %>%
     transmute(
@@ -61,8 +61,8 @@ glance_eigenvalue.CA <- function(res_global) {
   return(res)
 }
 #' @export
-glance_eigenvalue.tbl_sensory_global <- function(res_global) {
+inspect_space.tbl_sensory_global <- function(res_global) {
   res_global_extracted <- res_global$res_global
-  res <- glance_eigenvalue(res_global_extracted)
+  res <- inspect_space(res_global_extracted)
   return(res)
 }

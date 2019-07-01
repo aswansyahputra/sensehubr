@@ -1,4 +1,4 @@
-#' Glance panelist
+#' Inspect panelist
 #'
 #' Evaluate panelist performance.
 #'
@@ -6,8 +6,8 @@
 #' @param metric discrimination, agreement, consistency
 #'
 #' @export
-glance_panelist <- function(res_performance, metric) {
-  UseMethod("glance_panelist")
+inspect_panelist <- function(res_performance, metric) {
+  UseMethod("inspect_panelist")
 }
 
 #' @importFrom rlang arg_match
@@ -17,7 +17,7 @@ glance_panelist <- function(res_performance, metric) {
 #' @importFrom dplyr select filter
 #'
 #' @export
-glance_panelist.default <- function(res_performance, metric = c("discrimination", "agreement", "consistency")) {
+inspect_panelist.default <- function(res_performance, metric = c("discrimination", "agreement", "consistency")) {
   metric <- arg_match(metric)
 
   if (metric[[1]] == "discrimination") {
@@ -54,8 +54,8 @@ glance_panelist.default <- function(res_performance, metric = c("discrimination"
 }
 
 #' @export
-glance_panelist.tbl_sensory_performance <- function(res_performance, metric = c("discrimination", "agreement", "consistency")) {
+inspect_panelist.tbl_sensory_performance <- function(res_performance, metric = c("discrimination", "agreement", "consistency")) {
   res_performance_extracted <- res_performance$res_performance
-  res <- glance_panelist(res_performance_extracted, metric)
+  res <- inspect_panelist(res_performance_extracted, metric)
   return(res)
 }

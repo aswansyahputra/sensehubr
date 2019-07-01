@@ -61,10 +61,10 @@ analyse_performance <- function(.data) {
     random = TRUE
   )
 
-  tbl_panel <- glance_panel(res_performance)
-  tbl_panelist_dicrimination <- glance_panelist(res_performance, metric = "discrimination")
-  tbl_panelist_agreement <- glance_panelist(res_performance, metric = "agreement")
-  tbl_panelist_consistency <- glance_panelist(res_performance, metric = "consistency")
+  tbl_panel <- inspect_panel(res_performance)
+  tbl_panelist_dicrimination <- inspect_panelist(res_performance, metric = "discrimination")
+  tbl_panelist_agreement <- inspect_panelist(res_performance, metric = "agreement")
+  tbl_panelist_consistency <- inspect_panelist(res_performance, metric = "consistency")
 
   res <- list(
     panel = tbl_panel,

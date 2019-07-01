@@ -78,9 +78,9 @@ analyse_global.tbl_sensory_qda <- function(.data, ...) {
     column_to_rownames("product") %>%
     PCA(quanti.sup = NCOL(.), graph = FALSE)
 
-  tbl_eig <- glance_eigenvalue(res_global)
-  tbl_product <- glance_product(res_global)
-  tbl_attribute <- glance_attribute(res_global)
+  tbl_eig <- inspect_space(res_global)
+  tbl_product <- inspect_product(res_global)
+  tbl_attribute <- inspect_attribute(res_global)
 
   res <- list(
     eigenvalue = tbl_eig,
@@ -140,9 +140,9 @@ analyse_global.tbl_sensory_cata <- function(.data, ...) {
     column_to_rownames("product") %>%
     CA(quanti.sup = NCOL(.), graph = FALSE)
 
-  tbl_eig <- glance_eigenvalue(res_global)
-  tbl_product <- glance_product(res_global)
-  tbl_attribute <- glance_attribute(res_global)
+  tbl_eig <- inspect_space(res_global)
+  tbl_product <- inspect_product(res_global)
+  tbl_attribute <- inspect_attribute(res_global)
 
   res <- list(
     eigenvalue = tbl_eig,

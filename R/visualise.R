@@ -114,7 +114,7 @@ visualise.tbl_sensory_global <- function(res, choice = c("product", "attribute",
 
   if (choice[[1]] == "eigenvalue") {
     tbl <- res_global %>%
-      glance_eigenvalue()
+      inspect_space()
 
     max_dim <- NROW(tbl)
 
@@ -193,7 +193,7 @@ visualise.tbl_sensory_global <- function(res, choice = c("product", "attribute",
 #' @param ... not yet implemented
 #'
 #' @importFrom rlang arg_match
-#' @importFrom dplyr filter
+#' @importFrom dplyr filter mutate
 #' @importFrom ggplot2 ggplot aes geom_point geom_vline geom_hline scale_x_continuous scale_colour_manual labs theme_minimal
 #' @importFrom ggrepel geom_text_repel
 #' @importFrom scales percent_format
@@ -223,6 +223,7 @@ visualise.tbl_sensory_penalty <- function(res, product, frequency_threshold = 20
   
   res <- res %>%
     filter(product == subproduct) %>% 
+    mutate(attribute = ifelse(p.value <= 0.05, paste0(attribute, "*"), attribute)) %>% 
     ggplot(aes(x = frequency, y = penalty, colour = category)) +
     geom_point() +
     ggrepel::geom_text_repel(aes(label = attribute), show.legend = FALSE) +

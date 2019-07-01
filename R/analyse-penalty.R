@@ -6,7 +6,6 @@
 #' @param reference_value a score used as JAR value (reference)
 #'
 #' @examples
-#' data(perfume_jar)
 #' perfume_jar %>%
 #'   specify(
 #'     sensory_method = "JAR",
@@ -80,7 +79,7 @@ analyse_penalty.tbl_sensory_jar <- function(.data, reference_value) {
     unnest(stats, values) %>%
     transmute(
       product = as.character(product),
-      attribute = ifelse(p.value <= 0.05, paste0(attribute, "*"), attribute),
+      attribute,
       category = as.character(category),
       frequency = value,
       penalty = abs(estimate),

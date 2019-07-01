@@ -1,4 +1,4 @@
-#' Glance product
+#' Inspect product
 #'
 #' Evaluate product in global analysis.
 #'
@@ -6,8 +6,8 @@
 #' @param dimension dimension to focus, integer vector of length 2
 #'
 #' @export
-glance_product <- function(res_global, dimension = c(1, 2)) {
-  UseMethod("glance_product")
+inspect_product <- function(res_global, dimension = c(1, 2)) {
+  UseMethod("inspect_product")
 }
 
 #' @importFrom dplyr mutate left_join select rename_at arrange vars desc
@@ -15,7 +15,7 @@ glance_product <- function(res_global, dimension = c(1, 2)) {
 #' @importFrom tibble new_tibble
 #'
 #' @export
-glance_product.default <- function(res_global, dimension = c(1, 2)) {
+inspect_product.default <- function(res_global, dimension = c(1, 2)) {
   if (!is.numeric(dimension)) {
     stop("`dimension` should be an integer vector.", call. = FALSE)
   }
@@ -71,8 +71,8 @@ glance_product.default <- function(res_global, dimension = c(1, 2)) {
 }
 
 #' @export
-glance_product.tbl_sensory_global <- function(res_global, dimension = c(1, 2)) {
+inspect_product.tbl_sensory_global <- function(res_global, dimension = c(1, 2)) {
   res_global_extracted <- res_global$res_global
-  res <- glance_product(res_global_extracted, dimension = dimension)
+  res <- inspect_product(res_global_extracted, dimension = dimension)
   return(res)
 }

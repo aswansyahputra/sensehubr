@@ -15,7 +15,6 @@ analyse_penalty(.data, reference_value)
 Perform penalty analysis on sensory table.
 }
 \examples{
-data(perfume_jar)
 perfume_jar \%>\%
   specify(
     sensory_method = "JAR",
