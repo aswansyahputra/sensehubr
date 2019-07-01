@@ -119,13 +119,13 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>analyse_penalty</span>(<span class='no'>.data</span>, <span class='no'>reference_value</span>)</pre>
+    <pre class="usage"><span class='fu'>analyse_penalty</span>(<span class='no'>data</span>, <span class='no'>reference_value</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>.data</th>
+      <th>data</th>
       <td><p>a sensory table</p></td>
     </tr>
     <tr>
@@ -136,8 +136,7 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>perfume_jar</span>)
-<span class='no'>perfume_jar</span> <span class='kw'>%&gt;%</span>
+    <pre class="examples"><div class='input'><span class='no'>perfume_jar</span> <span class='kw'>%&gt;%</span>
   <span class='fu'>specify</span>(
     <span class='kw'>sensory_method</span> <span class='kw'>=</span> <span class='st'>"JAR"</span>,
     <span class='kw'>panelist</span> <span class='kw'>=</span> <span class='no'>consumer</span>,
@@ -148,18 +147,18 @@
   <span class='fu'>analyse_penalty</span>(<span class='kw'>reference_value</span> <span class='kw'>=</span> <span class='fl'>0</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># Penalty analysis: </span><span>
 #&gt; </span><span style='color: #555555;'># Sensory method:    Just-about-Right</span><span>
 #&gt; </span><span style='color: #555555;'># Analytical method: T-test</span><span>
-#&gt;    product attribute  category   frequency penalty std.error statistic   p.value
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span> Angel   intensity* Too high        62.1  2.12       0.462   -</span><span style='color: #BB0000;'>4.58</span><span>   0.000</span><span style='text-decoration: underline;'>013</span><span>3
-#&gt; </span><span style='color: #555555;'> 2</span><span> Angel   intensity  Not enough      11.7  0.018</span><span style='text-decoration: underline;'>5</span><span>     0.699   -</span><span style='color: #BB0000;'>0.026</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span> 0.979    
-#&gt; </span><span style='color: #555555;'> 3</span><span> Angel   freshness* Too high        10.7  1.91       0.746   -</span><span style='color: #BB0000;'>2.56</span><span>   0.012</span><span style='text-decoration: underline;'>0</span><span>   
-#&gt; </span><span style='color: #555555;'> 4</span><span> Angel   freshness* Not enough      63.1  2          0.477   -</span><span style='color: #BB0000;'>4.19</span><span>   0.000</span><span style='text-decoration: underline;'>060</span><span>5
-#&gt; </span><span style='color: #555555;'> 5</span><span> Angel   jasmin*    Too high        20.4  1.36       0.576   -</span><span style='color: #BB0000;'>2.36</span><span>   0.020</span><span style='text-decoration: underline;'>0</span><span>   
-#&gt; </span><span style='color: #555555;'> 6</span><span> Angel   jasmin*    Not enough      42.7  1.73       0.469   -</span><span style='color: #BB0000;'>3.70</span><span>   0.000</span><span style='text-decoration: underline;'>358</span><span> 
-#&gt; </span><span style='color: #555555;'> 7</span><span> Angel   rose*      Too high        10.7  2.59       0.691   -</span><span style='color: #BB0000;'>3.75</span><span>   0.000</span><span style='text-decoration: underline;'>298</span><span> 
-#&gt; </span><span style='color: #555555;'> 8</span><span> Angel   rose*      Not enough      46.6  1.67       0.428   -</span><span style='color: #BB0000;'>3.91</span><span>   0.000</span><span style='text-decoration: underline;'>167</span><span> 
-#&gt; </span><span style='color: #555555;'> 9</span><span> Angel   camomille  Too high        21.4  1.00       0.575   -</span><span style='color: #BB0000;'>1.74</span><span>   0.084</span><span style='text-decoration: underline;'>5</span><span>   
-#&gt; </span><span style='color: #555555;'>10</span><span> Angel   camomille  Not enough      33.0  0.634      0.502   -</span><span style='color: #BB0000;'>1.26</span><span>   0.209    
+#&gt;    product attribute category   frequency penalty std.error statistic   p.value
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> Angel   intensity Too high        62.1  2.12       0.462   -</span><span style='color: #BB0000;'>4.58</span><span>   0.000</span><span style='text-decoration: underline;'>013</span><span>3
+#&gt; </span><span style='color: #555555;'> 2</span><span> Angel   intensity Not enough      11.7  0.018</span><span style='text-decoration: underline;'>5</span><span>     0.699   -</span><span style='color: #BB0000;'>0.026</span><span style='color: #BB0000;text-decoration: underline;'>5</span><span> 0.979    
+#&gt; </span><span style='color: #555555;'> 3</span><span> Angel   freshness Too high        10.7  1.91       0.746   -</span><span style='color: #BB0000;'>2.56</span><span>   0.012</span><span style='text-decoration: underline;'>0</span><span>   
+#&gt; </span><span style='color: #555555;'> 4</span><span> Angel   freshness Not enough      63.1  2          0.477   -</span><span style='color: #BB0000;'>4.19</span><span>   0.000</span><span style='text-decoration: underline;'>060</span><span>5
+#&gt; </span><span style='color: #555555;'> 5</span><span> Angel   jasmin    Too high        20.4  1.36       0.576   -</span><span style='color: #BB0000;'>2.36</span><span>   0.020</span><span style='text-decoration: underline;'>0</span><span>   
+#&gt; </span><span style='color: #555555;'> 6</span><span> Angel   jasmin    Not enough      42.7  1.73       0.469   -</span><span style='color: #BB0000;'>3.70</span><span>   0.000</span><span style='text-decoration: underline;'>358</span><span> 
+#&gt; </span><span style='color: #555555;'> 7</span><span> Angel   rose      Too high        10.7  2.59       0.691   -</span><span style='color: #BB0000;'>3.75</span><span>   0.000</span><span style='text-decoration: underline;'>298</span><span> 
+#&gt; </span><span style='color: #555555;'> 8</span><span> Angel   rose      Not enough      46.6  1.67       0.428   -</span><span style='color: #BB0000;'>3.91</span><span>   0.000</span><span style='text-decoration: underline;'>167</span><span> 
+#&gt; </span><span style='color: #555555;'> 9</span><span> Angel   camomille Too high        21.4  1.00       0.575   -</span><span style='color: #BB0000;'>1.74</span><span>   0.084</span><span style='text-decoration: underline;'>5</span><span>   
+#&gt; </span><span style='color: #555555;'>10</span><span> Angel   camomille Not enough      33.0  0.634      0.502   -</span><span style='color: #BB0000;'>1.26</span><span>   0.209    
 #&gt; </span><span style='color: #555555;'># … with 494 more rows</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
