@@ -4,12 +4,14 @@
 \alias{create_template}
 \title{Create template for sensory data}
 \usage{
-create_template(data, attribute)
+create_template(data, attribute, hedonic = FALSE)
 }
 \arguments{
 \item{data}{output from \code{prepare} function}
 
 \item{attribute}{a numeric value of number or sensory attributes or vector of sensory terms (lexicon)}
+
+\item{hedonic}{whether to include hedonic rating or not}
 }
 \value{
 Returns a dataframe of sensory design with panelist, presentation order, product, blind code (optional) and sensory attributes columns

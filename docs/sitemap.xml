@@ -7,6 +7,9 @@
     <loc>https://aswansyahputra.github.io/senshubr//reference/analyse_global.html</loc>
   </url>
   <url>
+    <loc>https://aswansyahputra.github.io/senshubr//reference/analyse_liking.html</loc>
+  </url>
+  <url>
     <loc>https://aswansyahputra.github.io/senshubr//reference/analyse_local.html</loc>
   </url>
   <url>
@@ -14,6 +17,9 @@
   </url>
   <url>
     <loc>https://aswansyahputra.github.io/senshubr//reference/analyse_performance.html</loc>
+  </url>
+  <url>
+    <loc>https://aswansyahputra.github.io/senshubr//reference/analyse_preference.html</loc>
   </url>
   <url>
     <loc>https://aswansyahputra.github.io/senshubr//reference/create_template.html</loc>
@@ -28,10 +34,19 @@
     <loc>https://aswansyahputra.github.io/senshubr//reference/inspect_panelist.html</loc>
   </url>
   <url>
+    <loc>https://aswansyahputra.github.io/senshubr//reference/inspect_preference_panelist.html</loc>
+  </url>
+  <url>
+    <loc>https://aswansyahputra.github.io/senshubr//reference/inspect_preference_product.html</loc>
+  </url>
+  <url>
     <loc>https://aswansyahputra.github.io/senshubr//reference/inspect_product.html</loc>
   </url>
   <url>
     <loc>https://aswansyahputra.github.io/senshubr//reference/inspect_space.html</loc>
+  </url>
+  <url>
+    <loc>https://aswansyahputra.github.io/senshubr//reference/perform_prefmap.html</loc>
   </url>
   <url>
     <loc>https://aswansyahputra.github.io/senshubr//reference/perfume_jar.html</loc>
@@ -68,5 +83,8 @@
   </url>
   <url>
     <loc>https://aswansyahputra.github.io/senshubr//reference/visualise.html</loc>
+  </url>
+  <url>
+    <loc>https://aswansyahputra.github.io/senshubr//reference/visualise.tbl_sensory_prefmap.html</loc>
   </url>
 </urlset>
