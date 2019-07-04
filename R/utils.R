@@ -29,7 +29,7 @@ print_meta <- function(x, meta = c("dimension", "sensory_method", "panel_model",
 
   if (meta[[1]] == "dimension") {
     res <- glue("<{NROW(x)} x {NCOL(x)}>")
-    if (any(class(x) %in% c("tbl_sensory_global_product", "tbl_sensory_global_attribute"))) {
+    if (any(class(x) %in% c("tbl_sensory_global_product", "tbl_sensory_global_attribute", "tbl_sensory_preference_product", "tbl_sensory_preference_panelist"))) {
       res <- glue("Dim {attr(x, 'dimension')[[1]]} x {attr(x, 'dimension')[[2]]}")
     }
   }

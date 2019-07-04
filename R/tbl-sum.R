@@ -1,4 +1,3 @@
-#' @export
 tbl_sum.tbl_sensory_design <- function(x) {
   c(
     "Design of Experiment" = print_meta(x, "dimension"),
@@ -7,7 +6,6 @@ tbl_sum.tbl_sensory_design <- function(x) {
   )
 }
 
-#' @export
 tbl_sum.tbl_sensory_template <- function(x) {
   c(
     "A sensory table" = print_meta(x, "dimension"),
@@ -17,7 +15,6 @@ tbl_sum.tbl_sensory_template <- function(x) {
   )
 }
 
-#' @export
 tbl_sum.tbl_sensory_performance_panel <- function(x) {
   c(
     "Description of" = "Panel performance",
@@ -25,7 +22,6 @@ tbl_sum.tbl_sensory_performance_panel <- function(x) {
   )
 }
 
-#' @export
 tbl_sum.tbl_sensory_performance_panelist <- function(x) {
   c(
     "Description of" = "Panelist performance",
@@ -37,7 +33,6 @@ tbl_sum.tbl_sensory_performance_panelist <- function(x) {
   )
 }
 
-#' @export
 print.tbl_sensory_performance <- function(x, ...) {
   cat_subtle(
     glue(
@@ -65,8 +60,6 @@ print.tbl_sensory_performance <- function(x, ...) {
   invisible(x)
 }
 
-
-#' @export
 tbl_sum.tbl_sensory_qda <- function(x) {
   c(
     "A sensory table" = print_meta(x, "dimension"),
@@ -78,7 +71,6 @@ tbl_sum.tbl_sensory_qda <- function(x) {
   )
 }
 
-#' @export
 tbl_sum.tbl_sensory_cata <- function(x) {
   c(
     "A sensory table" = print_meta(x, "dimension"),
@@ -90,7 +82,6 @@ tbl_sum.tbl_sensory_cata <- function(x) {
   )
 }
 
-#' @export
 tbl_sum.tbl_sensory_jar <- function(x) {
   c(
     "A sensory table" = print_meta(x, "dimension"),
@@ -102,7 +93,6 @@ tbl_sum.tbl_sensory_jar <- function(x) {
   )
 }
 
-#' @export
 tbl_sum.tbl_sensory_penalty <- function(x) {
   c(
     "Penalty analysis" = "",
@@ -112,7 +102,6 @@ tbl_sum.tbl_sensory_penalty <- function(x) {
   )
 }
 
-#' @export
 tbl_sum.tbl_sensory_local <- function(x) {
   c(
     "Local analysis" = "",
@@ -122,7 +111,55 @@ tbl_sum.tbl_sensory_local <- function(x) {
   )
 }
 
-#' @export
+tbl_sum.tbl_sensory_liking <- function(x) {
+  c(
+    "Liking analysis" = "",
+    "Sensory method" = print_meta(x, "sensory_method"),
+    "Analytical method" = print_meta(x, "method_local"),
+    "Model" = print_meta(x, "model")
+  )
+}
+
+#' @importFrom glue glue
+tbl_sum.tbl_sensory_preference_product <- function(x) {
+  c(
+    "Description of" = glue("Product <{print_meta(x, 'n_product')}>"),
+    "Dimension" = print_meta(x, "dimension")
+  )
+}
+
+#' @importFrom glue glue
+tbl_sum.tbl_sensory_preference_panelist <- function(x) {
+  c(
+    "Description of" = glue("Panelist <{print_meta(x, 'n_panelist')}>"),
+    "Dimension" = print_meta(x, "dimension")
+  )
+}
+
+#' @importFrom glue glue
+print.tbl_sensory_preference <- function(x, ...) {
+  cat_subtle(
+    glue(
+      "
+    {pad('# Internal Preference Mapping:')}
+    {pad('# Sensory method:')} {sensory_method}
+    {pad('# Analytical method:')} {method_global}
+    #
+    
+    ",
+      sensory_method = print_meta(x, "sensory_method"),
+      method_global = print_meta(x, "method_global")
+    )
+  )
+  print(x$eigenvalue)
+  cat_subtle("#\n")
+  print(x$product)
+  cat_subtle("#\n")
+  print(x$panelist)
+  
+  invisible(x)
+}
+
 tbl_sum.tbl_sensory_global_eigenvalue <- function(x) {
   c(
     "Description of" = "Eigenvalue",
@@ -131,7 +168,6 @@ tbl_sum.tbl_sensory_global_eigenvalue <- function(x) {
 }
 
 #' @importFrom glue glue
-#' @export
 tbl_sum.tbl_sensory_global_product <- function(x) {
   c(
     "Description of" = glue("Product <{print_meta(x, 'n_product')}>"),
@@ -140,7 +176,6 @@ tbl_sum.tbl_sensory_global_product <- function(x) {
 }
 
 #' @importFrom glue glue
-#' @export
 tbl_sum.tbl_sensory_global_attribute <- function(x) {
   c(
     "Description of" = glue("Sensory attribute <{print_meta(x, 'n_attribute')}>"),
@@ -149,7 +184,6 @@ tbl_sum.tbl_sensory_global_attribute <- function(x) {
 }
 
 #' @importFrom glue glue
-#' @export
 print.tbl_sensory_global <- function(x, ...) {
   cat_subtle(
     glue(

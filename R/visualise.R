@@ -12,7 +12,7 @@ visualise <- function(res, ...) {
 
 #' @export
 visualise.default <- function(res, ...) {
-  stop("`res` is not a result of local nor global analysis.", call. = FALSE)
+  stop("`res` is invalid.", call. = FALSE)
 }
 
 #' Visualise sensory properties
@@ -28,7 +28,8 @@ visualise.default <- function(res, ...) {
 #' @param legend_position position of legend, valid values are "top", "right", "bottom", and "left"
 #' @param ... not yet implemented
 #'
-#' @import dplyr
+#' @importFrom dplyr select mutate_if
+#' @importFrom tidyr gather spread
 #' @importFrom ggradar ggradar
 #' @importFrom scales rescale
 #'
@@ -179,6 +180,58 @@ visualise.tbl_sensory_global <- function(res, choice = c("product", "attribute",
   return(res)
 }
 
+#' @importFrom dplyr select
+#' @importFrom tidyr gather
+#' @importFrom ggplot2 ggplot aes geom_col labs theme_minimal
+#' @importFrom scales rescale
+#' 
+#' @export
+visualise.tbl_sensory_liking <- function(res, xlab = "", ylab = "Mean of hedonic rating", title = "", ...) {
+  res <-
+    res %>% 
+    select(-statistic, -p.value) %>%
+    gather("product", "values", -attribute) %>%
+    ggplot(aes(x = product, y = values)) +
+    geom_col() +
+    labs(
+      title = title,
+      x = xlab,
+      y = ylab
+    ) +
+    theme_minimal()
+  
+  return(res)
+}
+
+#' @importFrom rlang arg_match
+#' @export
+visualise.tbl_sensory_preference <- function(res, choice = c("product", "panelist", "eigenvalue"), dimension = c(1, 2), repel = FALSE, colour_by = c("none", "quality", "contribution"), title = "default", ...) {
+  res$res_global <- res$res_preference
+  
+  choice <- arg_match(choice)
+  colour_by <- arg_match(colour_by)
+  
+  choice <- switch(choice[[1]],
+                   "product" = "attribute",
+                   "panelist" = "product",
+                   "eigenvalue" = "eigenvalue")
+  
+  if (title == "default") {
+    title <- "Representation of panelists"
+    if (choice == "attribute") {
+      title <- "Representation of products"
+    }
+  }
+  
+  res <- visualise.tbl_sensory_global(res = res, 
+                                      choice = choice,
+                                      dimension = dimension, 
+                                      repel = repel,
+                                      colour_by = colour_by,
+                                      title = title)
+  return(res)
+}
+
 #' Visualise penalty
 #'
 #' Plot liking drop and citing frequency from penalty analysis.
@@ -239,5 +292,40 @@ visualise.tbl_sensory_penalty <- function(res, product, frequency_threshold = 20
     ) +
     theme_minimal()
     
+  return(res)
+}
+
+#' Visualise External Preference Map
+#' 
+#' Plot preference map of products in sensory space.
+#' 
+#' @param res result of external preference mapping
+#' @param title a title to use in plot
+#' @param xlab label for x-axis
+#' @param ylab label for y-axis
+#' @param ... not yet implemented
+#' 
+#' @importFrom ggplot2 ggplot aes geom_raster geom_contour scale_fill_viridis_c labs theme_minimal
+#' @importFrom ggrepel geom_text_repel
+#' @importFrom scales percent_format
+#' 
+#' @export
+visualise.tbl_sensory_prefmap <- function(res, title = "External Preference Mapping", xlab = "Dim 1", ylab = "Dim 2", ...) {
+  tbl_above_average <- res$above_average
+  tbl_product <- res$product
+  
+  res <- ggplot(mapping = aes(x = dim1, y = dim2)) +
+    geom_raster(aes(fill = prop_panelist), data = tbl_above_average) +
+    geom_contour(aes(z = prop_panelist), data = tbl_above_average, colour = "gray80") +
+    geom_point(data = tbl_product, shape = 15, size = 3, colour = "white") +
+    geom_text_repel(aes(label = product), data = tbl_product, size = 4, colour = "white") +
+    scale_fill_viridis_c(labels = percent_format()) +
+    labs(
+      title = title,
+      x = xlab,
+      y = ylab,
+      fill = "Proportion of panelist"
+    ) +
+    theme_minimal()
   return(res)
 }

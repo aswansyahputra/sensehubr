@@ -11,8 +11,8 @@
 #' @param attribute sensory attribute columns
 #' @param hedonic hedonic column
 #'
-#' @importFrom dplyr select mutate_at
-#' @importFrom rlang arg_match as_label
+#' @importFrom dplyr select mutate_at pull
+#' @importFrom rlang arg_match enquo as_label
 #' @importFrom tidyselect vars_select
 #' @importFrom tibble new_tibble
 #'

@@ -25,7 +25,7 @@ analyse_penalty.default <- function(data, reference_value) {
   stop("`data` should be a sensory table.", call. = FALSE)
 }
 
-#' @importFrom dplyr select filter group_by mutate mutate_at transmute case_when arrange
+#' @importFrom dplyr select filter group_by mutate mutate_at transmute case_when arrange count
 #' @importFrom tidyr gather nest unnest
 #' @importFrom purrr map
 #' @importFrom broom tidy

@@ -10,7 +10,7 @@ inspect_product <- function(res_global, dimension = c(1, 2)) {
   UseMethod("inspect_product")
 }
 
-#' @importFrom dplyr mutate left_join select rename_at arrange vars desc
+#' @importFrom dplyr mutate left_join select everything starts_with rename_at arrange vars desc
 #' @importFrom factoextra facto_summarize
 #' @importFrom tibble new_tibble
 #'
@@ -52,7 +52,7 @@ inspect_product.default <- function(res_global, dimension = c(1, 2)) {
     left_join(cos2, by = "name") %>%
     left_join(contrib, by = "name") %>%
     select(
-      attribute = name,
+      product = name,
       everything(),
       quality = cos2,
       contribution = contrib,

@@ -4,6 +4,7 @@
 #'
 #' @param data output from \code{prepare} function
 #' @param attribute a numeric value of number or sensory attributes or vector of sensory terms (lexicon)
+#' @param hedonic whether to include hedonic rating or not
 #'
 #' @importFrom dplyr arrange mutate
 #' @importFrom stringr str_pad str_replace_all str_remove_all
@@ -19,7 +20,7 @@
 #' design
 #'
 #' create_template(design, attribute = c("Sweetness", "Mint", "Green", "Herbal"))
-create_template <- function(data, attribute) {
+create_template <- function(data, attribute, hedonic = FALSE) {
   if (!any(class(data) == "tbl_sensory_design")) {
     stop("`data` should be a sensory table of design.", call. = FALSE)
   }
@@ -42,6 +43,11 @@ create_template <- function(data, attribute) {
     tbl <- tbl %>%
       extract("product", "blind_code", regex = "(\\d{3})", remove = FALSE) %>%
       mutate(product = str_remove_all(product, "\\s\\(\\d{3}\\)$"))
+  }
+  
+  if (isTRUE(hedonic)) {
+    tbl <- tbl %>% 
+      mutate(liking = NA)
   }
 
   res <- new_tibble(tbl,

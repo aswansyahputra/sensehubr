@@ -37,7 +37,7 @@ analyse_local.default <- function(data, ...) {
   stop("`data` should be a sensory table.", call. = FALSE)
 }
 
-#' @importFrom dplyr select group_by mutate arrange
+#' @importFrom dplyr select group_by mutate summarise arrange
 #' @importFrom tidyr gather spread nest unnest
 #' @importFrom purrr map
 #' @importFrom broom tidy

@@ -7,7 +7,7 @@
 #' @param blind_code wheteher to generate random three digit number for labeling
 #' @param seed an integer for anchoring randomisation
 #'
-#' @importFrom dplyr rename_all mutate_all mutate
+#' @importFrom dplyr rename_all mutate_all mutate recode
 #' @importFrom stringr str_pad
 #' @importFrom stats setNames
 #' @importFrom SensoMineR WilliamsDesign

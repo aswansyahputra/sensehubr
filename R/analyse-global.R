@@ -78,12 +78,12 @@ analyse_global.tbl_sensory_qda <- function(data, ...) {
     column_to_rownames("product") %>%
     PCA(quanti.sup = NCOL(.), graph = FALSE)
 
-  tbl_eig <- inspect_space(res_global)
+  tbl_space <- inspect_space(res_global)
   tbl_product <- inspect_product(res_global)
   tbl_attribute <- inspect_attribute(res_global)
 
   res <- list(
-    eigenvalue = tbl_eig,
+    eigenvalue = tbl_space,
     product = tbl_product,
     attribute = tbl_attribute,
     res_global = res_global
@@ -98,7 +98,7 @@ analyse_global.tbl_sensory_qda <- function(data, ...) {
   return(res)
 }
 
-#' @importFrom dplyr select group_by summarise_all left_join
+#' @importFrom dplyr select group_by summarise_at left_join
 #' @importFrom tibble column_to_rownames
 #' @importFrom FactoMineR CA
 #'
@@ -140,12 +140,12 @@ analyse_global.tbl_sensory_cata <- function(data, ...) {
     column_to_rownames("product") %>%
     CA(quanti.sup = NCOL(.), graph = FALSE)
 
-  tbl_eig <- inspect_space(res_global)
+  tbl_space <- inspect_space(res_global)
   tbl_product <- inspect_product(res_global)
   tbl_attribute <- inspect_attribute(res_global)
 
   res <- list(
-    eigenvalue = tbl_eig,
+    eigenvalue = tbl_space,
     product = tbl_product,
     attribute = tbl_attribute,
     res_global = res_global
