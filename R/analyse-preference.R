@@ -32,7 +32,7 @@ analyse_preference.tbl_sensory_qda <- function(data) {
     select(
       panelist = meta_panelist,
       product = meta_product,
-      meta_hedonic
+      liking = meta_hedonic
     ) %>% 
     group_by(panelist) %>% 
     mutate(liking = scale(liking, center = TRUE, scale = TRUE)) %>% 

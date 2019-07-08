@@ -34,7 +34,7 @@ perform_prefmap.tbl_sensory_qda <- function(data) {
     select(
       panelist = meta_panelist,
       product = meta_product,
-      meta_hedonic
+      liking = meta_hedonic
     ) %>%
     mutate(product = as.character(product)) %>%
     spread(panelist, liking) %>%
