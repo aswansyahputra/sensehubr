@@ -41,3 +41,5 @@ Imports:
     ggrepel
 Remotes: 
     ricardo-bion/ggradar
+Suggests: 
+    testthat (>= 2.1.0)
