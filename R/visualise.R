@@ -122,12 +122,12 @@ visualise.tbl_sensory_global <- function(res, choice = c("product", "attribute",
     res <- ggplot(tbl, aes(dimension, eigenvalue)) +
       geom_col(fill = "lightblue") +
       scale_x_continuous(breaks = seq_len(max_dim)) +
-      scale_y_continuous(
-        sec.axis = sec_axis(~ . / max_dim,
-          name = "Explained variance",
-          labels = percent_format()
-        )
-      ) +
+      # scale_y_continuous(
+      #   sec.axis = sec_axis(~ . / max_dim,
+      #     name = "Explained variance",
+      #     labels = percent_format()
+      #   )
+      # ) +
       labs(
         x = "Dimension",
         y = "Eigenvalue",
