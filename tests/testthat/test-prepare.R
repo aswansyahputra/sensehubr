@@ -1,4 +1,6 @@
-context("Prepare sensory design")
+context("Prepare sensory experiment")
+
+design <- prepare(n_panelist = 20, product = 5, blind_code = TRUE)
 
 test_that("fails early", {
   expect_error(prepare())
@@ -7,9 +9,8 @@ test_that("fails early", {
 })
 
 test_that("design is correct", {
-  design <- prepare(n_panelist = 20, product = 5, blind_code = TRUE)
-  design
   expect_equal(attr(design, "n_panelist"), 20)
   expect_equal(attr(design, "n_product"), 5)
   expect_equal(attr(design, "blind_code"), TRUE)
+  expect_s3_class(design, "tbl_sensory_design")
 })
