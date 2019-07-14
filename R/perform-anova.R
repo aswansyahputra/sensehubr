@@ -1,32 +1,20 @@
-#' Liking analysis of sensory data
-#'
-#' Perform liking analysis on sensory table.
+#' Analysis of variance
 #' 
-#' @param data a sensory table
-#'
-#' @export
-analyse_liking <- function(data) {
-  UseMethod("analyse_liking")
-}
-
-#' @export
-analyse_liking.default <- function(data) {
-  stop("`data` should be a sensory table.", call. = FALSE)
-}
-
-#' @importFrom dplyr select group_by mutate arrange
+#' Perform Analysis of variance (ANOVA) on sensory table.
+#' 
+#' @param tbl_sensory a sensory table
+#' 
+#' @importFrom dplyr select group_by mutate summarise arrange
 #' @importFrom tidyr gather spread nest unnest
 #' @importFrom purrr map
 #' @importFrom broom tidy
 #' @importFrom tibble new_tibble
-#'
-#' @export
-analyse_liking.tbl_sensory_qda <- function(data) {
-  meta_panelist <- parse_meta(data, "panelist")
-  meta_product <- parse_meta(data, "product")
-  meta_session <- parse_meta(data, "session")
-  meta_pres_order <- parse_meta(data, "pres_order")
-  meta_hedonic <- parse_meta(data, "hedonic")
+perform_anova <- function(tbl_sensory) {
+  meta_panelist <- parse_meta(tbl_sensory, "panelist")
+  meta_product <- parse_meta(tbl_sensory, "product")
+  meta_session <- parse_meta(tbl_sensory, "session")
+  meta_pres_order <- parse_meta(tbl_sensory, "pres_order")
+  meta_attribute <- parse_meta(tbl_sensory, "attribute")
   
   if (!is.null(meta_session)) {
     if (!is.null(meta_pres_order)) {
@@ -42,15 +30,15 @@ analyse_liking.tbl_sensory_qda <- function(data) {
     }
   }
   
-  tbl <- data %>%
+  tbl <- tbl_sensory %>%
     select(
       panelist = meta_panelist,
       product = meta_product,
       session = meta_session,
       pres_order = meta_pres_order,
-      meta_hedonic
+      meta_attribute
     ) %>%
-    gather("attribute", "value", meta_hedonic) %>%
+    gather("attribute", "value", meta_attribute) %>%
     group_by(attribute) %>%
     nest() %>%
     mutate(
@@ -79,24 +67,12 @@ analyse_liking.tbl_sensory_qda <- function(data) {
     arrange(desc(statistic))
   
   res <- new_tibble(tbl,
-                    "sensory_method" = parse_meta(data, "sensory_method"),
-                    "method_local" = "Analysis of Variance",
+                    "sensory_method" = parse_meta(tbl_sensory, "sensory_method"),
+                    "method_local" = "Analysis of variance",
                     "model" = fmla,
                     nrow = NROW(tbl),
-                    class = "tbl_sensory_liking"
+                    class = "tbl_sensory_local"
   )
   
-  return(res)
-}
-
-#' @export
-analyse_liking.tbl_sensory_cata <- function(data) {
-  res <- analyse_liking.tbl_sensory_qda(data)
-  return(res)
-}
-
-#' @export
-analyse_liking.tbl_sensory_rata <- function(data) {
-  res <- analyse_liking.tbl_sensory_qda(data)
   return(res)
 }

@@ -1,27 +1,19 @@
-#' Preference analysis of sensory data
-#'
-#' Perform preference analysis on sensory table.
+#' Internal preference mapping
 #' 
-#' @param data a sensory table
-#'
-#' @export
-analyse_preference <- function(data) {
-  UseMethod("analyse_preference")
-}
-
-#' @export
-analyse_preference.default <- function(data) {
-  stop("`data` should be a sensory table.", call. = FALSE)
-}
-
+#' Perform internal preference mapping (MDPref) on sensory table.
+#' 
+#' @param tbl_sensory a sensory table
+#' 
 #' @importFrom dplyr select group_by mutate ungroup arrange
 #' @importFrom tidyr gather spread nest unnest
 #' @importFrom purrr map
 #' @importFrom broom tidy
 #' @importFrom tibble new_tibble
-#'
-#' @export
-analyse_preference.tbl_sensory_qda <- function(data) {
+perform_mdpref <- function(tbl_sensory) {
+  if (is.null(parse_meta(tbl_sensory, "hedonic"))) {
+    stop("No hedonic data is available in sensory table", call. = FALSE)
+  }
+  
   meta_panelist <- parse_meta(data, "panelist")
   meta_product <- parse_meta(data, "product")
   meta_session <- parse_meta(data, "session")
@@ -35,7 +27,7 @@ analyse_preference.tbl_sensory_qda <- function(data) {
       liking = meta_hedonic
     ) %>% 
     group_by(panelist) %>% 
-    mutate(liking = scale(liking, center = TRUE, scale = TRUE)) %>% 
+    mutate(liking = scale(liking, center = TRUE, scale = FALSE)) %>% 
     ungroup() %>% 
     spread(product, liking) %>% 
     as.data.frame() %>% 
@@ -58,19 +50,7 @@ analyse_preference.tbl_sensory_qda <- function(data) {
   attr(res, "n_product") <- parse_meta(data, "n_product")
   attr(res, "n_panelist") <- parse_meta(data, "n_panelist")
   attr(res, "hedonic") <- parse_meta(data, "hedonic")
-  class(res) <- append(class(res), "tbl_sensory_preference")
+  class(res) <- append(class(res), "tbl_sensory_mdpref")
   
-  return(res)
-}
-
-#' @export
-analyse_preference.tbl_sensory_cata <- function(data) {
-  res <- analyse_preference.tbl_sensory_qda(data)
-  return(res)
-}
-
-#' @export
-analyse_preference.tbl_sensory_rata <- function(data) {
-  res <- analyse_preference.tbl_sensory_qda(data)
-  return(res)
+  return(res)  
 }

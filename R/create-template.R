@@ -1,4 +1,4 @@
-#' Create template for sensory data
+#' Create template for sensory table
 #'
 #' Create template for inputting data that collected from sensory research.
 #'

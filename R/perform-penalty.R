@@ -1,46 +1,28 @@
-#' Penalty analysis of sensory data
-#'
+#' Penalty analysis
+#' 
 #' Perform penalty analysis on sensory table.
-#'
-#' @param data a sensory table
-#' @param reference_value a score used as JAR value (reference)
-#'
-#' @examples
-#' perfume_jar %>%
-#'   specify(
-#'     sensory_method = "JAR",
-#'     panelist = consumer,
-#'     product = product,
-#'     attribute = intensity:green,
-#'     hedonic = liking
-#'   ) %>%
-#'   analyse_penalty(reference_value = 0)
-#' @export
-analyse_penalty <- function(data, reference_value) {
-  UseMethod("analyse_penalty")
-}
-
-#' @export
-analyse_penalty.default <- function(data, reference_value) {
-  stop("`data` should be a sensory table.", call. = FALSE)
-}
-
+#' 
+#' @param tbl_sensory a sensory table
+#' @param ref_value a score used as JAR reference value
+#' 
 #' @importFrom dplyr select filter group_by mutate mutate_at transmute case_when arrange count
 #' @importFrom tidyr gather nest unnest
 #' @importFrom purrr map
 #' @importFrom broom tidy
 #' @importFrom tibble new_tibble
-#'
-#' @export
-analyse_penalty.tbl_sensory_jar <- function(data, reference_value) {
-  meta_panelist <- parse_meta(data, "panelist")
-  meta_product <- parse_meta(data, "product")
-  meta_attribute <- parse_meta(data, "attribute")
-  meta_hedonic <- parse_meta(data, "hedonic")
-
+perform_penalty <- function(tbl_sensory, ref_value) {
+  if (is.null(parse_meta(tbl_sensory, "hedonic"))) {
+    stop("No hedonic data is available in sensory table", call. = FALSE)
+  }
+  
+  meta_panelist <- parse_meta(tbl_sensory, "panelist")
+  meta_product <- parse_meta(tbl_sensory, "product")
+  meta_attribute <- parse_meta(tbl_sensory, "attribute")
+  meta_hedonic <- parse_meta(tbl_sensory, "hedonic")
+  
   fmla <- "liking ~ category"
   
-  tbl <- data %>%
+  tbl <- tbl_sensory %>%
     select(
       panelist = meta_panelist,
       product = meta_product,
@@ -51,8 +33,8 @@ analyse_penalty.tbl_sensory_jar <- function(data, reference_value) {
     mutate_at(
       vars(meta_attribute),
       ~ case_when(
-        .x < reference_value ~ "Not enough",
-        .x > reference_value ~ "Too high",
+        .x < ref_value ~ "Not enough",
+        .x > ref_value ~ "Too high",
         TRUE ~ "JAR"
       )
     ) %>%
@@ -82,19 +64,21 @@ analyse_penalty.tbl_sensory_jar <- function(data, reference_value) {
       attribute,
       category = as.character(category),
       frequency = value,
-      penalty = abs(estimate),
+      # penalty = abs(estimate),
+      penalty = (estimate),
       std.error,
       statistic,
       p.value
     ) %>%
     arrange(product)
-
+  
   res <- new_tibble(tbl,
-    "sensory_method" = parse_meta(data, "sensory_method"),
-    "method_local" = "T-test",
-    "model" = fmla,
-    nrow = NROW(tbl),
-    class = "tbl_sensory_penalty"
+                    "sensory_method" = parse_meta(tbl_sensory, "sensory_method"),
+                    "method_local" = "T-test",
+                    "model" = fmla,
+                    nrow = NROW(tbl),
+                    class = "tbl_sensory_penalty"
   )
+  
   return(res)
 }

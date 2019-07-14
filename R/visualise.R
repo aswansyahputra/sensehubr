@@ -48,7 +48,7 @@ visualise.default <- function(res, ...) {
 #'     pres_order = rank,
 #'     attribute = spicy:wrapping
 #'   ) %>%
-#'   analyse_local() %>%
+#'   analyse(choice = "local") %>%
 #'   visualise()
 visualise.tbl_sensory_local <- function(res, min_scales = 0, max_scales = 10, point_size = 4, line_width = 1, title = "Radar plot of sensory properties", legend_position = "bottom", ...) {
   res <-
@@ -105,7 +105,7 @@ visualise.tbl_sensory_local <- function(res, min_scales = 0, max_scales = 10, po
 #'     pres_order = rank,
 #'     attribute = spicy:wrapping
 #'   ) %>%
-#'   analyse_global() %>%
+#'   analyse(choice = "global") %>%
 #'   visualise(choice = "attribute", colour_by = "contribution")
 visualise.tbl_sensory_global <- function(res, choice = c("product", "attribute", "eigenvalue"), dimension = c(1, 2), repel = FALSE, colour_by = c("none", "quality", "contribution"), title = "default", ...) {
   res_global <- res$res_global
@@ -265,7 +265,7 @@ visualise.tbl_sensory_preference <- function(res, choice = c("product", "panelis
 #'     attribute = intensity:green,
 #'     hedonic = liking
 #'   ) %>%
-#'   analyse_penalty(reference_value = 0) %>% 
+#'   analyse(choice = "penalty", ref_value = 0) %>% 
 #'   visualise("Chanel N5")
 visualise.tbl_sensory_penalty <- function(res, product, frequency_threshold = 20, drop_threshold = 1, title = "Penalty analysis", xlab = "Citing frequency (%)", ylab = "Mean of liking drop", ...) {
   subproduct <- arg_match(product, values = unique(res$product))

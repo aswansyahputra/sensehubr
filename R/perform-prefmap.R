@@ -1,36 +1,24 @@
-#' Perform External Preference Mapping
+#' External preference mapping
 #'
-#' Perform external preference mapping on sensory table.
+#' Perform external preference mapping (PrefMap) on sensory table.
 #' 
-#' @param data a sensory table
-#'
-#' @export
-perform_prefmap <- function(data) {
-  UseMethod("perform_prefmap")
-}
-
-#' @export
-perform_prefmap.default <- function(data) {
-  stop("`data` should be a sensory table.", call. = FALSE)
-}
-
+#' @param tbl_sensory a sensory table
+#' 
 #' @importFrom dplyr select mutate
 #' @importFrom tidyr gather spread
 #' @importFrom SensoMineR carto
 #' @importFrom tibble column_to_rownames as_tibble
-#'
-#' @export
-perform_prefmap.tbl_sensory_qda <- function(data) {
-  meta_panelist <- parse_meta(data, "panelist")
-  meta_product <- parse_meta(data, "product")
-  meta_hedonic <- parse_meta(data, "hedonic")
-  meta_n_panelist <- parse_meta(data, "n_panelist")
-  
-  if (is.null(meta_hedonic)) {
-    stop("Hedonic data is not supplied.", call. = FALSE)
+perform_prefmap <- function(tbl_sensory) {
+  if (is.null(parse_meta(tbl_sensory, "hedonic"))) {
+    stop("No hedonic data is available in sensory table", call. = FALSE)
   }
   
-  tbl_hedonic <- data %>%
+  meta_panelist <- parse_meta(tbl_sensory, "panelist")
+  meta_product <- parse_meta(tbl_sensory, "product")
+  meta_hedonic <- parse_meta(tbl_sensory, "hedonic")
+  meta_n_panelist <- parse_meta(tbl_sensory, "n_panelist")
+  
+  tbl_hedonic <- tbl_sensory %>%
     select(
       panelist = meta_panelist,
       product = meta_product,
@@ -41,12 +29,22 @@ perform_prefmap.tbl_sensory_qda <- function(data) {
     as.data.frame() %>%
     column_to_rownames("product")
   
-  tbl_space <- data %>%
-    analyse_global() %>%
-    inspect_product() %>%
-    select(1:3) %>%
-    as.data.frame() %>%
-    column_to_rownames("product")
+  if (any(class(tbl_sensory) == "tbl_sensory_qda")) {
+    tbl_space <- tbl_sensory %>%
+      perform_pca() %>%
+      inspect_product() %>%
+      select(1:3) %>%
+      as.data.frame() %>%
+      column_to_rownames("product")
+  } else if (any(class(tbl_sensory) %in% c("tbl_sensory_cata", "tbl_sensory_rata"))) {
+    tbl_space <- tbl_sensory %>%
+      perform_ca() %>%
+      inspect_product() %>%
+      select(1:3) %>%
+      as.data.frame() %>%
+      column_to_rownames("product")
+    
+  }
   
   res_prefmap <- SensoMineR::carto(Mat = tbl_space,
                                    MatH = tbl_hedonic,
@@ -71,7 +69,11 @@ perform_prefmap.tbl_sensory_qda <- function(data) {
     res_prefmap = res_prefmap
   )
   
+  attr(res, "sensory_method") <- parse_meta(data, "sensory_method")
   attr(res, "method_global") <- "Principal Component Regression"
+  attr(res, "n_product") <- parse_meta(data, "n_product")
+  attr(res, "n_panelist") <- parse_meta(data, "n_panelist")
+  attr(res, "hedonic") <- parse_meta(data, "hedonic")
   class(res) <- append(class(res), "tbl_sensory_prefmap")
 
   return(res)
