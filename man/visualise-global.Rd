@@ -41,6 +41,6 @@ perfume_qda_experts \%>\%
     pres_order = rank,
     attribute = spicy:wrapping
   ) \%>\%
-  analyse_global() \%>\%
+  analyse(choice = "global") \%>\%
   visualise(choice = "attribute", colour_by = "contribution")
 }

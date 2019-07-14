@@ -4,22 +4,7 @@
     <loc>https://aswansyahputra.github.io/senshubr//index.html</loc>
   </url>
   <url>
-    <loc>https://aswansyahputra.github.io/senshubr//reference/analyse_global.html</loc>
-  </url>
-  <url>
-    <loc>https://aswansyahputra.github.io/senshubr//reference/analyse_liking.html</loc>
-  </url>
-  <url>
-    <loc>https://aswansyahputra.github.io/senshubr//reference/analyse_local.html</loc>
-  </url>
-  <url>
-    <loc>https://aswansyahputra.github.io/senshubr//reference/analyse_penalty.html</loc>
-  </url>
-  <url>
-    <loc>https://aswansyahputra.github.io/senshubr//reference/analyse_performance.html</loc>
-  </url>
-  <url>
-    <loc>https://aswansyahputra.github.io/senshubr//reference/analyse_preference.html</loc>
+    <loc>https://aswansyahputra.github.io/senshubr//reference/analyse.html</loc>
   </url>
   <url>
     <loc>https://aswansyahputra.github.io/senshubr//reference/create_template.html</loc>
@@ -44,6 +29,33 @@
   </url>
   <url>
     <loc>https://aswansyahputra.github.io/senshubr//reference/inspect_space.html</loc>
+  </url>
+  <url>
+    <loc>https://aswansyahputra.github.io/senshubr//reference/perform_anova.html</loc>
+  </url>
+  <url>
+    <loc>https://aswansyahputra.github.io/senshubr//reference/perform_ca.html</loc>
+  </url>
+  <url>
+    <loc>https://aswansyahputra.github.io/senshubr//reference/perform_cochran.html</loc>
+  </url>
+  <url>
+    <loc>https://aswansyahputra.github.io/senshubr//reference/perform_friedman.html</loc>
+  </url>
+  <url>
+    <loc>https://aswansyahputra.github.io/senshubr//reference/perform_liking_analysis.html</loc>
+  </url>
+  <url>
+    <loc>https://aswansyahputra.github.io/senshubr//reference/perform_mdpref.html</loc>
+  </url>
+  <url>
+    <loc>https://aswansyahputra.github.io/senshubr//reference/perform_panel_analysis.html</loc>
+  </url>
+  <url>
+    <loc>https://aswansyahputra.github.io/senshubr//reference/perform_pca.html</loc>
+  </url>
+  <url>
+    <loc>https://aswansyahputra.github.io/senshubr//reference/perform_penalty.html</loc>
   </url>
   <url>
     <loc>https://aswansyahputra.github.io/senshubr//reference/perform_prefmap.html</loc>
@@ -86,5 +98,8 @@
   </url>
   <url>
     <loc>https://aswansyahputra.github.io/senshubr//reference/visualise.tbl_sensory_prefmap.html</loc>
+  </url>
+  <url>
+    <loc>https://aswansyahputra.github.io/senshubr//articles/qda.html</loc>
   </url>
 </urlset>

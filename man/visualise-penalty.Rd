@@ -42,6 +42,6 @@ perfume_jar \%>\%
     attribute = intensity:green,
     hedonic = liking
   ) \%>\%
-  analyse_penalty(reference_value = 0) \%>\% 
+  analyse(choice = "penalty", ref_value = 0) \%>\% 
   visualise("Chanel N5")
 }

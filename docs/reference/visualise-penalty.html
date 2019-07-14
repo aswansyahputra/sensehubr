@@ -87,6 +87,18 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/qda.html">Quantitative Descriptive Analysis</a>
+    </li>
+  </ul>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -120,7 +132,7 @@
     </div>
 
     <pre class="usage"><span class='co'># S3 method for tbl_sensory_penalty</span>
-<span class='fu'>visualise</span>(<span class='no'>res</span>, <span class='no'>product</span>,
+<span class='fu'><a href='visualise.html'>visualise</a></span>(<span class='no'>res</span>, <span class='no'>product</span>,
   <span class='kw'>frequency_threshold</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>drop_threshold</span> <span class='kw'>=</span> <span class='fl'>1</span>,
   <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Penalty analysis"</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"Citing frequency (%)"</span>,
   <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"Mean of liking drop"</span>, <span class='no'>...</span>)</pre>
@@ -169,15 +181,15 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>perfume_jar</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>specify</span>(
+  <span class='fu'><a href='specify.html'>specify</a></span>(
     <span class='kw'>sensory_method</span> <span class='kw'>=</span> <span class='st'>"JAR"</span>,
     <span class='kw'>panelist</span> <span class='kw'>=</span> <span class='no'>consumer</span>,
     <span class='kw'>product</span> <span class='kw'>=</span> <span class='no'>product</span>,
     <span class='kw'>attribute</span> <span class='kw'>=</span> <span class='no'>intensity</span>:<span class='no'>green</span>,
     <span class='kw'>hedonic</span> <span class='kw'>=</span> <span class='no'>liking</span>
   ) <span class='kw'>%&gt;%</span>
-  <span class='fu'>analyse_penalty</span>(<span class='kw'>reference_value</span> <span class='kw'>=</span> <span class='fl'>0</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>visualise</span>(<span class='st'>"Chanel N5"</span>)</div><div class='img'><img src='visualise-penalty-1.png' alt='' width='700' height='433' /></div></pre>
+  <span class='fu'><a href='analyse.html'>analyse</a></span>(<span class='kw'>choice</span> <span class='kw'>=</span> <span class='st'>"penalty"</span>, <span class='kw'>ref_value</span> <span class='kw'>=</span> <span class='fl'>0</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='visualise.html'>visualise</a></span>(<span class='st'>"Chanel N5"</span>)</div><div class='img'><img src='visualise-penalty-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

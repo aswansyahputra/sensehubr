@@ -1,0 +1,49 @@
+---
+title: "Quantitative Descriptive Analysis"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{qda}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(sensehubr)
+```
+
+## Specify sensory table
+```{r}
+df <- specify(
+ data = perfume_qda_consumers,
+ sensory_method = "QDA",
+ panelist = consumer,
+ product = product,
+ attribute = intensity:green,
+ hedonic = NULL
+)
+df
+```
+
+## Local analysis
+```{r}
+qda_local <- analyse(df, "local")
+qda_local
+visualise(qda_local, min_scales = 0, max_scales = 100)
+```
+
+## Global analysis
+```{r}
+qda_global <- analyse(df, "global")
+qda_global
+visualise(qda_global, choice = "eigenvalue")
+visualise(qda_global, choice = "product")
+visualise(qda_global, choice = "attribute")
+```
+
