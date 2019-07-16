@@ -4,11 +4,11 @@
 #' 
 #' @param tbl_sensory a sensory table
 #' 
-#' @importFrom dplyr select group_by mutate arrange
+#' @importFrom dplyr select group_by ungroup mutate arrange summarise
 #' @importFrom tidyr gather spread nest unnest
 #' @importFrom purrr map
 #' @importFrom broom tidy
-#' @importFrom tibble new_tibble
+#' @importFrom tibble column_to_rownames
 perform_liking_analysis <- function(tbl_sensory) {
   if (is.null(parse_meta(tbl_sensory, "hedonic"))) {
     stop("No hedonic data is available in sensory table", call. = FALSE)
@@ -34,7 +34,7 @@ perform_liking_analysis <- function(tbl_sensory) {
     }
   }
   
-  tbl <- tbl_sensory %>%
+  res_liking_local <- tbl_sensory %>%
     select(
       panelist = meta_panelist,
       product = meta_product,
@@ -70,13 +70,38 @@ perform_liking_analysis <- function(tbl_sensory) {
     unnest(stats, values) %>%
     arrange(desc(statistic))
   
-  res <- new_tibble(tbl,
-                    "sensory_method" = parse_meta(tbl_sensory, "sensory_method"),
-                    "method_local" = "Analysis of variance",
-                    "model" = fmla,
-                    nrow = NROW(tbl),
-                    class = "tbl_sensory_liking"
+  res_liking_global <- tbl_sensory %>%
+    select(
+      panelist = meta_panelist,
+      product = meta_product,
+      liking = meta_hedonic
+    ) %>% 
+    group_by(panelist, product) %>% 
+    summarise(liking = mean(liking)) %>% 
+    ungroup() %>% 
+    spread(product, liking) %>% 
+    as.data.frame() %>% 
+    column_to_rownames("panelist") %>% 
+    PCA(graph = FALSE)
+  
+  res <- list(
+    tbl_liking = res_liking_local,
+    tbl_space = inspect_space(res_liking_global),
+    tbl_product = inspect_product_liking(res_liking_global),
+    tbl_panelist = inspect_panelist_liking(res_liking_global),
+    res_liking_global = res_liking_global
   )
+  
+  attr(res, "sensory_method") <- parse_meta(tbl_sensory, "sensory_method")
+  attr(res, "method_local") <- "Analysis of variance"
+  attr(res, "method_global") <- "Principal Component Analysis"
+  attr(res, "n_product") <- parse_meta(tbl_sensory, "n_product")
+  attr(res, "n_panelist") <- parse_meta(tbl_sensory, "n_panelist")
+  attr(res, "hedonic") <- parse_meta(tbl_sensory, "hedonic")
+  class(res) <- append(class(res), "tbl_sensory_liking")
+    
   
   return(res)
 }
+
+

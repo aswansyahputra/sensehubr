@@ -6,8 +6,8 @@
 #' @param dimension dimension to focus, integer vector of length 2
 #'
 #' @export
-inspect_preference_panelist <- function(res_preference, dimension = c(1, 2)) {
-  UseMethod("inspect_preference_panelist")
+inspect_panelist_preference <- function(res_preference, dimension = c(1, 2)) {
+  UseMethod("inspect_panelist_preference")
 }
 
 #' @importFrom dplyr mutate left_join select rename_at arrange vars desc
@@ -15,7 +15,7 @@ inspect_preference_panelist <- function(res_preference, dimension = c(1, 2)) {
 #' @importFrom tibble new_tibble
 #'
 #' @export
-inspect_preference_panelist.default <- function(res_preference, dimension = c(1, 2)) {
+inspect_panelist_preference.default <- function(res_preference, dimension = c(1, 2)) {
   if (!is.numeric(dimension)) {
     stop("`dimension` should be an integer vector.", call. = FALSE)
   }
@@ -33,9 +33,9 @@ inspect_preference_panelist.default <- function(res_preference, dimension = c(1,
   }
   
   if (any(class(res_preference) %in% "PCA")) {
-    element <- "ind"
+    element <- "var"
   } else if (any(class(res_preference) %in% "CA")) {
-    element <- "row"
+    element <- "col"
   }
   
   coord <- facto_summarize(res_preference, element = element, result = "coord", axes = dimension) %>%
@@ -71,8 +71,8 @@ inspect_preference_panelist.default <- function(res_preference, dimension = c(1,
 }
 
 #' @export
-inspect_preference_panelist.tbl_sensory_preference <- function(res_preference, dimension = c(1, 2)) {
+inspect_panelist_preference.tbl_sensory_mdpref <- function(res_preference, dimension = c(1, 2)) {
   res_preference_extracted <- res_preference$res_preference
-  res <- inspect_preference_panelist(res_preference_extracted, dimension = dimension)
+  res <- inspect_panelist_preference(res_preference_extracted, dimension = dimension)
   return(res)
 }
