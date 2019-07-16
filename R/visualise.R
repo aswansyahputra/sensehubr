@@ -275,7 +275,8 @@ visualise.tbl_sensory_penalty <- function(res, product, frequency_threshold = 20
   }
   
   res <- res %>%
-    filter(product == subproduct) %>% 
+    filter(product == subproduct,
+           penalty >= 1) %>% 
     mutate(attribute = ifelse(p.value <= 0.05, paste0(attribute, "*"), attribute)) %>% 
     ggplot(aes(x = frequency, y = penalty, colour = category)) +
     geom_point() +
