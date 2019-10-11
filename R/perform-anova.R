@@ -63,7 +63,7 @@ perform_anova <- function(tbl_sensory) {
       )
     ) %>%
     select(attribute, stats, values) %>%
-    unnest(stats, values) %>%
+    unnest(c(stats, values)) %>%
     arrange(desc(statistic))
   
   res <- new_tibble(tbl,

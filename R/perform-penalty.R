@@ -58,14 +58,15 @@ perform_penalty <- function(tbl_sensory, ref_value) {
           select(category, value)
       )
     ) %>%
-    unnest(stats, values) %>%
+    unnest(c(stats, values)) %>%
+    ungroup() %>% 
+    filter(estimate <= 0) %>% 
     transmute(
       product = as.character(product),
       attribute,
       category = as.character(category),
       frequency = value,
-      # penalty = abs(estimate),
-      penalty = (estimate),
+      penalty = abs(estimate),
       std.error,
       statistic,
       p.value

@@ -67,7 +67,7 @@ perform_liking_analysis <- function(tbl_sensory) {
       )
     ) %>%
     select(attribute, stats, values) %>%
-    unnest(stats, values) %>%
+    unnest(c(stats, values)) %>%
     arrange(desc(statistic))
   
   res_liking_global <- tbl_sensory %>%
