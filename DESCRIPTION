@@ -30,7 +30,6 @@ Imports:
     pillar,
     purrr,
     rlang,
-    RVAideMemoire,
     scales,
     SensoMineR,
     stringr,

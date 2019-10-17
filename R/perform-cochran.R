@@ -27,7 +27,7 @@ perform_cochran <- function(tbl_sensory) {
     nest() %>%
     mutate(
       model = map(
-        data, ~ cochran.qtest(as.formula(fmla), data = .x)
+        data, ~ cochran_qtest(as.formula(fmla), data = .x)
       ),
       statistic = map_dbl(model, "statistic"),
       p.value = map_dbl(model, "p.value"),
