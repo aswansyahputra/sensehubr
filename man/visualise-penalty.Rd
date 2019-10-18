@@ -43,5 +43,5 @@ perfume_jar \%>\%
     hedonic = liking
   ) \%>\%
   analyse(choice = "penalty", ref_value = 0) \%>\% 
-  visualise("Chanel N5")
+  visualise("Chanel N5", drop_threshold = 2)
 }

@@ -100,7 +100,6 @@ perform_liking_analysis <- function(tbl_sensory) {
   attr(res, "hedonic") <- parse_meta(tbl_sensory, "hedonic")
   class(res) <- append(class(res), "tbl_sensory_liking")
     
-  
   return(res)
 }
 

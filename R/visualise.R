@@ -266,7 +266,7 @@ visualise.tbl_sensory_preference <- function(res, choice = c("product", "panelis
 #'     hedonic = liking
 #'   ) %>%
 #'   analyse(choice = "penalty", ref_value = 0) %>% 
-#'   visualise("Chanel N5")
+#'   visualise("Chanel N5", drop_threshold = 2)
 visualise.tbl_sensory_penalty <- function(res, product, frequency_threshold = 20, drop_threshold = 1, title = "Penalty analysis", xlab = "Citing frequency (%)", ylab = "Mean of liking drop", ...) {
   subproduct <- arg_match(product, values = unique(res$product))
   
@@ -278,7 +278,7 @@ visualise.tbl_sensory_penalty <- function(res, product, frequency_threshold = 20
     filter(product == subproduct,
            penalty >= 1) %>% 
     mutate(attribute = ifelse(p.value <= 0.05, paste0(attribute, "*"), attribute)) %>% 
-    ggplot(aes(x = frequency, y = penalty, colour = category)) +
+    ggplot(aes(x = frequency/100, y = penalty, colour = category)) +
     geom_point() +
     ggrepel::geom_text_repel(aes(label = attribute), show.legend = FALSE) +
     geom_vline(xintercept = frequency_threshold, lty = 2, colour = "grey30") +
@@ -329,4 +329,41 @@ visualise.tbl_sensory_prefmap <- function(res, title = "External Preference Mapp
     ) +
     theme_minimal()
   return(res)
+}
+
+#' Visualise Perceptual distribution
+#' 
+#' Plot perceptual distribution obtained from discimination test.
+#' 
+#' @param res result of disrimination test
+#' @param title a title to use in plot
+#' @param ... not yet implemented
+#' 
+#' @importFrom ggplot2 ggplot aes geom_area geom_vline annotate labs theme_minimal theme element_blank
+#' 
+#' @export
+visualise.tbl_sensory_discrim <- function(res, title = "Perceptual distribution", ...) {
+  dprime <- unlist(res[3, 2])
+  tbl <- 
+    tibble(
+      random = seq(from = -5, to = 5, length.out = 1000),
+      A = dnorm(random, mean = 0),
+      B = dnorm(random, mean = dprime)
+    ) %>% 
+    gather(key = "product", value = "value", -1)
+  
+  ggplot(tbl, aes(random, value, fill = product)) +
+    geom_area(alpha = 0.25, position = position_identity(), show.legend = FALSE) +
+    geom_vline(xintercept = 0, alpha = 0.3) +
+    geom_vline(xintercept = dprime, alpha = 0.3) +
+    
+    annotate("text", x = 0, y = 0.2, label = "A", size = 11) +
+    annotate("text", x = dprime, y = 0.2, label = "B", size = 11) +
+    annotate("label", x = dprime/2, y = 0.3, label = paste("d' =", signif(dprime, 2)), size = 5) +
+    labs(
+      title = "Perceptual distribution"
+    ) +
+    theme_minimal() +
+    theme(axis.title = element_blank(),
+          axis.text.y = element_blank())
 }

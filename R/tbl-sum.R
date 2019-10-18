@@ -1,5 +1,14 @@
 #' @importFrom tibble tbl_sum
 #' @export
+tbl_sum.tbl_sensory_discrim <- function(x) {
+  c(
+    "Sensory method" = print_meta(x, "sensory_method"),
+    "Analytical method" = print_meta(x, "method_local")
+  )
+}
+
+#' @importFrom tibble tbl_sum
+#' @export
 tbl_sum.tbl_sensory_design <- function(x) {
   c(
     "Design of Experiment" = print_meta(x, "dimension"),
