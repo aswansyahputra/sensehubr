@@ -12,10 +12,14 @@ pad <- function(...) {
 
 
 #' @importFrom rlang arg_match
+#' @importFrom stringr str_remove_all
 parse_meta <- function(x, meta = c("sensory_method", "method_local", "model", "method_global", "panelist", "n_panelist", "product", "n_product", "session", "pres_order", "attribute", "n_attribute", "hedonic")) {
   meta <- arg_match(meta)
 
-  res <- attr(x, meta[[1]])
+  res <- 
+    attr(x, meta[[1]]) %>% 
+    str_remove_all('\\"')
+  
   if (length(res) == 1 && res == "NULL") {
     res <- NULL
   }
