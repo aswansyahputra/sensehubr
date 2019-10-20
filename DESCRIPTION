@@ -17,7 +17,6 @@ Depends:
     R (>= 3.4.0)
 Imports: 
     broom,
-    bs4Dash,
     dplyr,
     factoextra,
     FactoMineR,

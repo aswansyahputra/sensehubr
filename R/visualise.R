@@ -339,7 +339,9 @@ visualise.tbl_sensory_prefmap <- function(res, title = "External Preference Mapp
 #' @param title a title to use in plot
 #' @param ... not yet implemented
 #' 
-#' @importFrom ggplot2 ggplot aes geom_area geom_vline annotate labs theme_minimal theme element_blank
+#' @importFrom tibble tibble
+#' @importFrom stats dnorm
+#' @importFrom ggplot2 ggplot aes geom_area position_identity geom_vline annotate labs theme_minimal theme element_blank
 #' 
 #' @export
 visualise.tbl_sensory_discrim <- function(res, title = "Perceptual distribution", ...) {

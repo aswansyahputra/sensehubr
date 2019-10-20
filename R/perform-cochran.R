@@ -7,7 +7,6 @@
 #' @importFrom dplyr select group_by mutate arrange
 #' @importFrom tidyr gather spread nest unnest
 #' @importFrom purrr map map_dbl
-#' @importFrom RVAideMemoire cochran.qtest
 #' @importFrom tibble enframe new_tibble
 perform_cochran <- function(tbl_sensory) {
   meta_panelist <- parse_meta(tbl_sensory, "panelist")

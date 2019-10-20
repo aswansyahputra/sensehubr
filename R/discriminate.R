@@ -9,6 +9,7 @@
 #'
 #' @importFrom rlang arg_match
 #' @importFrom sensR discrim
+#' @importFrom stats binom.test
 #' @importFrom dplyr mutate recode
 #' @importFrom tibble as_tibble new_tibble
 #' @importFrom janitor clean_names

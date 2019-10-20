@@ -9,11 +9,8 @@
 #' @details If the response is a 0/1 variable, the probability of the '1' group is tested. In any other cases, the response is transformed into a factor and the probability of the second level is tested.
 #' 
 #' @author Maxime Hervé \email{mx.herve@@gmail.com}
-#' @examples 
-#' response <- c(0,1,1,0,0,1,0,1,1,1,1,1,0,0,1,1,0,1,0,1,1,0,0,1,0,1,1,0,0,1)
-#' fact <- gl(3,1,30,labels=LETTERS[1:3])
-#' block <- gl(10,3,labels=letters[1:10])
-#' cochran.qtest(response~fact|block)
+#' 
+#' @importFrom stats complete.cases na.omit pchisq binom.test pairwise.table
 cochran_qtest <-
   function(formula,
            data,
