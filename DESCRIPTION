@@ -1,6 +1,6 @@
 Package: sensehubr
 Title: A Tidy Approach for Sensory Analyses
-Version: 0.1.0
+Version: 0.2.0
 Authors@R: 
     person(given = "Muhammad Aswan",
            family = "Syahputra",
