@@ -5,10 +5,16 @@
 \alias{visualise.tbl_sensory_penalty}
 \title{Visualise penalty}
 \usage{
-\method{visualise}{tbl_sensory_penalty}(res, product,
-  frequency_threshold = 20, drop_threshold = 1,
-  title = "Penalty analysis", xlab = "Citing frequency (\%)",
-  ylab = "Mean of liking drop", ...)
+\method{visualise}{tbl_sensory_penalty}(
+  res,
+  product,
+  frequency_threshold = 20,
+  drop_threshold = 1,
+  title = "Penalty analysis",
+  xlab = "Citing frequency (\%)",
+  ylab = "Mean of liking drop",
+  ...
+)
 }
 \arguments{
 \item{res}{output penalty analysis}

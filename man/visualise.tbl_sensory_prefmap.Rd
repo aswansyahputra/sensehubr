@@ -4,9 +4,13 @@
 \alias{visualise.tbl_sensory_prefmap}
 \title{Visualise External Preference Map}
 \usage{
-\method{visualise}{tbl_sensory_prefmap}(res,
-  title = "External Preference Mapping", xlab = "Dim 1",
-  ylab = "Dim 2", ...)
+\method{visualise}{tbl_sensory_prefmap}(
+  res,
+  title = "External Preference Mapping",
+  xlab = "Dim 1",
+  ylab = "Dim 2",
+  ...
+)
 }
 \arguments{
 \item{res}{result of external preference mapping}

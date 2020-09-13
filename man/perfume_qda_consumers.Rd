@@ -4,7 +4,9 @@
 \name{perfume_qda_consumers}
 \alias{perfume_qda_consumers}
 \title{Perfume QDA Consumers}
-\format{An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 1236 rows and 23 columns.}
+\format{
+An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 1236 rows and 23 columns.
+}
 \source{
 Analyzing Sensory Data with R \url{www.sensorywithr.org}
 }

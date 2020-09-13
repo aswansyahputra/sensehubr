@@ -6,7 +6,7 @@
 \alias{sensehubr-package}
 \title{sensehubr: A Tidy Approach for Sensory Analyses}
 \description{
-\if{html}{\figure{logo.png}{options: align='right'}}
+\if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
 sensehubr aims to provide set of tools for
     performing sensory analyses using tidy phylosophy. This package wraps

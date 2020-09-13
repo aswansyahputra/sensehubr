@@ -4,9 +4,16 @@
 \alias{specify}
 \title{Specify sensory table}
 \usage{
-specify(data, sensory_method = c("QDA", "CATA", "RATA", "FCP", "FP",
-  "JAR", "IPM"), panelist, product, session = NULL, pres_order = NULL,
-  attribute, hedonic = NULL)
+specify(
+  data,
+  sensory_method = c("QDA", "CATA", "RATA", "FCP", "FP", "JAR", "IPM"),
+  panelist,
+  product,
+  session = NULL,
+  pres_order = NULL,
+  attribute,
+  hedonic = NULL
+)
 }
 \arguments{
 \item{data}{a dataframe}

@@ -4,8 +4,7 @@
 \alias{visualise.tbl_sensory_discrim}
 \title{Visualise Perceptual distribution}
 \usage{
-\method{visualise}{tbl_sensory_discrim}(res,
-  title = "Perceptual distribution", ...)
+\method{visualise}{tbl_sensory_discrim}(res, title = "Perceptual distribution", ...)
 }
 \arguments{
 \item{res}{result of disrimination test}

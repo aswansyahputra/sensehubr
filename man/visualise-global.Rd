@@ -5,10 +5,15 @@
 \alias{visualise.tbl_sensory_global}
 \title{Visualise sensory space}
 \usage{
-\method{visualise}{tbl_sensory_global}(res, choice = c("product",
-  "attribute", "eigenvalue"), dimension = c(1, 2), repel = FALSE,
-  colour_by = c("none", "quality", "contribution"), title = "default",
-  ...)
+\method{visualise}{tbl_sensory_global}(
+  res,
+  choice = c("product", "attribute", "eigenvalue"),
+  dimension = c(1, 2),
+  repel = FALSE,
+  colour_by = c("none", "quality", "contribution"),
+  title = "default",
+  ...
+)
 }
 \arguments{
 \item{res}{output of global analysis}

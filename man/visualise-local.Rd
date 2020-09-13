@@ -5,10 +5,16 @@
 \alias{visualise.tbl_sensory_local}
 \title{Visualise sensory properties}
 \usage{
-\method{visualise}{tbl_sensory_local}(res, min_scales = 0,
-  max_scales = 10, point_size = 4, line_width = 1,
+\method{visualise}{tbl_sensory_local}(
+  res,
+  min_scales = 0,
+  max_scales = 10,
+  point_size = 4,
+  line_width = 1,
   title = "Radar plot of sensory properties",
-  legend_position = "bottom", ...)
+  legend_position = "bottom",
+  ...
+)
 }
 \arguments{
 \item{res}{result of local or global analysis}

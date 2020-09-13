@@ -4,7 +4,9 @@
 \name{sensochoc}
 \alias{sensochoc}
 \title{Sensory data for 6 chocolates}
-\format{An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 348 rows and 18 columns.}
+\format{
+An object of class \code{spec_tbl_df} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 348 rows and 18 columns.
+}
 \source{
 SensoMineR package
 }
