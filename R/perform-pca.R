@@ -24,25 +24,25 @@ perform_pca <- function(tbl_sensory) {
       as.data.frame() %>%
       column_to_rownames("product") %>%
       PCA(quanti.sup = NULL, graph = FALSE)
+  } else {
+    res_global <- tbl_sensory %>%
+      select(
+        product = meta_product,
+        meta_attribute,
+        meta_hedonic
+      ) %>%
+      group_by(product) %>%
+      {
+        left_join(
+          summarise_at(., vars(meta_attribute), ~ mean(.x, na.rm = TRUE)),
+          summarise_at(., vars(meta_hedonic), ~ mean(.x, na.rm = TRUE)),
+          by = "product"
+        )
+      } %>%
+      as.data.frame() %>%
+      column_to_rownames("product") %>%
+      PCA(quanti.sup = NCOL(.), graph = FALSE)
   }
-  
-  res_global <- tbl_sensory %>%
-    select(
-      product = meta_product,
-      meta_attribute,
-      meta_hedonic
-    ) %>%
-    group_by(product) %>%
-    {
-      left_join(
-        summarise_at(., vars(meta_attribute), ~ mean(.x, na.rm = TRUE)),
-        summarise_at(., vars(meta_hedonic), ~ mean(.x, na.rm = TRUE)),
-        by = "product"
-      )
-    } %>%
-    as.data.frame() %>%
-    column_to_rownames("product") %>%
-    PCA(quanti.sup = NCOL(.), graph = FALSE)
   
   tbl_space <- inspect_space(res_global)
   tbl_product <- inspect_product(res_global)
